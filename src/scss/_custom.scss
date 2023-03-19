@@ -1,0 +1,241 @@
+// Here you can add other styles
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+@font-face {
+    font-family: 'KulminoituvaRegular';
+    src: url('http://www.miketaylr.com/f/kulminoituva.ttf');
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb {
+    height: 8px;
+    border-radius: 8px;
+    background-clip: padding-box;
+    border: 2px solid #0000003a;
+}
+
+*::-webkit-scrollbar:hover,
+*::-webkit-scrollbar-thumb:hover {
+    display: block;
+}
+
+.Toastify__toast-body {
+    font-size: 13px;
+}
+
+.btn-success,
+.btn-warning,
+.btn-danger,
+.btn-info,
+.btn-primary,
+.btn-secondary {
+    --cui-btn-color: #fff;
+}
+
+a,
+.btn-link {
+    text-decoration: none;
+}
+
+.table > thead {
+    background: var(--cui-gray-400);
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+// accordion
+.accordion-button::before {
+    content: "Xem chi tiết";
+    position: absolute;
+    right: 50px;
+}
+
+@media screen and (max-width: 575px) {
+    .accordion-button::before {
+        display: none;
+    }
+}
+
+// formik
+.formik-text-size {
+    font-size: 13px;
+}
+
+// datetime picker
+.react-datepicker__input-container input {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--cui-input-color, rgba(44, 56, 74, 0.95));
+    background-color: var(--cui-input-bg, #fff);
+    background-clip: padding-box;
+    border: 1px solid var(--cui-input-border-color, #b1b7c1);
+    appearance: none;
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+// login page
+.bg-login {
+    background: url("https://res.cloudinary.com/dzd9sonxs/image/upload/v1665391805/login/login_background_rf2pbd.jpg")
+        no-repeat center center;
+    background-size: cover;
+}
+
+.show-hide-password {
+    position: absolute;
+    z-index: 9;
+    right: 15px;
+}
+// 404 page
+
+/*======================
+    404 page
+=======================*/
+
+.page_404,
+.page_403 {
+    background: #fff;
+    img {
+        width: 100%;
+    }
+    .four_zero_four_bg {
+        background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+        height: 400px;
+        background-position: center;
+    }
+    .four_zero_four_bg h1 {
+        font-size: 80px;
+    }
+
+    .four_zero_four_bg h3 {
+        font-size: 80px;
+    }
+
+    .link_404,
+    .link_403 {
+        color: #fff !important;
+    }
+    .contant_box_404,
+    .contant_box_403 {
+        margin-top: -50px;
+    }
+}
+
+// loading login
+.loading-login {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    opacity: 0.2;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: none;
+}
+
+.loading-login.show {
+    display: block;
+}
+
+.lds-roller {
+    display: inline-block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-roller div {
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
+}
+.lds-roller div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    margin: -4px 0 0 -4px;
+}
+.lds-roller div:nth-child(1) {
+    animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+    top: 63px;
+    left: 63px;
+}
+.lds-roller div:nth-child(2) {
+    animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+    top: 68px;
+    left: 56px;
+}
+.lds-roller div:nth-child(3) {
+    animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+    top: 71px;
+    left: 48px;
+}
+.lds-roller div:nth-child(4) {
+    animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+    top: 72px;
+    left: 40px;
+}
+.lds-roller div:nth-child(5) {
+    animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+    top: 71px;
+    left: 32px;
+}
+.lds-roller div:nth-child(6) {
+    animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+    top: 68px;
+    left: 24px;
+}
+.lds-roller div:nth-child(7) {
+    animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+    top: 63px;
+    left: 17px;
+}
+.lds-roller div:nth-child(8) {
+    animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+    top: 56px;
+    left: 12px;
+}
+@keyframes lds-roller {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
