@@ -1,0 +1,114 @@
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
+
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+import {
+  CButton,
+  CCol,
+  CForm,
+  CFormInput,
+  CFormLabel,
+  CModal,
+  CModalBody,
+  CModalFooter,
+  CModalHeader,
+  CModalTitle,
+  CRow,
+} from '@coreui/react';
+import { FaEdit } from 'react-icons/fa';
+
+import parkingServices from 'src/api/buildingServices/parkingServices';
+
+import { toast } from 'react-toastify';
+import Tippy from '@tippyjs/react';
+
+const EditParkingModal = ({ apartmentId, submitEditParkingChange, ...rest }) => {
+  const [visibleEditParking, setVisibleEditParking] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      name: rest.parkingName,
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required('Vui lòng nhập tên bãi đỗ xe !').min(6, 'Tối thiểu 6 ký tự !'),
+    }),
+    onSubmit: async (values) => {
+      try {
+        const params = {
+          id: rest.parkingId,
+          name: values.name,
+          apartmentId: apartmentId,
+        };
+
+        const res = await parkingServices.updateParking(params);
+        if (res.response.message === 'Successful') {
+          toast.success('Sửa thành công !', { theme: 'colored' });
+          setVisibleEditParking(false);
+          submitEditParkingChange();
+        } else {
+          toast.error('Sửa thất bại !', {
+            theme: 'colored',
+          });
+        }
+      } catch (error) {
+        console.log('Sửa thất bại: ', error);
+        toast.error('Sửa thất bại ! ', { theme: 'colored' });
+      }
+    },
+  });
+
+  return (
+    <>
+      <Tippy content="Sửa thông tin">
+        <CButton color="warning" size="sm" className="ms-2" onClick={() => setVisibleEditParking(!visibleEditParking)}>
+          <FaEdit />
+        </CButton>
+      </Tippy>
+      <CModal
+        backdrop="static"
+        alignment="center"
+        visible={visibleEditParking}
+        onClose={() => setVisibleEditParking(false)}
+      >
+        <CModalHeader>
+          <CModalTitle>Sửa thông tin bãi đỗ xe</CModalTitle>
+        </CModalHeader>
+        <CForm onSubmit={formik.handleSubmit}>
+          <CModalBody>
+            <CRow className="align-items-center justify-content-center">
+              <CCol sm={11}>
+                <CFormLabel htmlFor="name" className="col-sm-12 col-form-label">
+                  <b>
+                    Tên bãi đỗ xe <span className="text-danger">*</span>
+                  </b>
+                </CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Nhập tên bãi đỗ xe..."
+                  {...formik.getFieldProps('name')}
+                />
+                {formik.touched.name && formik.errors.name ? (
+                  <p className="formik-text-size text-danger mt-1"> {formik.errors.name} </p>
+                ) : null}
+              </CCol>
+            </CRow>
+          </CModalBody>
+          <CModalFooter>
+            <CButton color="secondary" onClick={() => setVisibleEditParking(false)}>
+              Huỷ
+            </CButton>
+            <CButton type="submit" color="info">
+              Xác nhận
+            </CButton>
+          </CModalFooter>
+        </CForm>
+      </CModal>
+    </>
+  );
+};
+
+export default EditParkingModal;
