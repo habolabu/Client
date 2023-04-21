@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 
@@ -51,9 +56,8 @@ const PriceTag = () => {
         ePricePerDay: endPricePerDay,
       };
       const res = await priceTagServices.getPriceTag(params);
-      console.log(res);
-      if (res.response.message === 'Successful') {
-        setPriceTagList(res.response.body);
+      if (res && res.data) {
+        setPriceTagList(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách giá cả ! ', {
           theme: 'colored',

@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 
@@ -36,8 +41,8 @@ const AddParkingTypeModal = ({ submitAddParkingTypeChange }) => {
     const getPriceTag = async () => {
       try {
         const res = await priceTagServices.getAllPriceTag();
-        if (res.response.message === 'Successful') {
-          setPriceTags(res.response.body);
+        if (res && res.data) {
+          setPriceTags(res.data.response.body);
         } else {
           toast.error('Thất bại khi lấy danh sách giá cả ! ', {
             theme: 'colored',
@@ -71,7 +76,7 @@ const AddParkingTypeModal = ({ submitAddParkingTypeChange }) => {
           toast.error('Thông tin bị trùng.Thêm thất bại !', {
             theme: 'colored',
           });
-        } else if (res.response.message === 'Successful') {
+        } else if (res && res.data) {
           toast.success('Thêm thành công !', { theme: 'colored' });
           setVisibleAddParkingType(false);
           submitAddParkingTypeChange();

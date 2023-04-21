@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 .wrapper {
   width: 100%;
   @include ltr-rtl("padding-left", var(--cui-sidebar-occupy-start, 0));

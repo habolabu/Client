@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -23,7 +28,7 @@ const ChangePassword = () => {
           rawPassword: values.rawPassword,
         };
         const res = await authServices.changePassword(data);
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Cập nhật thành công. Vui lòng đăng nhập lại !', { theme: 'colored' });
           Cookies.remove('habolabu');
           navigate('/');

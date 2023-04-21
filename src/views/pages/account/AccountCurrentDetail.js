@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -15,12 +20,14 @@ import EmergencyCurrentUser from './EmergencyCurrentUser';
 
 const AccountCurrentDetail = () => {
   const [userInfo, setUserInfo] = useState([]);
+  const [isCookieLocked, setIsCookieLocked] = useState(false);
 
   const getUserDetails = async () => {
     try {
       const res = await userServices.getUserCurrentDetails();
-      if (res.response.message === 'Successful') {
-        setUserInfo(res.response.body);
+      if (res && res.data) {
+        setIsCookieLocked(true);
+        setUserInfo(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy thông tin chi tiết tài khoản ! ', {
           theme: 'colored',
@@ -166,7 +173,7 @@ const AccountCurrentDetail = () => {
           </CRow>
           <CRow>
             {/* avatar */}
-            <AvatarCurrentUser />
+            <AvatarCurrentUser isCookieLocked={isCookieLocked} />
             {/* emergency */}
             <EmergencyCurrentUser />
           </CRow>

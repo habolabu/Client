@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from '@coreui/react';
@@ -12,7 +17,7 @@ const DeleteRoomModal = ({ slug, submitDeleteRoomChange }) => {
   const handleDeleteRoom = async () => {
     try {
       const res = await roomServices.deleteRoom({ slug: slug });
-      if (res.response.message === 'Successful') {
+      if (res && res.data) {
         toast.success('Xoá thành công !', { theme: 'colored' });
         submitDeleteRoomChange();
       } else {

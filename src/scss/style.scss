@@ -1,4 +1,10 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 // If you want to override variables do it here
+
 @import "variables";
 
 $enable-ltr: true;
@@ -11,8 +17,7 @@ $enable-rtl: true;
 @import "@coreui/chartjs/scss/coreui-chartjs";
 
 @import "layout";
-@import "example";
 
 // If you want to add custom CSS you can put it here.
-@import "_sidebar-nav";
-@import "custom";
+@import "_custom";
+@import "_general-style";

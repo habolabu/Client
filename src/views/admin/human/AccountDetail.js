@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -25,8 +30,8 @@ const AccountDetail = () => {
   const getUserDetails = async () => {
     try {
       const res = await userServices.getUserDetails(url.userId);
-      if (res.response.message === 'Successful') {
-        setUserInfo(res.response.body);
+      if (res && res.data) {
+        setUserInfo(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy thông tin chi tiết tài khoản ! ', {
           theme: 'colored',
@@ -51,7 +56,7 @@ const AccountDetail = () => {
                 <CCardHeader className="d-flex align-items-center justify-content-between">
                   <strong>
                     <FaUserEdit /> Thông tin cá nhân - {`${userInfo.lastName} ${userInfo.firstName}`} (
-                    {userInfo.role.roleName})
+                    {userInfo.roles[0].roleName})
                   </strong>
                 </CCardHeader>
                 <CCardBody>

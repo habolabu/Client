@@ -1,11 +1,38 @@
-import React from 'react';
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
+import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { CBadge } from '@coreui/react';
+import authServices from 'src/api/auth/authServices';
+import { permissionLocal } from 'src/utils/permissionLocal';
 
 export const AppSidebarNav = ({ items }) => {
   const location = useLocation();
+  const [permissions, setPermissions] = useState(null);
+
+  const getPermissions = async () => {
+    try {
+      const res = await authServices.getAllPermissionCurrentUser();
+      if (res && res.data) {
+        permissionLocal.saveData(res.data.response.body);
+        setPermissions(res.data.response.body);
+      } else {
+        console.log('Thất bại khi lấy danh sách quyền');
+      }
+    } catch (error) {
+      console.log('Thất bại khi lấy danh sách quyền: ', error);
+    }
+  };
+
+  useEffect(() => {
+    getPermissions();
+  }, []);
+
   const navLink = (name, icon, badge) => {
     return (
       <>
@@ -23,39 +50,54 @@ export const AppSidebarNav = ({ items }) => {
   const navItem = (item, index) => {
     const { component, name, badge, icon, ...rest } = item;
     const Component = component;
-    return (
-      <Component
-        {...(rest.to &&
-          !rest.items && {
-            component: NavLink,
-          })}
-        key={index}
-        {...rest}
-      >
-        {navLink(name, icon, badge)}
-      </Component>
-    );
+    const isSubset = item.permissions.every((value) => permissions.includes(value));
+
+    if (isSubset || item.permissions.length === 0) {
+      return (
+        <Component
+          {...(rest.to &&
+            !rest.items && {
+              component: NavLink,
+            })}
+          key={index}
+          {...rest}
+        >
+          {navLink(name, icon, badge)}
+        </Component>
+      );
+    } else {
+      return;
+    }
   };
+
   const navGroup = (item, index) => {
     const { component, name, icon, to, ...rest } = item;
     const Component = component;
-    return (
-      <Component
-        idx={String(index)}
-        key={index}
-        toggler={navLink(name, icon)}
-        visible={location.pathname.startsWith(to)}
-        {...rest}
-      >
-        {item.items?.map((item, index) => (item.items ? navGroup(item, index) : navItem(item, index)))}
-      </Component>
-    );
+    const isSubset = item.permissions.every((value) => permissions.includes(value));
+
+    if (isSubset || item.permissions.length === 0) {
+      return (
+        <Component
+          idx={String(index)}
+          key={index}
+          toggler={navLink(name, icon)}
+          visible={location.pathname.startsWith(to)}
+          {...rest}
+        >
+          {item.items?.map((item, index) => (item.items ? navGroup(item, index) : navItem(item, index)))}
+        </Component>
+      );
+    } else {
+      return;
+    }
   };
 
   return (
-    <React.Fragment>
-      {items && items.map((item, index) => (item.items ? navGroup(item, index) : navItem(item, index)))}
-    </React.Fragment>
+    <>
+      {permissions !== null &&
+        items &&
+        items.map((item, index) => (item.items ? navGroup(item, index) : navItem(item, index)))}
+    </>
   );
 };
 

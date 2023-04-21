@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 
@@ -50,8 +55,8 @@ const ManageBill = () => {
   const getAllPaymentType = async () => {
     try {
       const res = await billServices.getAllPaymentTypes();
-      if (res.response.message === 'Successful') {
-        setPaymentTypeInfo(res.response.body);
+      if (res && res.data) {
+        setPaymentTypeInfo(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách loại hoá đơn ! ', {
           theme: 'colored',
@@ -69,8 +74,8 @@ const ManageBill = () => {
   const getAllStatusBill = async () => {
     try {
       const res = await billServices.getAllStatusBill();
-      if (res.response.message === 'Successful') {
-        setBillStatus(res.response.body);
+      if (res && res.data) {
+        setBillStatus(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách trạng thái hoá đơn ! ', {
           theme: 'colored',
@@ -97,8 +102,8 @@ const ManageBill = () => {
         eTotal: endTotal,
       };
       const res = await billServices.getAllBill(params);
-      if (res.response.message === 'Successful') {
-        setBillInfo(res.response.body);
+      if (res && res.data) {
+        setBillInfo(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách thanh toán ! ', {
           theme: 'colored',

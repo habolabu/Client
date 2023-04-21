@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -28,8 +33,8 @@ const DetailsEmergencyModal = ({ emergencyId }) => {
   const getEmergencyDetails = async () => {
     try {
       const res = await emergencyServices.getEmergencyDetails(emergencyId);
-      if (res.response.message === 'Successful') {
-        setEmergencyInfo(res.response.body);
+      if (res && res.data) {
+        setEmergencyInfo(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy thông tin liên hệ người khẩn cấp ! ', {
           theme: 'colored',

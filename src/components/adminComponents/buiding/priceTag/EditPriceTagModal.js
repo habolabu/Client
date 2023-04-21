@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -33,9 +38,9 @@ const EditPriceTagModal = ({ priceTagId, slug, submitEditPriceTagChange }) => {
     const getPriceTag = async () => {
       try {
         const res = await priceTagServices.getPriceTagDetails(slug);
-        if (res.response.message === 'Successful') {
-          formik.values.name = res.response.body.name;
-          formik.values.pricePerDay = res.response.body.pricePerDay;
+        if (res && res.data) {
+          formik.values.name = res.data.response.body.name;
+          formik.values.pricePerDay = res.data.response.body.pricePerDay;
         } else {
           toast.error('Thất bại khi lấy danh sách giá cả ! ', {
             theme: 'colored',
@@ -70,7 +75,7 @@ const EditPriceTagModal = ({ priceTagId, slug, submitEditPriceTagChange }) => {
           pricePerDay: values.pricePerDay,
         };
         const res = await priceTagServices.updatePriceTag(params);
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Sửa thành công !', { theme: 'colored' });
           setVisibleEditPriceTag(false);
           submitEditPriceTagChange();

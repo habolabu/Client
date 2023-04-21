@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -9,11 +14,10 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
-  CBadge,
   CImage,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { cilBell, cilEnvelopeOpen, cilMenu } from '@coreui/icons';
+import { cilEnvelopeOpen, cilMenu } from '@coreui/icons';
 
 import { AppBreadcrumb } from '../../index';
 import { AppHeaderDropdown } from '../../header/index';
@@ -29,7 +33,7 @@ const AppHeader = () => {
         <CHeaderToggler className="ps-1" onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}>
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
-        {/* avatar */}
+        {/* logo homepage mobile */}
         <CHeaderBrand className="mx-auto d-md-none" to="/">
           <CImage
             className="sidebar-brand-full"
@@ -37,27 +41,15 @@ const AppHeader = () => {
             height={45}
           />
         </CHeaderBrand>
-        <CHeaderNav className="d-none d-md-flex me-auto">🏨 Hệ thống chung cư thông minh</CHeaderNav>
+        <CHeaderNav className="d-none d-md-flex me-auto">
+          🏨 Hệ thống chung cư thông minh - {process.env.REACT_APP_BRAND_NAME.toUpperCase()}
+        </CHeaderNav>
         <CHeaderNav>
-          {/* notification */}
-          <CNavItem>
-            <Tippy content="Thông báo">
-              <CNavLink href="#" className="position-relative">
-                <CIcon icon={cilBell} size="lg" />
-                <CBadge color="info" className="badge-sm position-absolute start-90 translate-middle">
-                  12
-                </CBadge>
-              </CNavLink>
-            </Tippy>
-          </CNavItem>
           {/* message */}
           <CNavItem>
             <Tippy content="Tin nhắn">
-              <CNavLink href="#">
+              <CNavLink href={process.env.REACT_APP_ROOMCHAT_URL} target="_blank">
                 <CIcon icon={cilEnvelopeOpen} size="lg" />
-                <CBadge color="warning" className="badge-sm position-absolute start-90 translate-middle">
-                  42
-                </CBadge>
               </CNavLink>
             </Tippy>
           </CNavItem>

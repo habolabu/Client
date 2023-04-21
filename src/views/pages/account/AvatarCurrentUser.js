@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
@@ -28,31 +33,33 @@ import DeleteAvatar from 'src/components/adminComponents/human/avatar/DeleteAvat
 import DetailsAvatarModal from 'src/components/adminComponents/human/avatar/DetailsAvatarModal';
 import UpdateAvatar from 'src/components/adminComponents/human/avatar/UpdateAvatar';
 
-const Avatar = () => {
+const Avatar = ({ isCookieLocked }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [avatarUser, setAvatarUser] = useState([]);
 
   const getAvatarUser = async () => {
-    try {
-      const params = {
-        page: currentPage,
-      };
-      const res = await avatarServices.getAvatarCurrentUser(params);
-      if (res.response.message === 'Successful') {
-        setAvatarUser(res.response.body);
-      } else {
-        toast.error('Thất bại khi lấy avatar tài khoản ! ', {
-          theme: 'colored',
-        });
+    if (isCookieLocked) {
+      try {
+        const params = {
+          page: currentPage,
+        };
+        const res = await avatarServices.getAvatarCurrentUser(params);
+        if (res && res.data) {
+          setAvatarUser(res.data.response.body);
+        } else {
+          toast.error('Thất bại khi lấy avatar tài khoản ! ', {
+            theme: 'colored',
+          });
+        }
+      } catch (error) {
+        console.log('Thất bại khi lấy avatar tài khoản: ', error);
+        toast.error('Thất bại khi lấy avatar tài khoản ! ', { theme: 'colored' });
       }
-    } catch (error) {
-      console.log('Thất bại khi lấy avatar tài khoản: ', error);
-      toast.error('Thất bại khi lấy avatar tài khoản ! ', { theme: 'colored' });
     }
   };
   useEffect(() => {
     getAvatarUser();
-  }, [currentPage]);
+  }, [currentPage, isCookieLocked]);
 
   // pagination
   const handlePageClick = async (data) => {

@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -35,8 +40,8 @@ const RoomDetail = ({ userId }) => {
       };
       const res = await roomDetailServices.getRoom(params);
       console.log(res);
-      if (res.response.message === 'Successful') {
-        setRoomList(res.response.body);
+      if (res && res.data) {
+        setRoomList(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách phòng ! ' + res.response.message, {
           theme: 'colored',

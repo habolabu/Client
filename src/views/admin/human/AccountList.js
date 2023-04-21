@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -57,8 +62,8 @@ const AccountList = () => {
         eDateOfBirth: searchEndDOP,
       };
       const res = await userServices.getUsers(params);
-      if (res.response.message === 'Successful') {
-        setUserList(res.response.body);
+      if (res && res.data) {
+        setUserList(res.data.response.body.data);
       } else {
         toast.error('Thất bại khi lấy danh sách tài khoản ! ', {
           theme: 'colored',
@@ -173,7 +178,7 @@ const AccountList = () => {
                     </CTableRow>
                   </CTableHead>
                   <CTableBody>
-                    {userList.data.map((user) => {
+                    {userList.map((user) => {
                       return (
                         <CTableRow key={user.id}>
                           <CTableHeaderCell scope="row">{user.id}</CTableHeaderCell>
@@ -181,7 +186,12 @@ const AccountList = () => {
                           <CTableDataCell>{user.gender === 0 ? 'Nữ' : 'Nam'}</CTableDataCell>
                           <CTableHeaderCell scope="row">{user.address}</CTableHeaderCell>
                           <CTableHeaderCell scope="row">{user.dateOfBirth.slice(0, 10)}</CTableHeaderCell>
-                          <CTableHeaderCell scope="row">{user.role.roleName}</CTableHeaderCell>
+                          <CTableHeaderCell scope="row">
+                            {user.roles.map((role) => {
+                              return <span key={role.roleId}>{role.roleName}</span>;
+                            })}
+                            ;
+                          </CTableHeaderCell>
                           <CTableHeaderCell scope="row">
                             {/* details user modal */}
                             <Link to={`${user.id}`}>
@@ -211,7 +221,7 @@ const AccountList = () => {
           </CCard>
         </CCol>
         {/* pagination */}
-        {userList ? (
+        {userList && userList.length > 2 ? (
           <CCol xs={12}>
             <div className={'mt-2'}>
               <ReactPaginate

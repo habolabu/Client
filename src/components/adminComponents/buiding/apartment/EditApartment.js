@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -50,7 +55,7 @@ const EditApartment = ({ areaId, slug, submitEditApartmentChange }) => {
         };
 
         const res = await apartmentServices.updateApartment(params);
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Sửa thành công !', { theme: 'colored' });
           setVisibleEditApartment(false);
           submitEditApartmentChange();
@@ -70,10 +75,10 @@ const EditApartment = ({ areaId, slug, submitEditApartmentChange }) => {
     const getApartmentDetails = async () => {
       try {
         const res = await apartmentServices.getApartmentDetails(slug);
-        if (res.response.message === 'Successful') {
-          formik.values.id = res.response.body.id;
-          formik.values.name = res.response.body.name;
-          formik.values.floorAmount = res.response.body.floorAmount;
+        if (res && res.data) {
+          formik.values.id = res.data.response.body.id;
+          formik.values.name = res.data.response.body.name;
+          formik.values.floorAmount = res.data.response.body.floorAmount;
         } else {
           toast.error('Sửa thông tin thất bại ! ', { theme: 'colored' });
         }

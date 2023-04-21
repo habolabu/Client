@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 import { CButton } from '@coreui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -6,7 +11,7 @@ import Helmet from 'src/components/helmet/helmet';
 const Page403 = () => {
   return (
     <Helmet title="Lỗi truy cập" role="Forbidden">
-      <section className="page_403 mt-5">
+      <section className="page_403 mt-5 p-5">
         <div className="container">
           <div className="row">
             <div className="col-sm-12 text-center">

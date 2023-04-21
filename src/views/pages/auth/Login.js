@@ -1,10 +1,14 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import jwt_decode from 'jwt-decode';
 
 import {
   CButton,
@@ -26,7 +30,6 @@ import { cibAngellist, cilLockLocked, cilUser } from '@coreui/icons';
 import Helmet from 'src/components/helmet/helmet';
 
 import authServices from 'src/api/auth/login';
-import Cookies from 'js-cookie';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -50,12 +53,9 @@ const Login = () => {
           password: values.password,
         };
         const res = await authServices.postLogin(params);
-        if (res.response.message === 'Successful') {
-          let jwtDecodeAuth = jwt_decode(res.response.body);
-          Cookies.set(jwtDecodeAuth.aud, res.response.body, { expires: 1 });
-
+        if (res && res.data) {
           loadingLogin.classList.remove('show');
-          navigate(`${jwtDecodeAuth.role}/trang-tong-quan`);
+          navigate('habolabu/trang-tong-quan');
 
           toast.success('Đăng nhập thành công !', { theme: 'colored' });
         } else {

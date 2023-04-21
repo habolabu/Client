@@ -1,0 +1,113 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
+//
+//  Root override
+//  -------------------------------------
+
+:root {
+    --cui-input-border-color: #1976d2;
+    --cui-sidebar-nav-link-active-bg: rgba(255, 255, 255, 0.16);
+}
+
+//
+//  General style
+//  -------------------------------------
+
+.text-ellipsis-one-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+//
+//  Cards
+//  -------------------------------------
+
+.card {
+    overflow: hidden;
+    box-shadow: 7px 7px 3px 0px rgba(0, 0, 0, 0.1);
+}
+
+//
+//  Forms
+//  -------------------------------------
+
+.form-control {
+    border-radius: 0.5rem;
+    border: 2px solid var(--cui-input-border-color, #b1b7c1);
+}
+
+//
+//  Text
+//  -------------------------------------
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.comment-container {
+    .comment-input {
+        textarea {
+            width: 100%;
+            border: 1px solid #8d8d8d;
+            font-size: 16px;
+            padding: 20px;
+        }
+
+        &__action {
+            text-align: left;
+            margin-top: 15px;
+        }
+    }
+    .comment-item {
+        margin-top: 40px !important;
+        font-size: 16px;
+
+        .comment-wrapper {
+            display: flex;
+
+            &__img {
+                // width: 100px;
+                margin-right: 20px;
+                img {
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    max-width: unset;
+                }
+            }
+
+            &__info {
+                &-header {
+                    p {
+                        font-size: 18px;
+                        span {
+                            margin-left: 15px;
+                            color: #8d8d8d;
+                        }
+                    }
+                }
+
+                &-content {
+                    padding: 10px 0;
+                }
+
+                &-react {
+                    i {
+                        font-size: 18px;
+                        margin-right: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

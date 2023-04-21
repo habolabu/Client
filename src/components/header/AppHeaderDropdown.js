@@ -1,72 +1,87 @@
-import React from 'react';
-import {
-  CAvatar,
-  CBadge,
-  CDropdown,
-  CDropdownDivider,
-  CDropdownHeader,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-} from '@coreui/react';
-import { cilBell, cilCreditCard, cilEnvelopeOpen, cilSettings, cilUser, cilArrowThickFromLeft } from '@coreui/icons';
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
+import React, { useState, useEffect } from 'react';
+import { CAvatar, CDropdown, CDropdownDivider, CDropdownHeader, CDropdownMenu, CDropdownToggle } from '@coreui/react';
+import { cilCreditCard, cilEnvelopeOpen, cilSettings, cilUser, cilArrowThickFromLeft } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import jwt_decode from 'jwt-decode';
-import { toast } from 'react-toastify';
 import Tippy from '@tippyjs/react';
+import avatarServices from 'src/api/humanServices/avatarServices';
+import { encryptData } from 'src/utils/encryptData';
 
 const AppHeaderDropdown = () => {
-  let jwtDecodeAuth = jwt_decode(Cookies.get('habolabu'));
+  let brandName = process.env.REACT_APP_BRAND_NAME;
+  let roomChat = process.env.REACT_APP_ROOMCHAT_URL;
+
+  const [avatarUser, setAvatarUser] = useState(null);
+
+  const getAvatarUser = async () => {
+    try {
+      const res = await avatarServices.getAvatarCurrentUser();
+      if (res && res.data) {
+        setAvatarUser(res.data.response.body);
+      } else {
+        console.log('Thất bại khi lấy avatar tài khoản: ');
+      }
+    } catch (error) {
+      console.log('Thất bại khi lấy avatar tài khoản: ', error);
+    }
+  };
+  useEffect(() => {
+    getAvatarUser();
+  }, []);
+
   return (
     <Tippy content="Cài đặt">
       <CDropdown variant="nav-item">
         <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-          <CAvatar
-            src="https://res.cloudinary.com/dzd9sonxs/image/upload/v1664544714/avatar/default-avatar_xh2rub.png"
-            size="md"
-          />
+          {avatarUser ? (
+            <CAvatar src={avatarUser.data[0].url} size="md" />
+          ) : (
+            <CAvatar
+              src="https://res.cloudinary.com/dzd9sonxs/image/upload/v1664544714/avatar/default-avatar_xh2rub.png"
+              size="md"
+            />
+          )}
         </CDropdownToggle>
         <CDropdownMenu className="pt-0" placement="bottom-end">
           <CDropdownHeader className="bg-light fw-semibold py-2">Thông tin</CDropdownHeader>
-          <CDropdownItem href="#" onClick={() => toast.error('Chức năng chưa được phát triển', { theme: 'colored' })}>
-            <CIcon icon={cilBell} className="me-2" />
-            Thông báo
-            <CBadge color="info" className="ms-2">
-              42
-            </CBadge>
-          </CDropdownItem>
-          <CDropdownItem href="#" onClick={() => toast.error('Chức năng chưa được phát triển', { theme: 'colored' })}>
+          <Link to={`${roomChat}`} target="_blank" className="dropdown-item">
             <CIcon icon={cilEnvelopeOpen} className="me-2" />
             Tin nhắn
-            <CBadge color="success" className="ms-2">
-              42
-            </CBadge>
-          </CDropdownItem>
+          </Link>
 
           <CDropdownHeader className="bg-light fw-semibold py-2">Thanh toán</CDropdownHeader>
-          <Link to={`/${jwtDecodeAuth.role}/hoa-don`} className="dropdown-item">
+          <Link to={`/${brandName}/hoa-don`} className="dropdown-item">
             <CIcon icon={cilCreditCard} className="me-2" />
             Thanh toán
-            <CBadge color="secondary" className="ms-2">
-              2
-            </CBadge>
           </Link>
 
           <CDropdownHeader className="bg-light fw-semibold py-2">Tài khoản</CDropdownHeader>
-          <Link to={`/${jwtDecodeAuth.role}/thong-tin-ca-nhan`} className="dropdown-item">
+          <Link to={`/${brandName}/thong-tin-ca-nhan`} className="dropdown-item">
             <CIcon icon={cilUser} className="me-2" />
             Thông tin cá nhân
           </Link>
-          <Link to={`/${jwtDecodeAuth.role}/doi-mat-khau`} className="dropdown-item">
+          <Link to={`/${brandName}/doi-mat-khau`} className="dropdown-item">
             <CIcon icon={cilSettings} className="me-2" />
             Đổi mật khẩu
           </Link>
 
           <CDropdownDivider />
-          <Link to="/" className="dropdown-item" onClick={() => Cookies.remove('habolabu')}>
+          <Link
+            to="/"
+            className="dropdown-item"
+            onClick={() => {
+              Cookies.remove('access_token');
+              Cookies.remove('refresh_token');
+              encryptData.clearData();
+            }}
+          >
             <CIcon icon={cilArrowThickFromLeft} className="me-2" />
             Đăng xuất
           </Link>

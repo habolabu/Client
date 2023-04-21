@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 
@@ -30,8 +35,8 @@ const DetailsParkingTypeModal = ({ slug }) => {
     const getParkingTypeDetails = async () => {
       try {
         const res = await parkingTypeServices.getParkingTypeDetails(slug);
-        if (res.response.message === 'Successful') {
-          setParkingTypeInfo(res.response.body);
+        if (res && res.data) {
+          setParkingTypeInfo(res.data.response.body);
         } else {
           toast.error('Thất bại khi lấy thông tin chi tiết bãi đỗ xe ! ', {
             theme: 'colored',

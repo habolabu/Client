@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 
@@ -33,8 +38,8 @@ const AddParkingSpaceModal = ({ parkingId, submitAddParkingSpaceChange }) => {
   const getParkingType = async () => {
     try {
       const res = await parkingTypeServices.getAllParkingType();
-      if (res.response.message === 'Successful') {
-        setParkingTypes(res.response.body);
+      if (res && res.data) {
+        setParkingTypes(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách loại khu vực đỗ xe ! ', {
           theme: 'colored',
@@ -69,7 +74,7 @@ const AddParkingSpaceModal = ({ parkingId, submitAddParkingSpaceChange }) => {
           },
         };
         const res = await parkingSpaceServices.addParkingSpace(params);
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Thêm thành công !', { theme: 'colored' });
           setVisibleAddParkingSpace(false);
           submitAddParkingSpaceChange();

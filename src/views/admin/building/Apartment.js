@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -11,6 +16,9 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Helmet from 'src/components/helmet/helmet';
 import RoomList from './RoomList';
 import ParkingList from './ParkingList';
+import PermissionDirection from 'src/utils/PermissionDirection';
+import { permissionLocal } from 'src/utils/permissionLocal';
+import Page403 from 'src/views/pages/auth/Page403';
 
 const Apartment = () => {
   const url = useParams();
@@ -21,8 +29,8 @@ const Apartment = () => {
     const getApartmentDetails = async () => {
       try {
         const res = await apartmentServices.getApartmentDetails(url.apartmentDetails);
-        if (res.response.message === 'Successful') {
-          setApartmentInfo(res.response.body);
+        if (res && res.data) {
+          setApartmentInfo(res.data.response.body);
         } else {
           console.log('Thất bại khi lấy thông tin chung cư ! ' + res.response.message);
           toast.error('Thất bại khi lấy thông tin chung cư ! ', {
@@ -39,45 +47,51 @@ const Apartment = () => {
 
   return (
     <Helmet title={apartmentInfo ? apartmentInfo.name : 'Căn hộ'} role="Admin">
-      {apartmentInfo ? (
+      {permissionLocal.isExistPermission(PermissionDirection.VIEW_APARTMENT) ? (
         <>
-          <CRow>
-            <CCol lg={4} md={5} xs={12}>
-              <CCard className="mb-4">
-                <CCardHeader>
-                  <strong>🏦 Thông tin {apartmentInfo.name}</strong>
-                </CCardHeader>
-                <CCardBody>
-                  <CRow className="mb-3">
-                    <CCol sm={12}>
-                      <h6>📝 Thông tin chi tiết</h6>
-                      <ul>
-                        <li>
-                          <strong>Tên chung cư:</strong> {apartmentInfo.name}
-                        </li>
-                        <li>
-                          <strong>Số lượng:</strong> {apartmentInfo.floorAmount} phòng
-                        </li>
-                      </ul>
-                    </CCol>
-                  </CRow>
-                </CCardBody>
-              </CCard>
-            </CCol>
-          </CRow>
-          <hr />
-          <CRow>
-            {/* room list */}
-            <RoomList apartmentId={apartmentInfo.id} />
-            {/* parking list */}
-            <ParkingList apartmentId={apartmentInfo.id} />
-          </CRow>
+          {apartmentInfo ? (
+            <>
+              <CRow>
+                <CCol lg={4} md={5} xs={12}>
+                  <CCard className="mb-4">
+                    <CCardHeader>
+                      <strong>🏦 Thông tin {apartmentInfo.name}</strong>
+                    </CCardHeader>
+                    <CCardBody>
+                      <CRow className="mb-3">
+                        <CCol sm={12}>
+                          <h6>📝 Thông tin chi tiết</h6>
+                          <ul>
+                            <li>
+                              <strong>Tên chung cư:</strong> {apartmentInfo.name}
+                            </li>
+                            <li>
+                              <strong>Số lượng:</strong> {apartmentInfo.floorAmount} phòng
+                            </li>
+                          </ul>
+                        </CCol>
+                      </CRow>
+                    </CCardBody>
+                  </CCard>
+                </CCol>
+              </CRow>
+              <hr />
+              <CRow>
+                {/* room list */}
+                <RoomList apartmentId={apartmentInfo.id} />
+                {/* parking list */}
+                <ParkingList apartmentId={apartmentInfo.id} />
+              </CRow>
+            </>
+          ) : (
+            <SkeletonTheme color="#202020" highlightColor="#ccc">
+              <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
+              <Skeleton count={5} />
+            </SkeletonTheme>
+          )}
         </>
       ) : (
-        <SkeletonTheme color="#202020" highlightColor="#ccc">
-          <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-          <Skeleton count={5} />
-        </SkeletonTheme>
+        <Page403 />
       )}
     </Helmet>
   );

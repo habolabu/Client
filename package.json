@@ -1,6 +1,6 @@
 {
-  "name": "ui",
-  "version": "4.4.0",
+  "name": "habolabu",
+  "version": "1.0.0",
   "private": true,
   "homepage": ".",
   "scripts": {
@@ -13,6 +13,8 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^36.0.1",
+    "@ckeditor/ckeditor5-react": "^5.0.6",
     "@coreui/chartjs": "^3.0.0",
     "@coreui/coreui": "^4.2.0",
     "@coreui/icons": "^2.1.0",
@@ -20,6 +22,10 @@
     "@coreui/react": "^4.3.0",
     "@coreui/react-chartjs": "^2.1.0",
     "@coreui/utils": "^1.3.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/material": "^5.11.10",
     "@reduxjs/toolkit": "^1.8.6",
     "@tippyjs/react": "^4.2.6",
     "axios": "^0.27.2",
@@ -35,7 +41,7 @@
     "react-chartjs-2": "^4.3.1",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.6.0",
+    "react-icons": "^4.7.1",
     "react-loading-skeleton": "^3.1.0",
     "react-paginate": "^8.1.3",
     "react-redux": "^8.0.2",
