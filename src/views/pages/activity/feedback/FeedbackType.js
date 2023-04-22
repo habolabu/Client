@@ -32,6 +32,8 @@ import feedBackTypeServices from 'src/api/activityServices/feedBackTypeServices'
 import AddFeedbackTypeModal from 'src/components/adminComponents/activity/feedbackType/AddFeedbackTypeModal';
 import EditFeedbackTypeModal from 'src/components/adminComponents/activity/feedbackType/EditFeedbackTypeModal';
 import DeleteFeedbackTypeModal from 'src/components/adminComponents/activity/feedbackType/DeleteFeedbackTypeModal';
+import { permissionLocal } from 'src/utils/permissionLocal';
+import PermissionDirection from 'src/utils/PermissionDirection';
 
 const FeedbackType = () => {
   const [feedBackTypeList, setFeedBackTypeList] = useState([]);
@@ -82,7 +84,9 @@ const FeedbackType = () => {
             <CCard className="mb-4">
               <CCardHeader className="d-flex align-items-center justify-content-between">
                 <strong>Danh sách loại phản hồi</strong>
-                <AddFeedbackTypeModal submitAddFeedBackTypeChange={getFeedBackTypeAll} />
+                {permissionLocal.isExistPermission(PermissionDirection.ADD_NEW_FEEDBACK_TYPE) ? (
+                  <AddFeedbackTypeModal submitAddFeedBackTypeChange={getFeedBackTypeAll} />
+                ) : null}
               </CCardHeader>
               <CCardBody>
                 <CRow className="mb-3">
@@ -105,7 +109,10 @@ const FeedbackType = () => {
                           <CTableHeaderCell scope="col">#</CTableHeaderCell>
                           <CTableHeaderCell scope="col">Tên phản hồi</CTableHeaderCell>
                           <CTableHeaderCell scope="col">Ngày tạo</CTableHeaderCell>
-                          <CTableHeaderCell scope="col">Thao tác</CTableHeaderCell>
+                          {permissionLocal.isExistPermission(PermissionDirection.DELETE_EXIST_FEEDBACK_TYPE) ||
+                          permissionLocal.isExistPermission(PermissionDirection.MODIFY_EXIST_FEEDBACK_TYPE) ? (
+                            <CTableHeaderCell scope="col">Thao tác</CTableHeaderCell>
+                          ) : null}
                         </CTableRow>
                       </CTableHead>
                       <CTableBody>
@@ -115,16 +122,23 @@ const FeedbackType = () => {
                               <CTableHeaderCell scope="row">{feedBackTypeItem.id}</CTableHeaderCell>
                               <CTableDataCell>{feedBackTypeItem.name}</CTableDataCell>
                               <CTableDataCell>{feedBackTypeItem.createdAt.slice(0, 10)}</CTableDataCell>
-                              <CTableDataCell>
-                                <EditFeedbackTypeModal
-                                  slug={feedBackTypeItem.slug}
-                                  submitEditFeedBackTypeChange={getFeedBackTypeAll}
-                                />
-                                <DeleteFeedbackTypeModal
-                                  slug={feedBackTypeItem.slug}
-                                  submitDeleteFeedBackTypeChange={getFeedBackTypeAll}
-                                />
-                              </CTableDataCell>
+                              {permissionLocal.isExistPermission(PermissionDirection.DELETE_EXIST_FEEDBACK_TYPE) ||
+                              permissionLocal.isExistPermission(PermissionDirection.MODIFY_EXIST_FEEDBACK_TYPE) ? (
+                                <CTableDataCell>
+                                  {permissionLocal.isExistPermission(PermissionDirection.DELETE_EXIST_FEEDBACK_TYPE) ? (
+                                    <EditFeedbackTypeModal
+                                      slug={feedBackTypeItem.slug}
+                                      submitEditFeedBackTypeChange={getFeedBackTypeAll}
+                                    />
+                                  ) : null}
+                                  {permissionLocal.isExistPermission(PermissionDirection.DELETE_EXIST_FEEDBACK_TYPE) ? (
+                                    <DeleteFeedbackTypeModal
+                                      slug={feedBackTypeItem.slug}
+                                      submitDeleteFeedBackTypeChange={getFeedBackTypeAll}
+                                    />
+                                  ) : null}
+                                </CTableDataCell>
+                              ) : null}
                             </CTableRow>
                           );
                         })}

@@ -6,6 +6,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { permissionLocal } from 'src/utils/permissionLocal';
+import PermissionDirection from 'src/utils/PermissionDirection';
+import FBReactions from '../emotion/FBReaction';
+
 const CommentItem = ({ data }) => {
   return (
     <div className="comment-container">
@@ -19,12 +26,21 @@ const CommentItem = ({ data }) => {
           </div>
           <div className="comment-wrapper__info">
             <div className="comment-wrapper__info-header">
-              <p>
+              <p className="m-0">
                 <b>{data.fullName}</b>
                 <span>{new Date(data.createdAt).toLocaleString('vi-VI')}</span>
               </p>
             </div>
-            <div className="comment-wrapper__info-content">{data.content}</div>
+            <div className="comment-wrapper__info-content mb-2">{data.content}</div>
+            <div className="comment-action d-flex">
+              <FBReactions />
+              {permissionLocal.isExistPermission(PermissionDirection.DELETE_EXIST_COMMENT) ? (
+                <div className="comment-action__delete me-4">
+                  <DeleteOutlineIcon />
+                  Xoá
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

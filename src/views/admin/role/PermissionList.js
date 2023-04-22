@@ -38,13 +38,13 @@ function Row(props) {
         </TableCell>
         <TableCell>{permission.id}</TableCell>
         <TableCell>{permission.display}</TableCell>
-        {roleList.map((role) => {
+        {/* {roleList.map((role) => {
           return (
             <TableCell key={role.id} align="center">
               <Checkbox checked={permission.status} inputProps={{ 'aria-label': 'controlled' }} />
             </TableCell>
           );
-        })}
+        })} */}
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -58,13 +58,13 @@ function Row(props) {
                 </TableCell>
                 <TableCell>Mã phân quyền</TableCell>
                 <TableCell>Tên quyền</TableCell>
-                {roleList.map((role) => {
+                {/* {roleList.map((role) => {
                   return (
                     <TableCell key={role.id} align="center">
                       <Checkbox checked={permission.status} inputProps={{ 'aria-label': 'controlled' }} />
                     </TableCell>
                   );
-                })}
+                })} */}
               </TableHead>
               <TableBody>
                 {permission.permissionDocuments.map((permissionDocument) => (
@@ -74,13 +74,13 @@ function Row(props) {
                     <TableCell component="th" scope="row">
                       {permissionDocument.display}
                     </TableCell>
-                    {roleList.map((role) => {
+                    {/* {roleList.map((role) => {
                       return (
                         <TableCell key={role.id} align="center">
                           <Checkbox checked={permissionDocument.status} inputProps={{ 'aria-label': 'controlled' }} />
                         </TableCell>
                       );
-                    })}
+                    })} */}
                   </TableRow>
                 ))}
               </TableBody>

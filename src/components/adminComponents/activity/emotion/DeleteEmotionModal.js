@@ -6,20 +6,20 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from '@coreui/react';
-import parkingServices from 'src/api/buildingServices/parkingServices';
 import { toast } from 'react-toastify';
 import { MdDeleteForever } from 'react-icons/md';
 import Tippy from '@tippyjs/react';
+import emotionServices from 'src/api/activityServices/emotionServices';
 
-const DeleteEmotionModal = ({ slug, submitDeleteParkingChange }) => {
-  const [visibleDeleteParking, setVisibleDeleteParking] = useState(false);
+const DeleteEmotionModal = ({ emotionId, submitEmotionChange }) => {
+  const [visibleDeleteEmotion, setVisibleDeleteEmotion] = useState(false);
 
-  const handleDeleteParking = async () => {
+  const handleDeleteEmotion = async () => {
     try {
-      const res = await parkingServices.deleteParking({ slug: slug });
+      const res = await emotionServices.deleteEmotion({ emotionId: emotionId });
       if (res && res.data) {
         toast.success('Xoá thành công !', { theme: 'colored' });
-        submitDeleteParkingChange();
+        submitEmotionChange();
       } else {
         toast.error('Xoá thất bại ! ', { theme: 'colored' });
       }
@@ -31,12 +31,12 @@ const DeleteEmotionModal = ({ slug, submitDeleteParkingChange }) => {
 
   return (
     <>
-      <Tippy content="Xoá bãi đỗ xe">
+      <Tippy content="Xoá cảm xúc">
         <CButton
           color="danger"
           size="sm"
           className="ms-2"
-          onClick={() => setVisibleDeleteParking(!visibleDeleteParking)}
+          onClick={() => setVisibleDeleteEmotion(!visibleDeleteEmotion)}
         >
           <MdDeleteForever />
         </CButton>
@@ -44,28 +44,28 @@ const DeleteEmotionModal = ({ slug, submitDeleteParkingChange }) => {
       <CModal
         backdrop="static"
         alignment="center"
-        visible={visibleDeleteParking}
-        onClose={() => setVisibleDeleteParking(false)}
+        visible={visibleDeleteEmotion}
+        onClose={() => setVisibleDeleteEmotion(false)}
       >
         <CModalHeader>
           <CModalTitle>Bạn có muốn xoá ?</CModalTitle>
         </CModalHeader>
         <CModalBody>
           ❗ Mọi hành động của bạn sẽ không được phục hồi nếu bạn ấn nút
-          <b className="text-danger"> Xoá bãi đỗ xe</b>
+          <b className="text-danger"> Xoá cảm xúc</b>
         </CModalBody>
         <CModalFooter>
-          <CButton color="secondary" onClick={() => setVisibleDeleteParking(false)}>
+          <CButton color="secondary" onClick={() => setVisibleDeleteEmotion(false)}>
             Huỷ
           </CButton>
           <CButton
             color="danger"
             onClick={() => {
-              handleDeleteParking(slug);
-              setVisibleDeleteParking(false);
+              handleDeleteEmotion();
+              setVisibleDeleteEmotion(false);
             }}
           >
-            Xoá bãi đỗ xe
+            Xoá cảm xúc
           </CButton>
         </CModalFooter>
       </CModal>

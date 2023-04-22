@@ -8,6 +8,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
 import {
   CCard,
   CCardBody,
@@ -19,6 +22,9 @@ import {
   CCardFooter,
   CRow,
   CCol,
+  CFormInput,
+  CButton,
+  CForm,
 } from '@coreui/react';
 
 import { Skeleton } from '@mui/material';
@@ -29,6 +35,7 @@ import { cilCommentBubble, cilMoodGood } from '@coreui/icons';
 import Helmet from 'src/components/helmet/helmet';
 import commentServices from 'src/api/activityServices/commentServices';
 import CommentItem from 'src/components/adminComponents/activity/comment/commentItem';
+import FBReactions from 'src/components/adminComponents/activity/emotion/FBReaction';
 
 const PostDetail = () => {
   const [postInfo, setPostInfo] = useState(null);
@@ -38,7 +45,6 @@ const PostDetail = () => {
   const getPostDetails = async () => {
     try {
       const res = await postServices.getPostDetails(url.postSlug);
-      console.log(res);
       if (res && res.data) {
         getComments(res.data.response.body.id);
         setPostInfo(res.data.response.body);
@@ -59,7 +65,6 @@ const PostDetail = () => {
         postId: postId,
       };
       const res = await commentServices.getCommentAll(params);
-      console.log(res);
       if (res && res.data) {
         setComments(res.data.response.body.data);
       } else {
@@ -72,6 +77,42 @@ const PostDetail = () => {
       toast.error('Thất bại khi lấy bình luận ! ' + error.message, { theme: 'colored' });
     }
   };
+
+  const formik = useFormik({
+    initialValues: {
+      content: '',
+      postId: '',
+      commentId: 1,
+    },
+    validationSchema: Yup.object({
+      content: Yup.string().required('Vui lòng nhập bình luận !').min(1, 'Tối thiểu 1 ký tự !'),
+    }),
+    onSubmit: async (values) => {
+      try {
+        const params = {
+          content: values.content,
+          postId: postInfo.id,
+          commentId: '',
+        };
+        const res = await commentServices.addComment(params);
+
+        if (res && res.data) {
+          toast.success('Thêm thành công !', { theme: 'colored' });
+          formik.values.content = '';
+          getPostDetails();
+        } else {
+          toast.error('Thêm thất bại !', {
+            theme: 'colored',
+          });
+        }
+      } catch (error) {
+        console.log('Thêm thất bại: ', error);
+        toast.error('Thêm thất bại ! ', {
+          theme: 'colored',
+        });
+      }
+    },
+  });
 
   // get data page
   useEffect(() => {
@@ -86,24 +127,39 @@ const PostDetail = () => {
             <strong>{postInfo.title}</strong>
           </CCardHeader>
           <CCardBody>
-            <CCardSubtitle className="mb-2 text-medium-emphasis">
+            <CCardSubtitle className="mb-4 text-medium-emphasis">
               Ngày tạo: {postInfo.createdAt.slice(0, 10)}
             </CCardSubtitle>
-            <CCardText className="mt-4" dangerouslySetInnerHTML={{ __html: postInfo.content }} />
-            <CNavLink className="mt-1">
-              <span>
+            <CCardText className="my-5" dangerouslySetInnerHTML={{ __html: postInfo.content }} />
+            <div className="d-flex justify-content-between">
+              <p>
                 <CIcon icon={cilMoodGood} size="xl" />
                 <CBadge color="warning" className="badge-sm position-absolute start-90 translate-middle">
                   {postInfo.totalEmotion}
                 </CBadge>
-              </span>
-              <span className="px-2">
-                <CIcon icon={cilCommentBubble} size="xl" />
-                <CBadge color="warning" className="badge-sm position-absolute start-90 translate-middle">
-                  {postInfo.totalComment}
-                </CBadge>
-              </span>
-            </CNavLink>
+              </p>
+              <p className="px-2">{postInfo.totalComment} bình luận</p>
+            </div>
+            <FBReactions />
+            <CForm onSubmit={formik.handleSubmit}>
+              <CRow className="align-items-center justify-content-center my-4">
+                <CCol sm={12}>
+                  <CFormInput
+                    type="text"
+                    id="content"
+                    name="content"
+                    placeholder="Nhập bình luận..."
+                    {...formik.getFieldProps('content')}
+                  />
+                  {formik.touched.content && formik.errors.content ? (
+                    <p className="formik-text-size text-danger mt-1"> {formik.errors.content} </p>
+                  ) : null}
+                </CCol>
+              </CRow>
+              <CButton type="submit" color="info">
+                Bình luận
+              </CButton>
+            </CForm>
           </CCardBody>
           <CCardFooter className="px-4 pb-5">
             {comments != null ? (

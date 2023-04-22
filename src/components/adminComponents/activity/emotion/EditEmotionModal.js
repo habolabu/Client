@@ -23,43 +23,49 @@ import {
   CRow,
 } from '@coreui/react';
 
-import parkingServices from 'src/api/buildingServices/parkingServices';
-
 import { toast } from 'react-toastify';
-import Tippy from '@tippyjs/react';
+import emotionServices from 'src/api/activityServices/emotionServices';
 import { MdEdit } from 'react-icons/md';
-import { Button } from '@mui/material';
+import Tippy from '@tippyjs/react';
 
-const EditEmotionModal = ({ apartmentId, submitEditParkingChange, ...rest }) => {
-  const [visibleEditParking, setVisibleEditParking] = useState(false);
+const EditEmotionModal = ({ emotionId, submitEditEmotionChange }) => {
+  const [visibleEditEmotion, setVisibleEditEmotion] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      name: rest.parkingName,
+      id: emotionId,
+      name: '',
+      icon: File,
     },
-    validationSchema: Yup.object({
-      name: Yup.string().required('Vui lòng nhập tên bãi đỗ xe !').min(6, 'Tối thiểu 6 ký tự !'),
+    validationSchema: Yup.object().shape({
+      name: Yup.string().required('Vui lòng nhập tên cảm xúc !').min(2, 'Tối thiểu 2 ký tự !'),
+      icon: Yup.mixed().required('Vui lòng upload hình !'),
     }),
     onSubmit: async (values) => {
-      try {
-        const params = {
-          id: rest.parkingId,
-          name: values.name,
-          apartmentId: apartmentId,
-        };
+      let loadingLogin = document.getElementById('loadingLogin');
+      loadingLogin.classList.add('show');
 
-        const res = await parkingServices.updateParking(params);
-        if (res && res.data) {
+      try {
+        var bodyFormData = new FormData();
+        bodyFormData.append('id', emotionId);
+        bodyFormData.append('name', values.name);
+        bodyFormData.append('icon', values.icon);
+        const res = await emotionServices.updateEmotion(bodyFormData);
+
+        if (res.status === 200) {
           toast.success('Sửa thành công !', { theme: 'colored' });
-          setVisibleEditParking(false);
-          submitEditParkingChange();
-        } else {
+          loadingLogin.classList.remove('show');
+          setVisibleEditEmotion(false);
+          submitEditEmotionChange();
+        } else if (res.error.message !== undefined) {
           toast.error('Sửa thất bại !', {
             theme: 'colored',
           });
+          loadingLogin.classList.remove('show');
         }
       } catch (error) {
         console.log('Sửa thất bại: ', error);
+        loadingLogin.classList.remove('show');
         toast.error('Sửa thất bại ! ', { theme: 'colored' });
       }
     },
@@ -67,26 +73,31 @@ const EditEmotionModal = ({ apartmentId, submitEditParkingChange, ...rest }) => 
 
   return (
     <>
-      <Tippy content="Sửa thông tin">
-        <Button
-          variant="contained"
-          color="info"
-          endIcon={<MdEdit />}
-          size="small"
-          className="ms-2"
-          onClick={() => setVisibleEditParking(!visibleEditParking)}
-        >
-          Sửa
-        </Button>
+      <div className="loading-login" id="loadingLogin">
+        <div className="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <Tippy content="Sửa cảm xúc">
+        <CButton color="warning" size="sm" className="ms-2" onClick={() => setVisibleEditEmotion(!visibleEditEmotion)}>
+          <MdEdit />
+        </CButton>
       </Tippy>
       <CModal
         backdrop="static"
         alignment="center"
-        visible={visibleEditParking}
-        onClose={() => setVisibleEditParking(false)}
+        visible={visibleEditEmotion}
+        onClose={() => setVisibleEditEmotion(false)}
       >
         <CModalHeader>
-          <CModalTitle>Sửa thông tin bãi đỗ xe</CModalTitle>
+          <CModalTitle>Sửa cảm xúc</CModalTitle>
         </CModalHeader>
         <CForm onSubmit={formik.handleSubmit}>
           <CModalBody>
@@ -94,24 +105,37 @@ const EditEmotionModal = ({ apartmentId, submitEditParkingChange, ...rest }) => 
               <CCol sm={11}>
                 <CFormLabel htmlFor="name" className="col-sm-12 col-form-label">
                   <b>
-                    Tên bãi đỗ xe <span className="text-danger">*</span>
+                    Tên cảm xúc <span className="text-danger">*</span>
                   </b>
                 </CFormLabel>
                 <CFormInput
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Nhập tên bãi đỗ xe..."
+                  placeholder="Nhập tên cảm xúc..."
                   {...formik.getFieldProps('name')}
                 />
                 {formik.touched.name && formik.errors.name ? (
                   <p className="formik-text-size text-danger mt-1"> {formik.errors.name} </p>
                 ) : null}
+                <CFormLabel htmlFor="icon" className="col-sm-12 col-form-label">
+                  <b>
+                    File <span className="text-danger">*</span>
+                  </b>
+                </CFormLabel>
+                <CFormInput
+                  id="icon"
+                  type="file"
+                  name="icon"
+                  // value={formik.values.file}
+                  onChange={(event) => formik.setFieldValue('icon', event.currentTarget.files[0])}
+                />
+                {formik.errors.icon && <p className="formik-text-size text-danger mt-1"> {formik.errors.icon} </p>}
               </CCol>
             </CRow>
           </CModalBody>
           <CModalFooter>
-            <CButton color="secondary" onClick={() => setVisibleEditParking(false)}>
+            <CButton color="secondary" onClick={() => setVisibleEditEmotion(false)}>
               Huỷ
             </CButton>
             <CButton type="submit" color="info">
