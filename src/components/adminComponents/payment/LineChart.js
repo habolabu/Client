@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 
@@ -18,7 +23,6 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { CButton, CCol, CFormLabel, CFormSelect, CRow } from '@coreui/react';
-import AreaChart from './AreaChar';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Filler, Tooltip, Legend);
 
@@ -98,9 +102,9 @@ const LineChart = () => {
         toYear: toYear,
       };
       const res = await billServices.statistics(params);
-      if (res.response.message === 'Successful') {
+      if (res && res.data) {
         // set line chart
-        for (const [key, value] of Object.entries(res.response.body.summarize)) {
+        for (const [key, value] of Object.entries(res.data.response.body.summarize)) {
           let obj = {};
           let objValue = [];
           for (const [key1, value1] of Object.entries(value)) {
@@ -114,7 +118,7 @@ const LineChart = () => {
           obj[key] = objValue;
           labelStatsTitle.push(obj);
         }
-        setDataChartDetails(res.response.body.detail);
+        setDataChartDetails(res.data.response.body.detail);
         setDataLineChar({
           labels: labelTitles,
           datasets: [

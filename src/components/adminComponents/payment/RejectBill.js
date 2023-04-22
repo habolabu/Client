@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { CButton } from '@coreui/react';
@@ -10,7 +15,7 @@ const RejectBill = ({ billId }) => {
   const handleRejectBill = async () => {
     try {
       const res = await billServices.rejectBill(billId);
-      if (res.response.message === 'Successful') {
+      if (res && res.data) {
         toast.success('Từ chối hoá đơn thành công ! ', {
           theme: 'colored',
         });

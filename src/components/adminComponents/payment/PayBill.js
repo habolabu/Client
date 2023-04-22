@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import { CButton } from '@coreui/react';
@@ -18,11 +23,11 @@ const PayBill = ({ billId }) => {
       };
       const res = await billServices.payBill(data);
       console.log(res);
-      if (res.response.message === 'Successful') {
+      if (res && res.data) {
         toast.success('Đang chuyển đến trang thanh toán ! ', {
           theme: 'colored',
         });
-        window.location.href = res.response.body.payUrl;
+        window.location.href = res.data.response.body.payUrl;
       } else {
         toast.error('Thanh toán hoá đơn thất bại. Vui lòng thử lại sau ! ', {
           theme: 'colored',

@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 // api/axiosUploadImage.js
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -11,19 +16,25 @@ const axiosUploadImage = axios.create({
   headers: {
     'Content-Type': 'multipart/form-data',
     accept: 'multipart/form-data',
-    Authorization: `Bearer ${Cookies.get('habolabu')}`,
   },
   paramsSerializer: (params) => queryString.stringify(params),
 });
 axiosUploadImage.interceptors.request.use(async (config) => {
   // Handle token here ...
+  config.headers = {
+    Authorization: `Bearer ${Cookies.get('access_token')}`,
+    'Refresh-Token': `${Cookies.get('refresh_token')}`,
+  };
   return config;
 });
 axiosUploadImage.interceptors.response.use(
   (response) => {
-    if (response && response.data) {
-      return response.data;
+    // Handle token here (if yes)...
+    if (response.data.response.body['access_token'] && response.data.response.body['refresh_token']) {
+      Cookies.set('access_token', response.data.response.body['access_token']);
+      Cookies.set('refresh_token', response.data.response.body['refresh_token']);
     }
+
     return response;
   },
   (error) => {

@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 
@@ -32,7 +37,7 @@ const Dashboard = () => {
   };
 
   return (
-    <Helmet title="Tổng quan" role="Admin">
+    <Helmet title="Tổng quan">
       <CRow>
         <CCol xs={12}>
           <CCard className="mb-4">

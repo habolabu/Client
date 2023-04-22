@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
@@ -43,7 +48,7 @@ const EditParkingModal = ({ apartmentId, submitEditParkingChange, ...rest }) => 
         };
 
         const res = await parkingServices.updateParking(params);
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Sửa thành công !', { theme: 'colored' });
           setVisibleEditParking(false);
           submitEditParkingChange();

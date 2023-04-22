@@ -1,3 +1,9 @@
+/* eslint-disable no-loop-func */
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
@@ -17,7 +23,7 @@ import {
   Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { CCol, CFormLabel, CFormSelect, CRow } from '@coreui/react';
+import { CRow } from '@coreui/react';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend);
 
@@ -67,10 +73,10 @@ const AreaChart = ({ month, year }) => {
         toYear: year,
       };
       const res = await billServices.statistics(params);
-      if (res.response.message === 'Successful') {
+      if (res && res.data) {
         // set line chart
         color = `${randomRGB()}`;
-        for (const [key, value] of Object.entries(res.response.body.detail)) {
+        for (const [key, value] of Object.entries(res.data.response.body.detail)) {
           dataItem.fill = true;
           dataItem.label = key;
           dataItem.backgroundColor = color;

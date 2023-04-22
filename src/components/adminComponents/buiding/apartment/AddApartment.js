@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
@@ -49,7 +54,7 @@ const AddApartment = ({ areaId, submitAddApartmentChange }) => {
         };
         const res = await apartmentServices.addApartment(params);
 
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Thêm thành công !', { theme: 'colored' });
           setVisibleAddApartment(false);
           submitAddApartmentChange();

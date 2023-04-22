@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 // Variables
 //
 // If you want to customize your project please uncomment and update one of the following variables.
@@ -5,33 +10,33 @@
 // Color system
 
 // scss-docs-start gray-color-variables
-// $white:     #fff !default;
-// $gray-base: #3c4b64 !default;
-// $gray-100:  #ebedef !default;
-// $gray-200:  #d8dbe0 !default;
-// $gray-300:  #c4c9d0 !default;
-// $gray-400:  #b1b7c1 !default;
-// $gray-500:  #9da5b1 !default;
-// $gray-600:  #8a93a2 !default;
-// $gray-700:  #768192 !default;
-// $gray-800:  #636f83 !default;
-// $gray-900:  #4f5d73 !default;
-// $black:     #000015 !default;
+$white: #fff !default;
+$gray-base: #3c4b64 !default;
+$gray-100: #ebedef !default;
+$gray-200: #d8dbe0 !default;
+$gray-300: #c4c9d0 !default;
+$gray-400: #b1b7c1 !default;
+$gray-500: #9da5b1 !default;
+$gray-600: #8a93a2 !default;
+$gray-700: #768192 !default;
+$gray-800: #636f83 !default;
+$gray-900: #4f5d73 !default;
+$black: #000015 !default;
 // scss-docs-end gray-color-variables
 
 // fusv-disable
 // scss-docs-start gray-colors-map
-// $grays: (
-//   "100": $gray-100,
-//   "200": $gray-200,
-//   "300": $gray-300,
-//   "400": $gray-400,
-//   "500": $gray-500,
-//   "600": $gray-600,
-//   "700": $gray-700,
-//   "800": $gray-800,
-//   "900": $gray-900
-// ) !default;
+$grays: (
+    "100": $gray-100,
+    "200": $gray-200,
+    "300": $gray-300,
+    "400": $gray-400,
+    "500": $gray-500,
+    "600": $gray-600,
+    "700": $gray-700,
+    "800": $gray-800,
+    "900": $gray-900,
+) !default;
 // scss-docs-end gray-colors-map
 // fusv-enable
 
@@ -44,34 +49,34 @@
 // $disabled-inverse:         rgba($white, .38) !default;
 
 // scss-docs-start color-variables
-// $blue:    #0d6efd !default;
-// $indigo:  #6610f2 !default;
-// $purple:  #6f42c1 !default;
-// $pink:    #d63384 !default;
-// $red:     #dc3545 !default;
-// $orange:  #fd7e14 !default;
-// $yellow:  #ffc107 !default;
-// $green:   #198754 !default;
-// $teal:    #20c997 !default;
-// $cyan:    #0dcaf0 !default;
+$blue: #0d6efd !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #d63384 !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #198754 !default;
+$teal: #20c997 !default;
+$cyan: #0dcaf0 !default;
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
-// $colors: (
-//   "blue":       $blue,
-//   "indigo":     $indigo,
-//   "purple":     $purple,
-//   "pink":       $pink,
-//   "red":        $red,
-//   "orange":     $orange,
-//   "yellow":     $yellow,
-//   "green":      $green,
-//   "teal":       $teal,
-//   "cyan":       $cyan,
-//   "white":      $white,
-//   "gray":       $gray-600,
-//   "gray-dark":  $gray-800
-// ) !default;
+$colors: (
+    "blue": $blue,
+    "indigo": $indigo,
+    "purple": $purple,
+    "pink": $pink,
+    "red": $red,
+    "orange": $orange,
+    "yellow": $yellow,
+    "green": $green,
+    "teal": $teal,
+    "cyan": $cyan,
+    "white": $white,
+    "gray": $gray-600,
+    "gray-dark": $gray-800,
+) !default;
 // scss-docs-end colors-map
 
 // fusv-disable
@@ -338,7 +343,6 @@
 // $body-color:                $high-emphasis !default;
 // $body-text-align:           null !default;
 
-
 // Links
 //
 // Style anchor elements.
@@ -357,7 +361,6 @@
 // Style p element.
 
 // $paragraph-margin-bottom:   1rem !default;
-
 
 // Grid breakpoints
 //
@@ -378,7 +381,6 @@
 // @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
 // @include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
 
-
 // Grid containers
 //
 // Define the maximum width of `.container` for different screen sizes.
@@ -395,7 +397,6 @@
 
 // @include _assert-ascending($container-max-widths, "$container-max-widths");
 
-
 // Grid columns
 //
 // Set the number of columns and specify the width of the gutters.
@@ -410,36 +411,35 @@
 
 // $container-padding-x: $grid-gutter-width / 2 !default;
 
-
 // Components
 //
 // Define common padding and border radius sizes and more.
 
 // scss-docs-start border-variables
-// $border-width:                1px !default;
-// $border-widths: (
-//   1: 1px,
-//   2: 2px,
-//   3: 3px,
-//   4: 4px,
-//   5: 5px
-// ) !default;
+$border-width: 1px !default;
+$border-widths: (
+    1: 1px,
+    2: 2px,
+    3: 3px,
+    4: 4px,
+    5: 5px,
+) !default;
 
-// $border-color:                $gray-200 !default;
+$border-color: $gray-200 !default;
 // scss-docs-end border-variables
 
 // scss-docs-start border-radius-variables
-// $border-radius:               .25rem !default;
-// $border-radius-sm:            .2rem !default;
-// $border-radius-lg:            .3rem !default;
-// $border-radius-pill:          50rem !default;
+$border-radius: 0.25rem !default;
+$border-radius-sm: 0.2rem !default;
+$border-radius-lg: 0.3rem !default;
+$border-radius-pill: 50rem !default;
 // scss-docs-end border-radius-variables
 
 // scss-docs-start box-shadow-variables
-// $box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
-// $box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
-// $box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
-// $box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
+$box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075) !default;
+$box-shadow-lg: 0 1rem 3rem rgba($black, 0.175) !default;
+$box-shadow-inset: inset 0 1px 2px rgba($black, 0.075) !default;
 // scss-docs-end box-shadow-variables
 
 // $component-active-color:      $high-emphasis-inverse !default;
@@ -597,7 +597,6 @@
 // $icon-size-lg:    $icon-size-base * 1.25 !default;
 // $icon-size-xl:    $icon-size-base * 1.5 !default;
 
-
 // Tables
 //
 // Customizes the `.table` component with basic values, each used across all table variations.
@@ -653,7 +652,6 @@
 // ) !default;
 // scss-docs-end table-loop
 
-
 // Buttons + Forms
 //
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
@@ -681,7 +679,6 @@
 
 // $input-btn-border-width:      $border-width !default;
 // scss-docs-end input-btn-variables
-
 
 // Buttons
 //
@@ -754,7 +751,6 @@
 //   "dark": btn-outline-color-map($dark)
 // ) !default;
 // scss-docs-end btn-variables
-
 
 // Forms
 // scss-docs-start form-variables
@@ -1022,7 +1018,6 @@
 // $zindex-toaster:                    1090 !default;
 // scss-docs-end zindex-stack
 
-
 // Navs
 // scss-docs-start nav-variables
 // $nav-link-padding-y:                .5rem !default;
@@ -1046,7 +1041,6 @@
 // $nav-pills-link-active-color:       $component-active-color !default;
 // $nav-pills-link-active-bg:          $component-active-bg !default;
 // scss-docs-end nav-variables
-
 
 // Navbar
 
@@ -1091,7 +1085,6 @@
 // $navbar-dark-brand-color:                 $navbar-dark-active-color !default;
 // $navbar-dark-brand-hover-color:           $navbar-dark-active-color !default;
 // scss-docs-end navbar-theme-variables
-
 
 // Dropdowns
 //
@@ -1143,7 +1136,6 @@
 // $dropdown-dark-header-color:        $gray-500 !default;
 // scss-docs-end dropdown-dark-variables
 
-
 // Pagination
 
 // scss-docs-start pagination-variables
@@ -1185,25 +1177,25 @@
 // $pagination-border-radius-lg:       $border-radius-lg !default;
 // scss-docs-end pagination-variables
 
-
 // Cards
 // scss-docs-start card-variables
-// $card-spacer-y:                     $spacer !default;
-// $card-spacer-x:                     $spacer !default;
-// $card-title-spacer-y:               $spacer / 2 !default;
-// $card-border-width:                 $border-width !default;
-// $card-border-radius:                $border-radius !default;
-// $card-border-color:                 rgba($black, .125) !default;
-// $card-inner-border-radius:          subtract($card-border-radius, $card-border-width) !default;
-// $card-cap-padding-y:                $card-spacer-y / 2 !default;
-// $card-cap-padding-x:                $card-spacer-x !default;
-// $card-cap-bg:                       rgba($black, .03) !default;
-// $card-cap-color:                    unset !default;
-// $card-height:                       null !default;
-// $card-color:                        unset !default;
-// $card-bg:                           $white !default;
-// $card-img-overlay-padding:          $spacer !default;
-// $card-group-margin:                 $grid-gutter-width / 2 !default;
+// $card-spacer-y: $spacer !default;
+// $card-spacer-x: $spacer !default;
+// $card-title-spacer-y: $spacer / 2 !default;
+$card-border-width: $border-width !default;
+$card-border-radius: 10px !default;
+$card-border-color: rgba($black, 0.125) !default;
+$card-inner-border-radius: subtract($card-border-radius, $card-border-width) !default;
+// $card-cap-padding-y: $card-spacer-y / 2 !default;
+// $card-cap-padding-x: $card-spacer-x !default;
+$card-cap-bg: rgba($black, 0.03) !default;
+$card-cap-color: unset !default;
+$card-height: null !default;
+$card-color: unset !default;
+$card-bg: $white !default;
+
+// $card-img-overlay-padding: $spacer !default;
+// $card-group-margin: $grid-gutter-width / 2 !default;
 // scss-docs-end card-variables
 
 // Accordion
@@ -1269,7 +1261,6 @@
 // $form-feedback-tooltip-border-radius: $tooltip-border-radius !default;
 // scss-docs-end tooltip-feedback-variables
 
-
 // Popovers
 // scss-docs-start popover-variables
 // $popover-font-size:                 $font-size-sm !default;
@@ -1297,7 +1288,6 @@
 // $popover-arrow-outer-color:         fade-in($popover-border-color, .05) !default;
 // scss-docs-end popover-variables
 
-
 // Toasts
 // scss-docs-start toast-variables
 // $toast-max-width:                   350px !default;
@@ -1317,7 +1307,6 @@
 // $toast-header-border-color:         rgba(0, 0, 0, .05) !default;
 // scss-docs-end toast-variables
 
-
 // Badges
 // scss-docs-start badge-variables
 // $badge-font-size:                   .75em !default;
@@ -1332,7 +1321,6 @@
 // $badge-padding-y-sm:                .3em !default;
 // $badge-padding-x-sm:                .5em !default;
 // scss-docs-end badge-variables
-
 
 // Modals
 
@@ -1375,7 +1363,6 @@
 // $modal-transition:                  transform .3s ease-out !default;
 // $modal-scale-transform:             scale(1.02) !default;
 // scss-docs-end modal-variables
-
 
 // Avatars
 // scss-docs-start avatar-variables
@@ -1443,7 +1430,6 @@
 // ) !default;
 // scss-docs-end callout-variables
 
-
 // Progress bars
 
 // scss-docs-start progress-variables
@@ -1497,7 +1483,6 @@
 //   "dark": list-group-color-map($dark)
 // ) !default;
 // scss-docs-end list-group-variables
-
 
 // Header
 // scss-docs-start header-variables
@@ -1559,7 +1544,6 @@
 // $subheader-disabled-color:         $disabled !default;
 // scss-docs-end subheader-default-themes
 
-
 // Image thumbnails
 
 // scss-docs-start thumbnail-variables
@@ -1571,14 +1555,12 @@
 // $thumbnail-box-shadow:              $box-shadow-sm !default;
 // scss-docs-end thumbnail-variables
 
-
 // Figures
 
 // scss-docs-start figure-variables
 // $figure-caption-font-size:          $small-font-size !default;
 // $figure-caption-color:              $gray-600 !default;
 // scss-docs-end figure-variables
-
 
 // Breadcrumbs
 // scss-docs-start breadcrumb-variables
@@ -1743,7 +1725,6 @@
 // $spinner-border-width-sm: .2em !default;
 // scss-docs-end spinner-variables
 
-
 // Close
 // scss-docs-start close-variables
 // $btn-close-width:            1em !default;
@@ -1759,7 +1740,6 @@
 // $btn-close-disabled-opacity: .25 !default;
 // $btn-close-white-filter:     invert(1) grayscale(100%) brightness(200%) !default;
 // scss-docs-end close-variables
-
 
 // Offcanvas
 

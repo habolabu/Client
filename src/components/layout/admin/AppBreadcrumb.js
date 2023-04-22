@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -33,7 +38,7 @@ const AppBreadcrumb = () => {
 
   return (
     <CBreadcrumb className="m-0 ms-2">
-      <Link to={`/${routes[0].role}/trang-tong-quan`}>Trang chủ &nbsp;</Link>
+      <Link to={`/habolabu/trang-tong-quan`}>Trang chủ &nbsp;</Link>
       {breadcrumbs.map((breadcrumb, index) => {
         return (
           <CBreadcrumbItem {...(breadcrumb.active ? { active: true } : { href: breadcrumb.pathname })} key={index}>

@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -31,10 +36,10 @@ const EditArea = ({ slug, submitEditAreaChange }) => {
     const getAreaDetails = async () => {
       try {
         const res = await areaServices.getAreaDetails(slug);
-        if (res.response.message === 'Successful') {
-          formik.values.name = res.response.body.name;
-          formik.values.address = res.response.body.address;
-          formik.values.id = res.response.body.id;
+        if (res && res.data) {
+          formik.values.name = res.data.response.body.name;
+          formik.values.address = res.data.response.body.address;
+          formik.values.id = res.data.response.body.id;
         } else {
           toast.error('Thất bại khi lấy thông tin chi tiết khu vực ! ', { theme: 'colored' });
         }
@@ -64,7 +69,7 @@ const EditArea = ({ slug, submitEditAreaChange }) => {
           address: values.address,
         };
         const res = await areaServices.updateArea(params);
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Cập nhật thành công ! ', { theme: 'colored' });
           setVisibleEditArea(false);
           submitEditAreaChange();

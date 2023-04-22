@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 
@@ -30,6 +35,9 @@ import AddParkingTypeModal from 'src/components/adminComponents/buiding/parkingT
 import EditParkingTypeModal from 'src/components/adminComponents/buiding/parkingType/EditParkingTypeModal';
 import DetailsParkingTypeModal from 'src/components/adminComponents/buiding/parkingType/DetailsParkingTypeModal';
 import DeleteParkingTypeModal from 'src/components/adminComponents/buiding/parkingType/DeleteParkingTypeModal';
+import { permissionLocal } from 'src/utils/permissionLocal';
+import PermissionDirection from 'src/utils/PermissionDirection';
+import Page403 from 'src/views/pages/auth/Page403';
 
 const ParkingType = () => {
   const [parkingTypeList, setParkingTypeList] = useState([]);
@@ -44,8 +52,8 @@ const ParkingType = () => {
         name: nameParkingType,
       };
       const res = await parkingTypeServices.getParkingType(params);
-      if (res.response.message === 'Successful') {
-        setParkingTypeList(res.response.body);
+      if (res && res.data) {
+        setParkingTypeList(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách khu vực đỗ xe ! ', {
           theme: 'colored',
@@ -73,105 +81,109 @@ const ParkingType = () => {
 
   return (
     <Helmet title="Quản lý đỗ xe" role="Admin">
-      <CRow className="align-items-center justify-content-center">
-        <CCol md={8} xs={12}>
-          <CCard className="mb-4">
-            <CCardHeader className="d-flex align-items-center justify-content-between">
-              <strong>🚕 Quản lý khu vực đỗ xe</strong>
-              {/* add parking type modal */}
-              <AddParkingTypeModal submitAddParkingTypeChange={getParkingType} />
-            </CCardHeader>
-            <CCardBody>
-              <CRow className="mb-3">
-                <CCol md={5} sm={12}>
-                  <CFormLabel htmlFor="searchNameParkingType" className="col-form-label">
-                    🔍 Tìm kiếm theo tên khu vực đỗ xe:
-                  </CFormLabel>
-                </CCol>
-                <CCol md={7} sm={12}>
-                  <CFormInput
-                    type="text"
-                    id="searchNameParkingType"
-                    placeholder="Nhập tên bãi đỗ xe..."
-                    onChange={(e) => setNameParkingType(e.target.value)}
-                  />
-                </CCol>
-              </CRow>
-              {parkingTypeList.totalPage ? (
-                <>
-                  <h6 className="my-4">📃 Danh sách khu vực đỗ xe</h6>
-                  <CTable striped responsive hover className="text-center text-nowrap">
-                    <CTableHead>
-                      <CTableRow>
-                        <CTableHeaderCell scope="col">Mã khu vực đỗ xe (ID)</CTableHeaderCell>
-                        <CTableHeaderCell scope="col">Loại khu vực đỗ xe</CTableHeaderCell>
-                        <CTableHeaderCell scope="col">Thao tác</CTableHeaderCell>
-                      </CTableRow>
-                    </CTableHead>
-                    <CTableBody>
-                      {parkingTypeList.data.map((parkingType) => {
-                        return (
-                          <CTableRow key={parkingType.id}>
-                            <CTableHeaderCell scope="row">{parkingType.id}</CTableHeaderCell>
-                            <CTableDataCell>{parkingType.name}</CTableDataCell>
-                            <CTableDataCell>
-                              {/* details parking type modal */}
-                              <DetailsParkingTypeModal slug={parkingType.slug} />
-                              {/* edit parking type modal */}
-                              <EditParkingTypeModal
-                                slug={parkingType.slug}
-                                submitEditParkingTypeChange={getParkingType}
-                              />
-                              {/* delete parking type modal */}
-                              <DeleteParkingTypeModal
-                                slug={parkingType.slug}
-                                submitDeleteParkingTypeChange={getParkingType}
-                              />
-                            </CTableDataCell>
-                          </CTableRow>
-                        );
-                      })}
-                    </CTableBody>
-                  </CTable>
-                </>
-              ) : (
-                <SkeletonTheme color="#202020" highlightColor="#ccc">
-                  <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-                  <Skeleton count={5} />
-                </SkeletonTheme>
-              )}
-            </CCardBody>
-          </CCard>
-        </CCol>
-        {/* pagination */}
-        {parkingTypeList.data ? (
-          <CCol xs={12}>
-            <div className={'mt-2'}>
-              <ReactPaginate
-                previousLabel={'<<'}
-                nextLabel={'>>'}
-                breakLabel={'...'}
-                pageCount={parkingTypeList.totalPage}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={2}
-                onPageChange={handlePageClick}
-                containerClassName={'pagination justify-content-center'}
-                pageClassName={'page-item'}
-                pageLinkClassName={'page-link'}
-                previousClassName={'page-item'}
-                previousLinkClassName={'page-link'}
-                nextClassName={'page-item'}
-                nextLinkClassName={'page-link'}
-                breakClassName={'page-item'}
-                breakLinkClassName={'page-link'}
-                activeClassName={'active'}
-              />
-            </div>
+      {permissionLocal.isExistPermission(PermissionDirection.VIEW_PARKING_TYPE) ? (
+        <CRow className="align-items-center justify-content-center">
+          <CCol md={8} xs={12}>
+            <CCard className="mb-4">
+              <CCardHeader className="d-flex align-items-center justify-content-between">
+                <strong>🚕 Quản lý khu vực đỗ xe</strong>
+                {/* add parking type modal */}
+                <AddParkingTypeModal submitAddParkingTypeChange={getParkingType} />
+              </CCardHeader>
+              <CCardBody>
+                <CRow className="mb-3">
+                  <CCol md={5} sm={12}>
+                    <CFormLabel htmlFor="searchNameParkingType" className="col-form-label">
+                      🔍 Tìm kiếm theo tên khu vực đỗ xe:
+                    </CFormLabel>
+                  </CCol>
+                  <CCol md={7} sm={12}>
+                    <CFormInput
+                      type="text"
+                      id="searchNameParkingType"
+                      placeholder="Nhập tên bãi đỗ xe..."
+                      onChange={(e) => setNameParkingType(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                {parkingTypeList.totalPage ? (
+                  <>
+                    <h6 className="my-4">📃 Danh sách khu vực đỗ xe</h6>
+                    <CTable striped responsive hover className="text-center text-nowrap">
+                      <CTableHead>
+                        <CTableRow>
+                          <CTableHeaderCell scope="col">Mã khu vực đỗ xe (ID)</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">Loại khu vực đỗ xe</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">Thao tác</CTableHeaderCell>
+                        </CTableRow>
+                      </CTableHead>
+                      <CTableBody>
+                        {parkingTypeList.data.map((parkingType) => {
+                          return (
+                            <CTableRow key={parkingType.id}>
+                              <CTableHeaderCell scope="row">{parkingType.id}</CTableHeaderCell>
+                              <CTableDataCell>{parkingType.name}</CTableDataCell>
+                              <CTableDataCell>
+                                {/* details parking type modal */}
+                                <DetailsParkingTypeModal slug={parkingType.slug} />
+                                {/* edit parking type modal */}
+                                <EditParkingTypeModal
+                                  slug={parkingType.slug}
+                                  submitEditParkingTypeChange={getParkingType}
+                                />
+                                {/* delete parking type modal */}
+                                <DeleteParkingTypeModal
+                                  slug={parkingType.slug}
+                                  submitDeleteParkingTypeChange={getParkingType}
+                                />
+                              </CTableDataCell>
+                            </CTableRow>
+                          );
+                        })}
+                      </CTableBody>
+                    </CTable>
+                  </>
+                ) : (
+                  <SkeletonTheme color="#202020" highlightColor="#ccc">
+                    <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
+                    <Skeleton count={5} />
+                  </SkeletonTheme>
+                )}
+              </CCardBody>
+            </CCard>
           </CCol>
-        ) : (
-          <></>
-        )}
-      </CRow>
+          {/* pagination */}
+          {parkingTypeList.data ? (
+            <CCol xs={12}>
+              <div className={'mt-2'}>
+                <ReactPaginate
+                  previousLabel={'<<'}
+                  nextLabel={'>>'}
+                  breakLabel={'...'}
+                  pageCount={parkingTypeList.totalPage}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={2}
+                  onPageChange={handlePageClick}
+                  containerClassName={'pagination justify-content-center'}
+                  pageClassName={'page-item'}
+                  pageLinkClassName={'page-link'}
+                  previousClassName={'page-item'}
+                  previousLinkClassName={'page-link'}
+                  nextClassName={'page-item'}
+                  nextLinkClassName={'page-link'}
+                  breakClassName={'page-item'}
+                  breakLinkClassName={'page-link'}
+                  activeClassName={'active'}
+                />
+              </div>
+            </CCol>
+          ) : (
+            <></>
+          )}
+        </CRow>
+      ) : (
+        <Page403 />
+      )}
     </Helmet>
   );
 };

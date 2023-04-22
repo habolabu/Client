@@ -1,3 +1,4 @@
+/* eslint-disable strict */
 /**
  * Copyright (c) 2013-present, creativeLabs Lukasz Holeczek.
  *
@@ -5,13 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict'
+'use strict';
 
 module.exports = {
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx}',
-    '!**/*index.js',
-    '!src/serviceWorker.js',
-    '!src/polyfill.js',
-  ],
-}
+  collectCoverageFrom: ['src/**/*.{js,jsx}', '!**/*index.js', '!src/serviceWorker.js', '!src/polyfill.js'],
+};

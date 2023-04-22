@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -30,8 +35,8 @@ const DetailsPaymentModal = ({ billId }) => {
   const getBillDetails = async () => {
     try {
       const res = await billServices.getBillDetails(billId);
-      if (res.response.message === 'Successful') {
-        setBill(res.response.body);
+      if (res && res.data) {
+        setBill(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy chi tiết hoá đơn ! ', {
           theme: 'colored',

@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 
@@ -37,8 +42,8 @@ const EditRoomModal = ({ submitEditRoomChange, ...rest }) => {
     const getPriceTag = async () => {
       try {
         const res = await priceTagServices.getAllPriceTag();
-        if (res.response.message === 'Successful') {
-          setPriceTags(res.response.body);
+        if (res && res.data) {
+          setPriceTags(res.data.response.body);
         } else {
           toast.error('Thất bại khi lấy danh sách giá cả ! ', {
             theme: 'colored',
@@ -75,7 +80,7 @@ const EditRoomModal = ({ submitEditRoomChange, ...rest }) => {
           priceTagId: priceTagId,
         };
         const res = await roomServices.updateRoom(params);
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Thêm thành công !', { theme: 'colored' });
           setVisibleEditRoom(false);
           submitEditRoomChange();

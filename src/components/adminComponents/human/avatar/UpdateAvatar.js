@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { CButton } from '@coreui/react';
@@ -14,7 +19,7 @@ const UpdateAvatar = ({ avatarId }) => {
         toast.error('Chọn ảnh thất bại. Vui lòng thử lại sau ! ', {
           theme: 'colored',
         });
-      } else if (res.response.message === 'Successful') {
+      } else if (res && res.data) {
         toast.success('Chọn ảnh thành công ! ', {
           theme: 'colored',
         });

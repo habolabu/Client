@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -37,8 +42,8 @@ const EditParkingTypeModal = ({ slug, submitEditParkingTypeChange }) => {
     const getPriceTag = async () => {
       try {
         const res = await priceTagServices.getAllPriceTag();
-        if (res.response.message === 'Successful') {
-          setPriceTags(res.response.body);
+        if (res && res.data) {
+          setPriceTags(res.data.response.body);
         } else {
           toast.error('Thất bại khi lấy danh sách giá cả ! ', {
             theme: 'colored',
@@ -57,9 +62,9 @@ const EditParkingTypeModal = ({ slug, submitEditParkingTypeChange }) => {
     try {
       const res = await parkingTypeServices.getParkingTypeDetails(slug);
 
-      if (res.response.message === 'Successful') {
-        formik.values.id = res.response.body.id;
-        formik.values.name = res.response.body.name;
+      if (res && res.data) {
+        formik.values.id = res.data.response.body.id;
+        formik.values.name = res.data.response.body.name;
       } else {
         toast.error('Thất bại khi lấy thông tin chi tiết bãi đỗ xe ! ', {
           theme: 'colored',
@@ -90,7 +95,7 @@ const EditParkingTypeModal = ({ slug, submitEditParkingTypeChange }) => {
           priceTagId: priceTagId,
         };
         const res = await parkingTypeServices.updateParkingType(params);
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Sửa thành công !', { theme: 'colored' });
           setVisibleEditParkingType(false);
           submitEditParkingTypeChange();

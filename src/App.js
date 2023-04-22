@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './scss/style.scss';
@@ -13,7 +18,6 @@ const loading = (
 );
 // Containers
 const AdminLayout = React.lazy(() => import('./layout/AdminLayout'));
-const ClientLayout = React.lazy(() => import('./layout/ClientLayout'));
 
 // Pages
 const Login = React.lazy(() => import('./views/pages/auth/Login'));
@@ -27,8 +31,7 @@ const App = () => {
         <Suspense fallback={loading}>
           <Routes>
             <Route path="/" name="LoginPage" element={<Login />} />
-            <Route path="/nguoi-dung-thuong/*" name="ClientDashboard" element={<ClientLayout />} />
-            <Route path="/quan-tri-vien/*" name="AdminDashboard" element={<AdminLayout />} />
+            <Route path="/habolabu/*" name="AdminDashboard" element={<AdminLayout />} />
             <Route path="*" name="404" element={<Page404 />} />
           </Routes>
         </Suspense>

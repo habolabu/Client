@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 
@@ -43,8 +48,8 @@ const AddUserModal = ({ submitAddUserChange }) => {
   const getRoles = async () => {
     try {
       const res = await roleServices.getAllRole();
-      if (res.response.message === 'Successful') {
-        setRoles(res.response.body);
+      if (res && res.data) {
+        setRoles(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách quyền ! ', {
           theme: 'colored',
@@ -103,7 +108,7 @@ const AddUserModal = ({ submitAddUserChange }) => {
           roleId: 1,
         };
         const res = await userServices.addUser(params);
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Thêm thành công !', { theme: 'colored' });
           setVisibleAddUser(false);
           submitAddUserChange();

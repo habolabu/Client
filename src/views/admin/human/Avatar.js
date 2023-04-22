@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
@@ -37,8 +42,8 @@ const Avatar = ({ userId }) => {
         page: currentPage,
       };
       const res = await avatarServices.getAvatarUserID(params, userId);
-      if (res.response.message === 'Successful') {
-        setAvatarUser(res.response.body);
+      if (res && res.data) {
+        setAvatarUser(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy avatar tài khoản ! ', {
           theme: 'colored',

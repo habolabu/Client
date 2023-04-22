@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
@@ -53,7 +58,7 @@ const AddEmergencyModal = ({ submitAddEmergencyChange }) => {
           toast.error('Thông tin bị trùng.Thêm thất bại !', {
             theme: 'colored',
           });
-        } else if (res.response.message === 'Successful') {
+        } else if (res && res.data) {
           toast.success('Thêm thành công !', { theme: 'colored' });
           setVisibleAddEmergency(false);
           submitAddEmergencyChange();

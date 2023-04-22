@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 
@@ -30,8 +35,8 @@ const DetailsPriceTagModal = ({ slug }) => {
     const getPriceTag = async () => {
       try {
         const res = await priceTagServices.getPriceTagDetails(slug);
-        if (res.response.message === 'Successful') {
-          setPriceTagInfo(res.response.body);
+        if (res && res.data) {
+          setPriceTagInfo(res.data.response.body);
         } else {
           toast.error('Thất bại khi lấy danh sách giá cả ! ', {
             theme: 'colored',

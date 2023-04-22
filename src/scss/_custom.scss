@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 // Here you can add other styles
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
@@ -6,14 +11,13 @@ body {
 }
 
 @font-face {
-    font-family: 'KulminoituvaRegular';
-    src: url('http://www.miketaylr.com/f/kulminoituva.ttf');
+    font-family: "KulminoituvaRegular";
+    src: url("http://www.miketaylr.com/f/kulminoituva.ttf");
 }
 
 *::-webkit-scrollbar,
 *::-webkit-scrollbar-thumb {
-    height: 8px;
-    border-radius: 8px;
+    height: 3px;
     background-clip: padding-box;
     border: 2px solid #0000003a;
 }
@@ -96,6 +100,7 @@ a,
     z-index: 9;
     right: 15px;
 }
+
 // 404 page
 
 /*======================
@@ -105,14 +110,17 @@ a,
 .page_404,
 .page_403 {
     background: #fff;
+
     img {
         width: 100%;
     }
+
     .four_zero_four_bg {
         background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
         height: 400px;
         background-position: center;
     }
+
     .four_zero_four_bg h1 {
         font-size: 80px;
     }
@@ -125,6 +133,7 @@ a,
     .link_403 {
         color: #fff !important;
     }
+
     .contant_box_404,
     .contant_box_403 {
         margin-top: -50px;
@@ -165,6 +174,7 @@ a,
     animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     transform-origin: 40px 40px;
 }
+
 .lds-roller div:after {
     content: " ";
     display: block;
@@ -175,67 +185,118 @@ a,
     background: #fff;
     margin: -4px 0 0 -4px;
 }
+
 .lds-roller div:nth-child(1) {
     animation-delay: -0.036s;
 }
+
 .lds-roller div:nth-child(1):after {
     top: 63px;
     left: 63px;
 }
+
 .lds-roller div:nth-child(2) {
     animation-delay: -0.072s;
 }
+
 .lds-roller div:nth-child(2):after {
     top: 68px;
     left: 56px;
 }
+
 .lds-roller div:nth-child(3) {
     animation-delay: -0.108s;
 }
+
 .lds-roller div:nth-child(3):after {
     top: 71px;
     left: 48px;
 }
+
 .lds-roller div:nth-child(4) {
     animation-delay: -0.144s;
 }
+
 .lds-roller div:nth-child(4):after {
     top: 72px;
     left: 40px;
 }
+
 .lds-roller div:nth-child(5) {
     animation-delay: -0.18s;
 }
+
 .lds-roller div:nth-child(5):after {
     top: 71px;
     left: 32px;
 }
+
 .lds-roller div:nth-child(6) {
     animation-delay: -0.216s;
 }
+
 .lds-roller div:nth-child(6):after {
     top: 68px;
     left: 24px;
 }
+
 .lds-roller div:nth-child(7) {
     animation-delay: -0.252s;
 }
+
 .lds-roller div:nth-child(7):after {
     top: 63px;
     left: 17px;
 }
+
 .lds-roller div:nth-child(8) {
     animation-delay: -0.288s;
 }
+
 .lds-roller div:nth-child(8):after {
     top: 56px;
     left: 12px;
 }
+
 @keyframes lds-roller {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
+}
+
+.reactions-wrapper {
+    margin-top: -100px;
+    z-index: 1;
+    position: relative;
+}
+
+.reactionsHolder {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    box-shadow: 3px 3px 30px rgba(0, 10, 10, 0.2);
+    padding: 15px;
+    border-radius: 60px;
+    width: 350px;
+    margin-bottom: 20px;
+}
+
+.reactionsHolder > img {
+    margin-right: 8px;
+}
+
+.likeBtn {
+    padding: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.reactionsAction {
+    width: 20px;
+    margin-right: 7px;
 }

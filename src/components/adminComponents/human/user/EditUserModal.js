@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -49,17 +54,17 @@ const EditUserModal = ({ userId, submitEditUserChange }) => {
   const getUserDetails = async () => {
     try {
       const res = await userServices.getUserDetails(userId);
-      if (res.response.message === 'Successful') {
-        formik.values.lastName = res.response.body.lastName;
-        formik.values.firstName = res.response.body.firstName;
-        formik.values.address = res.response.body.address;
-        formik.values.idCard = res.response.body.idCard;
-        formik.values.phoneNumber = res.response.body.phoneNumber;
-        formik.values.email = res.response.body.email;
-        setGender(res.response.body.gender);
-        formik.values.roleId = res.response.body.roleId;
-        setDateOfBirth(new Date(res.response.body.dateOfBirth.slice(0, 10)));
-        formik.values.nationality = res.response.body.nationality;
+      if (res && res.data) {
+        formik.values.lastName = res.data.response.body.lastName;
+        formik.values.firstName = res.data.response.body.firstName;
+        formik.values.address = res.data.response.body.address;
+        formik.values.idCard = res.data.response.body.idCard;
+        formik.values.phoneNumber = res.data.response.body.phoneNumber;
+        formik.values.email = res.data.response.body.email;
+        setGender(res.data.response.body.gender);
+        formik.values.roleId = res.data.response.body.roleId;
+        setDateOfBirth(new Date(res.data.response.body.dateOfBirth.slice(0, 10)));
+        formik.values.nationality = res.data.response.body.nationality;
       } else {
         toast.error('Thất bại khi lấy thông tin chi tiết tài khoản ! ', {
           theme: 'colored',
@@ -77,8 +82,8 @@ const EditUserModal = ({ userId, submitEditUserChange }) => {
   const getRoles = async () => {
     try {
       const res = await roleServices.getAllRole();
-      if (res.response.message === 'Successful') {
-        setRoles(res.response.body);
+      if (res && res.data) {
+        setRoles(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách quyền ! ', {
           theme: 'colored',
@@ -135,7 +140,7 @@ const EditUserModal = ({ userId, submitEditUserChange }) => {
           roleId: roleSelect,
         };
         const res = await userServices.updateUser(params);
-        if (res.response.message === 'Successful') {
+        if (res && res.data) {
           toast.success('Sửa thành công !', { theme: 'colored' });
           setVisibleAddUser(false);
           submitEditUserChange();

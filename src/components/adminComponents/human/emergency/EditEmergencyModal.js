@@ -1,3 +1,8 @@
+// /**
+//  * Copyright 2023 @ by Open University. All rights reserved
+//  * Author: Thành Nam Nguyễn (DH19IT03)
+//  */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
@@ -32,10 +37,10 @@ const EditEmergencyModal = ({ emergencyId, submitEditEmergencyChange }) => {
     const getEmergencyDetails = async () => {
       try {
         const res = await emergencyServices.getEmergencyDetails(emergencyId);
-        if (res.response.message === 'Successful') {
-          formik.values.name = res.response.body.name;
-          formik.values.phoneNumber = res.response.body.phoneNumber;
-          formik.values.address = res.response.body.address;
+        if (res && res.data) {
+          formik.values.name = res.data.response.body.name;
+          formik.values.phoneNumber = res.data.response.body.phoneNumber;
+          formik.values.address = res.data.response.body.address;
         } else {
           toast.error('Thất bại khi lấy thông tin liên hệ người khẩn cấp! ', {
             theme: 'colored',
@@ -76,7 +81,7 @@ const EditEmergencyModal = ({ emergencyId, submitEditEmergencyChange }) => {
           toast.error('Thông tin bị trùng.Sửa thất bại !', {
             theme: 'colored',
           });
-        } else if (res.response.message === 'Successful') {
+        } else if (res && res.data) {
           toast.success('Sửa thành công !', { theme: 'colored' });
           setVisibleEditEmergency(false);
           submitEditEmergencyChange();
