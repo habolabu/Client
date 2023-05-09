@@ -37,6 +37,8 @@ const LineChart = () => {
   for (let i = 2016; i <= dateNow; i++) {
     optionsYear.push({ value: `${i}`, text: `Năm ${i}` });
   }
+  const [activeMonthButton, setActiveMonthButton] = useState(null);
+  const [activeYearButton, setActiveYearButton] = useState(null);
   // searching
   const [fromMonth, setFromMonth] = useState(optionsMonth[0].value);
   const [toMonth, setToMonth] = useState(optionsMonth[optionsMonth.length - 1].value);
@@ -170,15 +172,24 @@ const LineChart = () => {
   };
 
   function handleYear(data) {
+    const handleClick = (year) => {
+      setActiveMonthButton(null);
+      setActiveYearButton(year);
+      renderMonth(data[year]);
+    };
+
     let year = [];
     for (const [key, value] of Object.entries(data)) {
       year.push(key);
     }
 
     return year.map((year, i) => {
+      const isActive = activeYearButton === year;
       return (
         <CCol key={i} md={1} sm={12}>
-          <CButton onClick={() => renderMonth(data[year])}>{year}</CButton>
+          <CButton color={isActive ? 'success' : 'info'} onClick={() => handleClick(year)}>
+            {year}
+          </CButton>
         </CCol>
       );
     });
@@ -235,7 +246,12 @@ const LineChart = () => {
       },
     },
   };
+
   function handleMonth(data) {
+    const handleClick = (month) => {
+      setActiveMonthButton(month);
+      renderChartDetails(data[parseInt(month) - minMonth]);
+    };
     let month = [];
     let minMonth;
     for (const [key, value] of Object.entries(data)) {
@@ -245,12 +261,10 @@ const LineChart = () => {
     minMonth = month[0];
 
     return month.map((month, i) => {
+      const isActive = activeMonthButton === month;
       return (
-        <CCol key={i} md={1} sm={12}>
-          <CButton
-            color="info"
-            onClick={() => renderChartDetails(data[parseInt(month) - minMonth])}
-          >{`Tháng ${month}`}</CButton>
+        <CCol key={i} md={1} sm={6}>
+          <CButton color={isActive ? 'success' : 'info'} onClick={() => handleClick(month)}>{`Tháng ${month}`}</CButton>
         </CCol>
       );
     });

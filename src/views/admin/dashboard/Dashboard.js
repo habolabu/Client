@@ -21,6 +21,8 @@ import {
 } from 'chart.js';
 import LineChart from 'src/components/adminComponents/payment/LineChart';
 import AreaChart from 'src/components/adminComponents/payment/AreaChar';
+import Clock from 'src/components/utilComponents/Clock';
+import BlocksServices from 'src/components/utilComponents/BlocksServices';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -38,6 +40,14 @@ const Dashboard = () => {
 
   return (
     <Helmet title="Tổng quan">
+      <CRow className="mb-4">
+        <CCol xs={12} md={5}>
+          <Clock />
+        </CCol>
+        <CCol xs={12} md={7}>
+          <BlocksServices />
+        </CCol>
+      </CRow>
       <CRow>
         <CCol xs={12}>
           <CCard className="mb-4">
