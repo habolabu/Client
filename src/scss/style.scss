@@ -20,4 +20,6 @@ $enable-rtl: true;
 
 // If you want to add custom CSS you can put it here.
 @import "_custom";
+@import "_clock";
+@import "_blocks-services";
 @import "_general-style";

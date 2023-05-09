@@ -98,7 +98,7 @@ const PostList = () => {
               <CCardHeader className="d-flex align-items-center justify-content-between">
                 <strong>Quản lý bài viết</strong>
                 {permissionLocal.isExistPermission(PermissionDirection.ADD_NEW_POST) ? (
-                  <Link to="habolabu/tao-bai-viet">
+                  <Link to="/habolabu/tao-bai-viet">
                     <Button variant="contained" startIcon={<AddIcon />} size="small">
                       Tạo bài viết
                     </Button>

@@ -1,0 +1,49 @@
+.blocks-services {
+  .card {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .card__exit,
+  .card__icon {
+    position: relative;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .text {
+    color: white;
+  }
+
+  .card__exit {
+    grid-row: 1/2;
+    justify-self: end;
+  }
+
+  .card__icon {
+    grid-row: 2/3;
+    font-size: 30px;
+  }
+
+  .card__title {
+    grid-row: 3/4;
+    font-weight: 400;
+    color: #ffffff;
+  }
+
+  .card__apply {
+    grid-row: 4/5;
+    align-self: center;
+  }
+
+  .card-5 {
+    background: radial-gradient(#f588d8, #c0a3e5);
+  }
+
+  @media (max-width: 1600px) {
+    .cards {
+      justify-content: center;
+    }
+  }
+}  
+
