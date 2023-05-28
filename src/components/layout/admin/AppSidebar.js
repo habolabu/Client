@@ -23,15 +23,15 @@ const AppSidebar = () => {
   const dispatch = useDispatch();
   const unfoldable = useSelector((state) => state.sidebarUnfoldable);
   const sidebarShow = useSelector((state) => state.sidebarShow);
-  const params = useLocation();
+  // const params = useLocation();
 
-  useEffect(() => {
-    if (params.pathname.includes('/habolabu/trang-tong-quan')) {
-      dispatch({ type: 'set', sidebarShow: false });
-    } else {
-      dispatch({ type: 'set', sidebarShow: true });
-    }
-  }, [params.pathname]);
+  // useEffect(() => {
+  //   if (params.pathname.includes('/habolabu/trang-tong-quan')) {
+  //     dispatch({ type: 'set', sidebarShow: false });
+  //   } else {
+  //     dispatch({ type: 'set', sidebarShow: true });
+  //   }
+  // }, [params.pathname]);
 
   return (
     <CSidebar
@@ -52,8 +52,9 @@ const AppSidebar = () => {
         />
         <CImage
           className="sidebar-brand-narrow"
-          src="https://res.cloudinary.com/dzd9sonxs/image/upload/v1666776349/logo/ou_logo_e0ex9z.svg"
+          src="https://res.cloudinary.com/dzd9sonxs/image/upload/v1685287491/habolabu_logo_jvuybs.svg"
           height={45}
+          width={70}
         />
       </CSidebarBrand>
       <CSidebarNav>

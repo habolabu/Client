@@ -14,7 +14,8 @@ const InitBill = () => {
   const handleInitBill = async () => {
     try {
       const res = await billServices.initBill();
-      if (res && res.data) {
+      console.log(res);
+      if (res.status === 200) {
         toast.success('Khởi tạo thành công ! ', {
           theme: 'colored',
         });
