@@ -34,12 +34,12 @@ const CommentItem = ({ data }) => {
             <div className="comment-wrapper__info-content mb-2">{data.content}</div>
             <div className="comment-action d-flex">
               <FBReactions />
-              {permissionLocal.isExistPermission(PermissionDirection.DELETE_EXIST_COMMENT) ? (
+              {/* {permissionLocal.isExistPermission(PermissionDirection.DELETE_EXIST_COMMENT) ? (
                 <div className="comment-action__delete me-4">
                   <DeleteOutlineIcon />
                   Xoá
                 </div>
-              ) : null}
+              ) : null} */}
             </div>
           </div>
         </div>

@@ -120,7 +120,6 @@ const FBReactions = () => {
         <div
           className="likeBtn"
           onClick={() => {
-            console.log(selectedReaction.name);
             if (selectedReaction.name === 'React') {
               setBtnClicked(true);
             } else {
@@ -131,10 +130,10 @@ const FBReactions = () => {
           <motion.img src={selectedReaction.img} className="reactionsAction" />
           <motion.span>{selectedReaction.name}</motion.span>
         </div>
-        <div className="comment-action__like me-4">
+        {/* <div className="comment-action__like me-4">
           <ChatBubbleOutlineIcon />
           Bình luận
-        </div>
+        </div> */}
       </div>
     </motion.div>
   );

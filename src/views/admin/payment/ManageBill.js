@@ -46,7 +46,6 @@ const ManageBill = () => {
 
   // search payment
   const [searchUserID, setSearchUserID] = useState('');
-  const [billID, setBillID] = useState('');
   const [billStatusID, setBillStatusID] = useState('2');
   const [paymentTypeID, setPaymentTypeID] = useState('');
   const [beginTotal, setBeginTotal] = useState('');
@@ -97,7 +96,6 @@ const ManageBill = () => {
         userId: searchUserID,
         paymentTypeId: paymentTypeID,
         billStatusId: billStatusID,
-        billId: billID,
         bTotal: beginTotal,
         eTotal: endTotal,
       };
@@ -116,7 +114,7 @@ const ManageBill = () => {
   };
   useEffect(() => {
     getAllBill();
-  }, [currentPage, billStatusID, searchUserID, billID, beginTotal, endTotal]);
+  }, [currentPage, billStatusID, searchUserID, beginTotal, endTotal]);
 
   const handleChangePaymentType = (event) => {
     setPaymentTypeID(event.target.value);
@@ -151,17 +149,6 @@ const ManageBill = () => {
                     id="searchUserID"
                     placeholder="Nhập ID người dùng..."
                     onChange={(e) => setSearchUserID(e.target.value)}
-                  />
-                </CCol>
-                <CCol md={4} sm={12}>
-                  <CFormLabel htmlFor="searchBillID" className="col-sm-12 col-form-label">
-                    🔍 Mã hoá đơn
-                  </CFormLabel>
-                  <CFormInput
-                    type="number"
-                    id="searchBillID"
-                    placeholder="Nhập mã hoá đơn..."
-                    onChange={(e) => setBillID(e.target.value)}
                   />
                 </CCol>
                 <CCol md={4} sm={12}>
@@ -259,8 +246,8 @@ const ManageBill = () => {
                             <DetailsPaymentModal billId={bill.id} />
                             {bill.billStatus.id === 1 ? (
                               <>
-                                <ApproveBill billId={bill.id} />
-                                <RejectBill billId={bill.id} />
+                                <ApproveBill billId={bill.id} submitChange={getAllBill} />
+                                <RejectBill billId={bill.id} submitChange={getAllBill} />
                               </>
                             ) : null}
                           </CTableDataCell>
