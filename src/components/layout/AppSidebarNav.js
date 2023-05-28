@@ -14,13 +14,23 @@ import { permissionLocal } from 'src/utils/permissionLocal';
 export const AppSidebarNav = ({ items }) => {
   const location = useLocation();
   const [permissions, setPermissions] = useState(null);
+  let permissionsAccount = [];
 
   const getPermissions = async () => {
     try {
       const res = await authServices.getAllPermissionCurrentUser();
       if (res && res.data) {
-        permissionLocal.saveData(res.data.response.body);
-        setPermissions(res.data.response.body);
+        res.data.response.body.forEach((permissionsRoles) => {
+          permissionsRoles.permissions.forEach((permissionDocument) => {
+            permissionDocument.permissionDocuments.forEach((permission) => {
+              if (permission.status) {
+                permissionsAccount.push(permission.name);
+              }
+            });
+          });
+        });
+        permissionLocal.saveData(permissionsAccount);
+        setPermissions(permissionsAccount);
       } else {
         console.log('Thất bại khi lấy danh sách quyền');
       }

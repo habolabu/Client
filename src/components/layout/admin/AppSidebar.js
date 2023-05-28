@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // /**
 //  * Copyright 2023 @ by Open University. All rights reserved
 //  * Author: Thành Nam Nguyễn (DH19IT03)
@@ -15,11 +16,22 @@ import 'simplebar/dist/simplebar.min.css';
 
 // sidebar nav config
 import navigation from '../../../route/_navAdmin';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const AppSidebar = () => {
   const dispatch = useDispatch();
   const unfoldable = useSelector((state) => state.sidebarUnfoldable);
   const sidebarShow = useSelector((state) => state.sidebarShow);
+  const params = useLocation();
+
+  useEffect(() => {
+    if (params.pathname.includes('/habolabu/trang-tong-quan')) {
+      dispatch({ type: 'set', sidebarShow: false });
+    } else {
+      dispatch({ type: 'set', sidebarShow: true });
+    }
+  }, [params.pathname]);
 
   return (
     <CSidebar

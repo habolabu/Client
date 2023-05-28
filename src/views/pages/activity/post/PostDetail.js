@@ -25,6 +25,7 @@ import {
   CFormInput,
   CButton,
   CForm,
+  CFormLabel,
 } from '@coreui/react';
 
 import { Skeleton } from '@mui/material';
@@ -41,6 +42,7 @@ const PostDetail = () => {
   const [postInfo, setPostInfo] = useState(null);
   const [comments, setComments] = useState(null);
   const url = useParams();
+  const [currentPage, setCurrentPage] = useState(1);
 
   const getPostDetails = async () => {
     try {
@@ -59,10 +61,11 @@ const PostDetail = () => {
     }
   };
 
-  const getComments = async (postId) => {
+  const getComments = async (postId, page) => {
     try {
       const params = {
         postId: postId,
+        page: page || 1,
       };
       const res = await commentServices.getCommentAll(params);
       if (res && res.data) {
@@ -88,26 +91,33 @@ const PostDetail = () => {
       content: Yup.string().required('Vui lòng nhập bình luận !').min(1, 'Tối thiểu 1 ký tự !'),
     }),
     onSubmit: async (values) => {
-      try {
-        const params = {
-          content: values.content,
-          postId: postInfo.id,
-          commentId: '',
-        };
-        const res = await commentServices.addComment(params);
+      if (values.content.trim().length) {
+        try {
+          const params = {
+            content: values.content,
+            postId: postInfo.id,
+            commentId: null,
+          };
+          const res = await commentServices.addComment(params);
 
-        if (res && res.data) {
-          toast.success('Thêm thành công !', { theme: 'colored' });
-          formik.values.content = '';
-          getPostDetails();
-        } else {
-          toast.error('Thêm thất bại !', {
+          if (res && res.data) {
+            toast.success('Thêm thành công !', { theme: 'colored' });
+            formik.values.content = '';
+            getPostDetails();
+          } else {
+            toast.error('Thêm thất bại !', {
+              theme: 'colored',
+            });
+          }
+        } catch (error) {
+          console.log('Thêm thất bại: ', error);
+          toast.error('Thêm thất bại ! ', {
             theme: 'colored',
           });
         }
-      } catch (error) {
-        console.log('Thêm thất bại: ', error);
-        toast.error('Thêm thất bại ! ', {
+      } else {
+        values.content = '';
+        toast.error('Vui lòng không để trống bình luận', {
           theme: 'colored',
         });
       }
@@ -119,10 +129,15 @@ const PostDetail = () => {
     getPostDetails();
   }, []);
 
+  const handlePageClick = async (page) => {
+    setCurrentPage(page + 1);
+    getComments(postInfo.id, page + 1);
+  };
+
   return (
     <Helmet title="Chi tiết bài viết" role="Admin">
       {postInfo != null ? (
-        <CCard>
+        <CCard className="my-4">
           <CCardHeader>
             <strong>{postInfo.title}</strong>
           </CCardHeader>
@@ -138,7 +153,9 @@ const PostDetail = () => {
                   {postInfo.totalEmotion}
                 </CBadge>
               </p>
-              <p className="px-2">{postInfo.totalComment} bình luận</p>
+              <CFormLabel className="px-2" htmlFor="content">
+                {postInfo.totalComment} bình luận
+              </CFormLabel>
             </div>
             <FBReactions />
             <CForm onSubmit={formik.handleSubmit}>
@@ -163,9 +180,19 @@ const PostDetail = () => {
           </CCardBody>
           <CCardFooter className="px-4 pb-5">
             {comments != null ? (
-              comments.map((comment) => {
-                return <CommentItem key={comment.id} data={comment}></CommentItem>;
-              })
+              <>
+                {comments.map((comment) => {
+                  return <CommentItem key={comment.id} data={comment}></CommentItem>;
+                })}
+                <p
+                  onClick={() => {
+                    handlePageClick(currentPage);
+                  }}
+                  className="load-more-cmt"
+                >
+                  Xem thêm bình luận
+                </p>
+              </>
             ) : (
               <p>Không có bình luận nào</p>
             )}

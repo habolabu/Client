@@ -41,10 +41,10 @@ const Dashboard = () => {
   return (
     <Helmet title="Tổng quan">
       <CRow className="mb-4">
-        <CCol xs={12} md={5}>
+        <CCol xs={12} lg={5}>
           <Clock />
         </CCol>
-        <CCol xs={12} md={7}>
+        <CCol xs={12} lg={7}>
           <BlocksServices />
         </CCol>
       </CRow>
@@ -56,14 +56,14 @@ const Dashboard = () => {
             </CCardHeader>
             <CCardBody>
               <CRow className="mb-3">
-                <CCol sm={11}>
+                <CCol sm={12}>
                   <CRow>
                     <CCol lg={2} md={4} xs={12}>
                       <CFormLabel htmlFor="floorNumber" className="col-form-label">
                         <b>Chọn loại thống kê</b>
                       </CFormLabel>
                     </CCol>
-                    <CCol md={8} sm={12}>
+                    <CCol lg={4} md={8} sm={12}>
                       <CFormSelect value={selectStatistic} onChange={handleChangeStatistic}>
                         {optionsStatistic.map((option) => (
                           <option key={option.value} value={option.value}>

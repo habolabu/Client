@@ -35,7 +35,7 @@ const billServices = {
     return axiosClient.put(url);
   },
   initBill: () => {
-    const url = `/payment/command/api/bill/test`;
+    const url = `/payment/command/api/test`;
     return axiosClient.get(url);
   },
   rejectBill: (billId) => {

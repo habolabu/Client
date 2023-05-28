@@ -13,6 +13,7 @@
 
   .text {
     color: white;
+    text-align: center;
   }
 
   .card__exit {
@@ -22,7 +23,9 @@
 
   .card__icon {
     grid-row: 2/3;
-    font-size: 30px;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
   }
 
   .card__title {
@@ -37,7 +40,7 @@
   }
 
   .card-5 {
-    background: radial-gradient(#f588d8, #c0a3e5);
+    background: #0092e4;
   }
 
   @media (max-width: 1600px) {
@@ -45,5 +48,10 @@
       justify-content: center;
     }
   }
-}  
+}
 
+@media screen and (max-width: 991px) {
+  .blocks-services {
+    margin-top: 30px;
+  }
+}

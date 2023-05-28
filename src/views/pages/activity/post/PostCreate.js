@@ -17,9 +17,11 @@ import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import postServices from 'src/api/activityServices/postServices';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const PostCreate = () => {
   const [editorContentData, setEditorContentData] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Configure CKEditor to remove the image toolbar button
@@ -64,7 +66,7 @@ const PostCreate = () => {
           if (res && res.data) {
             toast.success('Tạo thành công !', { theme: 'colored' });
             setEditorContentData('');
-            values.title = '';
+            window.location.replace('/habolabu/bai-viet');
           } else {
             toast.error('Tạo thất bại !', {
               theme: 'colored',
