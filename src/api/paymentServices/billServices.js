@@ -32,7 +32,7 @@ const billServices = {
   },
   approveBill: (billId) => {
     const url = `/payment/command/api/bill/approve/${billId}`;
-    return axiosClient.put(url);
+    return axiosClient.put(url, {}, { headers: { 'Content-Type': 'application/json' } });
   },
   initBill: () => {
     const url = `/payment/command/api/test`;
@@ -40,15 +40,15 @@ const billServices = {
   },
   rejectBill: (billId) => {
     const url = `/payment/command/api/bill/reject/${billId}`;
-    return axiosClient.put(url);
+    return axiosClient.put(url, {}, { headers: { 'Content-Type': 'application/json' } });
   },
   payBill: (data) => {
     const url = '/payment/command/api/bill/pay';
     return axiosClient.post(url, data);
   },
-  getBillPayComplete: (billId) => {
+  getBillPayComplete: (billId, params) => {
     const url = `/payment/command/api/bill/pay/complete/${billId}`;
-    return axiosClient.get(url);
+    return axiosClient.get(url, { params });
   },
 };
 

@@ -6,9 +6,9 @@
 import axiosClient from '../axios/axiosClient';
 
 const postEmotionServices = {
-  getPostEmotionAll: () => {
+  getPostEmotionAll: (params) => {
     const url = '/activity/query/api/post-emotion';
-    return axiosClient.get(url);
+    return axiosClient.get(url, { params });
   },
   addPostEmotion: (params) => {
     const url = '/activity/command/api/post-emotion';

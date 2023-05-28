@@ -19,7 +19,7 @@ const PayBill = ({ billId }) => {
     try {
       const data = {
         billId: billId,
-        returnUrl: 'http://localhost:3000/quan-tri-vien/hoa-don',
+        returnUrl: 'http://localhost:3000/habolabu/hoa-don',
       };
       const res = await billServices.payBill(data);
       console.log(res);
@@ -56,8 +56,8 @@ const PayBill = ({ billId }) => {
         toast.error('Đặt hàng thất bại do lỗi hệ thống', { theme: 'colored' });
       } else if (parseInt(resultCode) === 0) {
         toast.success('Thanh toán thành công !', { theme: 'colored' });
-        const res = billServices.getBillPayComplete(billId);
-        console.log(res);
+        const res = billServices.getBillPayComplete(billId, { resultCode: resultCode });
+        window.location.replace('/habolabu/hoa-don/');
       } else {
         toast.error('Thanh toán thất bại', { theme: 'colored' });
       }

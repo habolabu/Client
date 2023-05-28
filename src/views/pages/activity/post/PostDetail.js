@@ -18,7 +18,6 @@ import {
   CCardSubtitle,
   CCardText,
   CBadge,
-  CNavLink,
   CCardFooter,
   CRow,
   CCol,
@@ -32,7 +31,7 @@ import { Skeleton } from '@mui/material';
 
 import postServices from 'src/api/activityServices/postServices';
 import CIcon from '@coreui/icons-react';
-import { cilCommentBubble, cilMoodGood } from '@coreui/icons';
+import { cilMoodGood } from '@coreui/icons';
 import Helmet from 'src/components/helmet/helmet';
 import commentServices from 'src/api/activityServices/commentServices';
 import CommentItem from 'src/components/adminComponents/activity/comment/commentItem';
@@ -69,7 +68,7 @@ const PostDetail = () => {
       };
       const res = await commentServices.getCommentAll(params);
       if (res && res.data) {
-        setComments(res.data.response.body.data);
+        setComments(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy bình luận ! ' + res.response.message, {
           theme: 'colored',
@@ -134,6 +133,11 @@ const PostDetail = () => {
     getComments(postInfo.id, page + 1);
   };
 
+  const handlePageClickPrev = async (page) => {
+    setCurrentPage(page - 1);
+    getComments(postInfo.id, page - 1);
+  };
+
   return (
     <Helmet title="Chi tiết bài viết" role="Admin">
       {postInfo != null ? (
@@ -181,17 +185,33 @@ const PostDetail = () => {
           <CCardFooter className="px-4 pb-5">
             {comments != null ? (
               <>
-                {comments.map((comment) => {
+                {currentPage > 1 ? (
+                  <p
+                    onClick={() => {
+                      handlePageClickPrev(currentPage);
+                    }}
+                    className="load-more-cmt"
+                  >
+                    Xem bình luận cũ hơn
+                  </p>
+                ) : (
+                  <></>
+                )}
+                {comments.data.map((comment) => {
                   return <CommentItem key={comment.id} data={comment}></CommentItem>;
                 })}
-                <p
-                  onClick={() => {
-                    handlePageClick(currentPage);
-                  }}
-                  className="load-more-cmt"
-                >
-                  Xem thêm bình luận
-                </p>
+                {currentPage === comments.totalPage ? (
+                  <></>
+                ) : (
+                  <p
+                    onClick={() => {
+                      handlePageClick(currentPage);
+                    }}
+                    className="load-more-cmt"
+                  >
+                    Xem thêm bình luận
+                  </p>
+                )}
               </>
             ) : (
               <p>Không có bình luận nào</p>
