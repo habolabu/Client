@@ -183,16 +183,23 @@ const LineChart = () => {
       year.push(key);
     }
 
-    return year.map((year, i) => {
-      const isActive = activeYearButton === year;
-      return (
-        <CCol key={i} md={1} sm={12}>
-          <CButton color={isActive ? 'success' : 'info'} onClick={() => handleClick(year)}>
-            {year}
-          </CButton>
-        </CCol>
-      );
-    });
+    return (
+      <>
+        <p>
+          <b>Chọn năm thống kê:</b>
+        </p>
+        {year.map((year, i) => {
+          const isActive = activeYearButton === year;
+          return (
+            <CCol key={i} md={2} sm={4} xs={6} className="my-2">
+              <CButton color={isActive ? 'success' : 'info'} onClick={() => handleClick(year)} className="full-width">
+                {year}
+              </CButton>
+            </CCol>
+          );
+        })}
+      </>
+    );
   }
 
   const [chartMonthDetail, setChartMonthDetail] = useState(null);
@@ -260,20 +267,31 @@ const LineChart = () => {
 
     minMonth = month[0];
 
-    return month.map((month, i) => {
-      const isActive = activeMonthButton === month;
-      return (
-        <CCol key={i} md={1} sm={6}>
-          <CButton color={isActive ? 'success' : 'info'} onClick={() => handleClick(month)}>{`Tháng ${month}`}</CButton>
-        </CCol>
-      );
-    });
+    return (
+      <>
+        <p>
+          <b>Chọn tháng thống kê:</b>
+        </p>
+        {month.map((month, i) => {
+          const isActive = activeMonthButton === month;
+          return (
+            <CCol key={i} md={2} sm={4} xs={6} className="my-2">
+              <CButton
+                className="full-width"
+                color={isActive ? 'success' : 'info'}
+                onClick={() => handleClick(month)}
+              >{`Tháng ${month}`}</CButton>
+            </CCol>
+          );
+        })}
+      </>
+    );
   }
 
   return (
     <CRow>
       <CRow>
-        <CCol md={4} sm={12}>
+        <CCol md={6} sm={12}>
           <CRow>
             <CCol md={4} xs={12}>
               <CFormLabel htmlFor="fromMonth" className="col-form-label">
@@ -291,9 +309,9 @@ const LineChart = () => {
             </CCol>
           </CRow>
         </CCol>
-        <CCol md={4} sm={12}>
+        <CCol md={6} sm={12}>
           <CRow>
-            <CCol md={4} xs={12}>
+            <CCol lg={3} md={4} xs={12}>
               <CFormLabel htmlFor="fromYear" className="col-form-label">
                 <b>Năm bắt đầu</b>
               </CFormLabel>
@@ -311,7 +329,7 @@ const LineChart = () => {
         </CCol>
       </CRow>
       <CRow className="mt-3 mb-5">
-        <CCol md={4} sm={12}>
+        <CCol md={6} sm={12}>
           <CRow>
             <CCol md={4} xs={12}>
               <CFormLabel htmlFor="toMonth" className="col-form-label">
@@ -329,9 +347,9 @@ const LineChart = () => {
             </CCol>
           </CRow>
         </CCol>
-        <CCol md={4} sm={12}>
+        <CCol md={6} sm={12}>
           <CRow>
-            <CCol md={4} xs={12}>
+            <CCol lg={3} md={4} xs={12}>
               <CFormLabel htmlFor="toYear" className="col-form-label">
                 <b>Năm kết thúc</b>
               </CFormLabel>

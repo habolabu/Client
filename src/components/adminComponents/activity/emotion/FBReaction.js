@@ -16,25 +16,25 @@ const FBReactions = () => {
   const [selectedReaction, setSelectedReaction] = useState({ img: LikeIcon, name: 'React' });
   const [emotionList, setEmotionList] = useState([]);
 
-  const getEmotionAll = async () => {
-    try {
-      const params = {
-        page: 1,
-      };
-      const res = await emotionServices.getEmotionAll(params);
-      console.log(res.data.response.body);
-      if (res && res.data) {
-        setEmotionList(res.data.response.body);
-      }
-    } catch (error) {
-      console.log('Lấy danh sách cảm xúc thất bại: ', error);
-    }
-  };
+  // const getEmotionAll = async () => {
+  //   try {
+  //     const params = {
+  //       page: 1,
+  //     };
+  //     const res = await emotionServices.getEmotionAll(params);
+  //     console.log(res.data.response.body);
+  //     if (res && res.data) {
+  //       setEmotionList(res.data.response.body);
+  //     }
+  //   } catch (error) {
+  //     console.log('Lấy danh sách cảm xúc thất bại: ', error);
+  //   }
+  // };
 
-  // get data page
-  useEffect(() => {
-    getEmotionAll();
-  }, []);
+  // // get data page
+  // useEffect(() => {
+  //   getEmotionAll();
+  // }, []);
 
   const handleReactionClick = ({ img, name }) => {
     setSelectedReaction({ img, name });

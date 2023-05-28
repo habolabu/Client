@@ -4,38 +4,136 @@
 //  * Author: Thành Nam Nguyễn (DH19IT03)
 //  */
 
-import React from 'react';
-import {
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CFormCheck,
-  CFormInput,
-  CFormLabel,
-  CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
-} from '@coreui/react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { CCard, CCardBody, CCardHeader, CCol, CFormInput, CFormLabel, CRow } from '@coreui/react';
+import PropTypes from 'prop-types';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import authServices from 'src/api/auth/authServices';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
 import Helmet from 'src/components/helmet/helmet';
+import { Checkbox } from '@mui/material';
+import uuid from 'react-uuid';
+
+function Row(props) {
+  const { accountId, permissionAccount, submitCheckedChange } = props;
+  const [open, setOpen] = useState(false);
+
+  const grantPermission = async (accountId, permissionId, roleId, status) => {
+    try {
+      const params = {
+        referenceKey: {
+          accountId: accountId,
+          permissionId: permissionId,
+          roleId: roleId,
+        },
+        status: !status,
+      };
+      const res = await authServices.grantPermission(params);
+      if (res && res.data) {
+        toast.success('Cập nhật thành công ! ', {
+          theme: 'colored',
+        });
+        submitCheckedChange();
+      } else {
+        toast.error('Thất bại khi cập nhật quyền ! ', {
+          theme: 'colored',
+        });
+      }
+    } catch (error) {
+      console.log('Thất bại khi cập nhật quyền: ', error);
+      toast.error('Thất bại khi cập nhật quyền ! ', { theme: 'colored' });
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <TableRow>
+        <TableCell>
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell>{permissionAccount[0].permissionBlock.id}</TableCell>
+        <TableCell>{permissionAccount[0].permissionBlock.display}</TableCell>
+        {permissionAccount.map((role) => {
+          return <TableCell key={role.permissionBlock.id} align="center"></TableCell>;
+        })}
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Table size="small" aria-label="purchases">
+              <TableBody>
+                {permissionAccount[0].permissionBlock.permissionDocuments.map((permissionDocument, index) => (
+                  <TableRow key={permissionDocument.childOrder}>
+                    <TableCell></TableCell>
+                    <TableCell>{permissionDocument.id}</TableCell>
+                    <TableCell component="th" scope="row">
+                      {permissionDocument.display}
+                    </TableCell>
+                    {permissionAccount.map((role) => {
+                      return (
+                        <TableCell key={uuid()} align="center">
+                          <Checkbox
+                            defaultChecked={role.permissionBlock.permissionDocuments[index].status}
+                            // onChange={handleChange}
+                            onClick={() => {
+                              grantPermission(
+                                accountId,
+                                role.permissionBlock.permissionDocuments[index].id,
+                                role.roleId,
+                                role.permissionBlock.permissionDocuments[index].status,
+                              );
+                            }}
+                          />
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
+}
+
+Row.propTypes = {
+  permissionAccount: PropTypes.array,
+  accountId: PropTypes.number,
+  submitCheckedChange: PropTypes.func,
+};
 
 export default function SearchRole() {
-  const [permissionList, setPermissionList] = useState([]);
+  const [permissionListAccount, setPermissionListAccount] = useState([]);
   const [accountId, setAccountId] = useState(0);
 
-  const getPermissions = async () => {
+  useEffect(() => {
+    const callApiGetUser = setTimeout(() => {
+      getPermissionsAccount();
+    }, 1000);
+    return () => {
+      clearTimeout(callApiGetUser);
+    };
+  }, [accountId]);
+
+  const getPermissionsAccount = async () => {
     try {
       const res = await authServices.getPermissionAccount(accountId);
       if (res && res.data) {
-        setPermissionList(res.data.response.body);
+        setPermissionListAccount(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách quyền ! ', {
           theme: 'colored',
@@ -46,16 +144,6 @@ export default function SearchRole() {
       toast.error('Thất bại khi lấy danh sách quyền ! ', { theme: 'colored' });
     }
   };
-
-  useEffect(() => {
-    const callApiPermission = setTimeout(() => {
-      getPermissions();
-    }, 500);
-
-    return () => {
-      clearTimeout(callApiPermission);
-    };
-  }, [accountId]);
 
   return (
     <Helmet title="Tìm kiếm quyền">
@@ -82,31 +170,51 @@ export default function SearchRole() {
                 </CCol>
               </CRow>
 
-              {permissionList.length > 0 ? (
+              {permissionListAccount.length > 0 ? (
                 <>
-                  <h6 className="my-4">📃 Danh sách phân quyền tài khoản: accountId = {accountId}</h6>
-                  <CTable striped responsive hover className="text-center text-nowrap">
-                    <CTableHead>
-                      <CTableRow>
-                        <CTableHeaderCell scope="col">Số thứ tự (ID)</CTableHeaderCell>
-                        <CTableHeaderCell scope="col">Tên quyền</CTableHeaderCell>
-                        <CTableHeaderCell scope="col">Trạng thái</CTableHeaderCell>
-                      </CTableRow>
-                    </CTableHead>
-                    <CTableBody>
-                      {permissionList.map((permission) => {
-                        return (
-                          <CTableRow key={permission.id}>
-                            <CTableHeaderCell scope="row">{permission.id}</CTableHeaderCell>
-                            <CTableDataCell>{permission.display}</CTableDataCell>
-                            <CTableDataCell>
-                              <CFormCheck checked={permission.status} readOnly />
-                            </CTableDataCell>
-                          </CTableRow>
-                        );
-                      })}
-                    </CTableBody>
-                  </CTable>
+                  <h6 className="my-4">📃 Danh sách phân quyền tài khoản</h6>
+                  {permissionListAccount.length > 0 ? (
+                    <TableContainer component={Paper} className="mt-3 mb-5">
+                      <Table aria-label="collapsible table">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell />
+                            <TableCell>Mã phân quyền</TableCell>
+                            <TableCell>Tên quyền</TableCell>
+                            {permissionListAccount.map((role) => {
+                              return (
+                                <TableCell align="center" key={role.roleId}>
+                                  {role.roleDisplay}
+                                </TableCell>
+                              );
+                            })}
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {permissionListAccount[0].permissions.map((permission, index) => {
+                            let permissionListPerRow = [];
+                            permissionListAccount.forEach((role) => {
+                              permissionListPerRow.push({
+                                roleName: role.roleName,
+                                roleId: role.roleId,
+                                permissionBlock: role.permissions[index],
+                              });
+                            });
+                            return (
+                              <Row
+                                key={index}
+                                permissionAccount={permissionListPerRow}
+                                accountId={parseInt(accountId)}
+                                submitCheckedChange={getPermissionsAccount}
+                              />
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  ) : (
+                    <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
+                  )}
                 </>
               ) : (
                 <></>

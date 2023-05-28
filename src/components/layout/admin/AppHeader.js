@@ -17,11 +17,14 @@ import {
   CImage,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { cilEnvelopeOpen, cilMenu } from '@coreui/icons';
+import { cilMenu } from '@coreui/icons';
 
 import { AppBreadcrumb } from '../../index';
 import { AppHeaderDropdown } from '../../header/index';
 import Tippy from '@tippyjs/react';
+import Lottie from 'react-lottie-player';
+import cityHall from '../../../assets/lottie/city-hall.json';
+import chat from '../../../assets/lottie/chat.json';
 
 const AppHeader = () => {
   const dispatch = useDispatch();
@@ -41,15 +44,16 @@ const AppHeader = () => {
             height={45}
           />
         </CHeaderBrand>
-        <CHeaderNav className="d-none d-md-flex me-auto">
-          🏨 Hệ thống chung cư thông minh - {process.env.REACT_APP_BRAND_NAME.toUpperCase()}
+        <CHeaderNav className="d-none d-md-flex me-auto align-items-center">
+          <Lottie loop animationData={cityHall} play style={{ width: 40, height: 40 }} />
+          <p style={{ margin: 0 }}>Hệ thống chung cư thông minh - {process.env.REACT_APP_BRAND_NAME.toUpperCase()}</p>
         </CHeaderNav>
         <CHeaderNav>
           {/* message */}
           <CNavItem>
             <Tippy content="Tin nhắn">
               <CNavLink href={process.env.REACT_APP_ROOMCHAT_URL} target="_blank">
-                <CIcon icon={cilEnvelopeOpen} size="lg" />
+                <Lottie loop animationData={chat} play style={{ width: 40, height: 40 }} />
               </CNavLink>
             </Tippy>
           </CNavItem>

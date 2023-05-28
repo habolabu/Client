@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { CAvatar, CDropdown, CDropdownDivider, CDropdownHeader, CDropdownMenu, CDropdownToggle } from '@coreui/react';
-import { cilCreditCard, cilEnvelopeOpen, cilSettings, cilUser, cilArrowThickFromLeft } from '@coreui/icons';
+import { cilCreditCard, cilSettings, cilUser, cilArrowThickFromLeft, cilChatBubble } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 
 import { Link } from 'react-router-dom';
@@ -52,7 +52,7 @@ const AppHeaderDropdown = () => {
         <CDropdownMenu className="pt-0" placement="bottom-end">
           <CDropdownHeader className="bg-light fw-semibold py-2">Thông tin</CDropdownHeader>
           <Link to={`${roomChat}`} target="_blank" className="dropdown-item">
-            <CIcon icon={cilEnvelopeOpen} className="me-2" />
+            <CIcon icon={cilChatBubble} className="me-2" />
             Tin nhắn
           </Link>
 

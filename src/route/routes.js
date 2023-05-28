@@ -28,7 +28,6 @@ const ManageEmotion = React.lazy(() => import('../views/pages/activity/emotion/M
 const FeedbackType = React.lazy(() => import('../views/pages/activity/feedback/FeedbackType'));
 const Feedback = React.lazy(() => import('../views/pages/activity/feedback/Feedback'));
 const SearchRole = React.lazy(() => import('../views/admin/role/SearchRole'));
-const PermissionList = React.lazy(() => import('../views/admin/role/PermissionList'));
 const RoleManagement = React.lazy(() => import('../views/admin/role/RoleManagement'));
 const Page403 = React.lazy(() => import('../views/pages/auth/Page403'));
 const Page404 = React.lazy(() => import('../views/pages/auth/Page404'));
@@ -148,11 +147,6 @@ const routes = [
     path: '/danh-sach-vai-tro',
     name: 'Danh sách vai trò',
     element: RoleManagement,
-  },
-  {
-    path: '/danh-sach-phan-quyen',
-    name: 'Danh sách phân quyền',
-    element: PermissionList,
   },
   {
     path: '/403',

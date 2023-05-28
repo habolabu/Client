@@ -12,6 +12,10 @@ import {
   cilCarAlt,
   cilCart,
   cilDollar,
+  cilFeaturedPlaylist,
+  cilLibraryBuilding,
+  cilList,
+  cilListRich,
   cilLockLocked,
   cilMoodGood,
   cilNewspaper,
@@ -34,7 +38,7 @@ const _navAdmin = [
   {
     component: CNavGroup,
     name: 'Quản lý Chung cư',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilLibraryBuilding} customClassName="nav-icon" />,
     permissions: [PermissionDirection.VIEW_AREA, PermissionDirection.VIEW_PARKING, PermissionDirection.VIEW_PRICE_TAG],
     items: [
       {
@@ -70,7 +74,7 @@ const _navAdmin = [
   {
     component: CNavGroup,
     name: 'Quản lý hoá đơn',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilCart} customClassName="nav-icon" />,
     permissions: [],
     items: [
       {
@@ -92,7 +96,7 @@ const _navAdmin = [
   {
     component: CNavGroup,
     name: 'Quản lý hoạt động',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilListRich} customClassName="nav-icon" />,
     permissions: [],
     items: [
       {
@@ -114,7 +118,7 @@ const _navAdmin = [
   {
     component: CNavGroup,
     name: 'Quản lý phản hồi',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilFeaturedPlaylist} customClassName="nav-icon" />,
     permissions: [],
     items: [
       {
@@ -136,7 +140,7 @@ const _navAdmin = [
   {
     component: CNavGroup,
     name: 'Quản lý tài khoản',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     permissions: [],
     items: [
       {
@@ -158,7 +162,7 @@ const _navAdmin = [
   {
     component: CNavGroup,
     name: 'Quản lý quyền',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilLockLocked} customClassName="nav-icon" />,
     permissions: [PermissionDirection.VIEW_ROLE, PermissionDirection.VIEW_PERMISSION],
     items: [
       {
@@ -172,14 +176,7 @@ const _navAdmin = [
         component: CNavItem,
         name: 'Danh sách vai trò',
         to: '/habolabu/danh-sach-vai-tro',
-        icon: <CIcon icon={cilMoodGood} customClassName="nav-icon" />,
-        permissions: [PermissionDirection.VIEW_ROLE, PermissionDirection.VIEW_PERMISSION],
-      },
-      {
-        component: CNavItem,
-        name: 'Danh sách phân quyền',
-        to: '/habolabu/danh-sach-phan-quyen',
-        icon: <CIcon icon={cilNewspaper} customClassName="nav-icon" />,
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
         permissions: [PermissionDirection.VIEW_ROLE, PermissionDirection.VIEW_PERMISSION],
       },
     ],

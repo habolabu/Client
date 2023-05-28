@@ -10,11 +10,12 @@ const AppFooter = () => {
   return (
     <CFooter>
       <div>
-        <span className="fw-bold">Hệ thống quản lý chung cư Habolabu - Trường Đại học Mở Tp.HCM</span> @ 2022
+        <span className="fw-bold">Hệ thống quản lý chung cư {process.env.REACT_APP_BRAND_NAME}</span> @ 2022 -{' '}
+        {new Date().getFullYear()}
       </div>
       <div className="ms-auto">
         <span className="me-1">Cung cấp bởi</span>
-        <span className="fw-bold">Trung Kiên - Thành Nam</span>
+        <span className="fw-bold">{process.env.REACT_APP_BRAND_NAME}</span>
       </div>
     </CFooter>
   );

@@ -50,7 +50,10 @@ const AccountCurrentDetail = () => {
             <CCol xs={12}>
               <CCard className="mb-4">
                 <CCardHeader className="d-flex align-items-center justify-content-between">
-                  <strong>🕵️‍♀️ Thông tin cá nhân - {`${userInfo.lastName} ${userInfo.firstName}`}</strong>
+                  <strong>
+                    🕵️‍♀️ Thông tin cá nhân - {`${userInfo.lastName} ${userInfo.firstName}`} -{' '}
+                    {`Mã người dùng: ${userInfo.id}`}
+                  </strong>
                 </CCardHeader>
                 <CCardBody>
                   <CRow>

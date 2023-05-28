@@ -43,6 +43,7 @@ import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
+import parse from 'html-react-parser';
 
 const PostList = () => {
   const [postList, setPostList] = useState([]);
@@ -168,7 +169,7 @@ const PostList = () => {
                     />
                     <CardContent>
                       <Typography variant="body2" color="text.secondary">
-                        {postItem.content}
+                        {parse(postItem.content)}
                       </Typography>
                     </CardContent>
                     <CardActions className="d-flex justify-content-between p-4">
