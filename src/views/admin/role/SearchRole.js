@@ -23,6 +23,7 @@ import { toast } from 'react-toastify';
 import Helmet from 'src/components/helmet/helmet';
 import { Checkbox } from '@mui/material';
 import uuid from 'react-uuid';
+import { permissionLocal } from 'src/utils/permissionLocal';
 
 function Row(props) {
   const { accountId, permissionAccount, submitCheckedChange } = props;
@@ -119,6 +120,7 @@ Row.propTypes = {
 export default function SearchRole() {
   const [permissionListAccount, setPermissionListAccount] = useState([]);
   const [accountId, setAccountId] = useState(0);
+  let permissionsAccount = [];
 
   useEffect(() => {
     const callApiGetUser = setTimeout(() => {
@@ -142,6 +144,28 @@ export default function SearchRole() {
     } catch (error) {
       console.log('Thất bại khi lấy danh sách quyền: ', error);
       toast.error('Thất bại khi lấy danh sách quyền ! ', { theme: 'colored' });
+    }
+  };
+
+  const savePermissionsCurrent = async () => {
+    try {
+      const res = await authServices.getAllPermissionCurrentUser();
+      if (res && res.data) {
+        res.data.response.body.forEach((permissionsRoles) => {
+          permissionsRoles.permissions.forEach((permissionDocument) => {
+            permissionDocument.permissionDocuments.forEach((permission) => {
+              if (permission.status) {
+                permissionsAccount.push(permission.name);
+              }
+            });
+          });
+        });
+        permissionLocal.saveData(permissionsAccount);
+      } else {
+        console.log('Thất bại khi lấy danh sách quyền');
+      }
+    } catch (error) {
+      console.log('Thất bại khi lấy danh sách quyền: ', error);
     }
   };
 
@@ -205,7 +229,7 @@ export default function SearchRole() {
                                 key={index}
                                 permissionAccount={permissionListPerRow}
                                 accountId={parseInt(accountId)}
-                                submitCheckedChange={getPermissionsAccount}
+                                submitCheckedChange={(getPermissionsAccount, savePermissionsCurrent)}
                               />
                             );
                           })}

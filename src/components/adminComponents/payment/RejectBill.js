@@ -11,7 +11,7 @@ import billServices from 'src/api/paymentServices/billServices';
 import { MdDeleteForever } from 'react-icons/md';
 import Tippy from '@tippyjs/react';
 
-const RejectBill = ({ billId }) => {
+const RejectBill = ({ billId, submitChange }) => {
   const handleRejectBill = async () => {
     try {
       const res = await billServices.rejectBill(billId);
@@ -19,6 +19,7 @@ const RejectBill = ({ billId }) => {
         toast.success('Từ chối hoá đơn thành công ! ', {
           theme: 'colored',
         });
+        submitChange();
       } else {
         toast.error('Từ chối hoá đơn thất bại ! ', {
           theme: 'colored',

@@ -11,7 +11,7 @@ import billServices from 'src/api/paymentServices/billServices';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import Tippy from '@tippyjs/react';
 
-const ApproveBill = ({ billId }) => {
+const ApproveBill = ({ billId, submitChange }) => {
   const handleApproveBill = async () => {
     try {
       const res = await billServices.approveBill(billId);
@@ -19,6 +19,7 @@ const ApproveBill = ({ billId }) => {
         toast.success('Duyệt hoá đơn thành công ! ', {
           theme: 'colored',
         });
+        submitChange();
       } else {
         toast.error('Duyệt hoá đơn thất bại ! ', {
           theme: 'colored',
