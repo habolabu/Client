@@ -90,9 +90,12 @@ a,
 
 // login page
 .bg-login {
-  background: url('https://res.cloudinary.com/dzd9sonxs/image/upload/v1665391805/login/login_background_rf2pbd.jpg')
-    no-repeat center center;
+  background: url('https://res.cloudinary.com/dzd9sonxs/image/upload/v1685322297/login_bg_blrv45.jpg') no-repeat;
   background-size: cover;
+
+  .card {
+    background: #ffffffed;
+  }
 }
 
 .show-hide-password {

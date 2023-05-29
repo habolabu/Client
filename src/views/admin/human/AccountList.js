@@ -64,7 +64,7 @@ const AccountList = () => {
       const res = await userServices.getUsers(params);
       if (res && res.data) {
         console.log(res.data);
-        setUserList(res.data.response.body.data);
+        setUserList(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách tài khoản ! ', {
           theme: 'colored',
@@ -179,7 +179,7 @@ const AccountList = () => {
                     </CTableRow>
                   </CTableHead>
                   <CTableBody>
-                    {userList.map((user) => {
+                    {userList.data.map((user) => {
                       return (
                         <CTableRow key={user.id}>
                           <CTableHeaderCell scope="row">{user.id}</CTableHeaderCell>
@@ -222,7 +222,7 @@ const AccountList = () => {
           </CCard>
         </CCol>
         {/* pagination */}
-        {userList && userList.length > 2 ? (
+        {userList ? (
           <CCol xs={12}>
             <div className={'mt-2'}>
               <ReactPaginate
