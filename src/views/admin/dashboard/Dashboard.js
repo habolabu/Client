@@ -23,6 +23,8 @@ import LineChart from 'src/components/adminComponents/payment/LineChart';
 import AreaChart from 'src/components/adminComponents/payment/AreaChar';
 import Clock from 'src/components/utilComponents/Clock';
 import BlocksServices from 'src/components/utilComponents/BlocksServices';
+import { permissionLocal } from 'src/utils/permissionLocal';
+import PermissionDirection from 'src/utils/PermissionDirection';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -44,42 +46,46 @@ const Dashboard = () => {
         <CCol xs={12} lg={5}>
           <Clock />
         </CCol>
-        <CCol xs={12} lg={7}>
-          <BlocksServices />
-        </CCol>
+        {permissionLocal.isExistPermission(PermissionDirection.STATISTIC) ? (
+          <CCol xs={12} lg={7}>
+            <BlocksServices />
+          </CCol>
+        ) : null}
       </CRow>
-      <CRow>
-        <CCol xs={12}>
-          <CCard className="mb-4">
-            <CCardHeader className="d-flex align-items-center justify-content-between">
-              <strong>📈 Thống kê</strong>
-            </CCardHeader>
-            <CCardBody>
-              <CRow className="mb-3">
-                <CCol sm={12}>
-                  <CRow>
-                    <CCol lg={2} md={4} xs={12}>
-                      <CFormLabel htmlFor="floorNumber" className="col-form-label">
-                        <b>Chọn loại thống kê</b>
-                      </CFormLabel>
-                    </CCol>
-                    <CCol lg={4} md={8} sm={12}>
-                      <CFormSelect value={selectStatistic} onChange={handleChangeStatistic}>
-                        {optionsStatistic.map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.text}
-                          </option>
-                        ))}
-                      </CFormSelect>
-                    </CCol>
-                  </CRow>
-                </CCol>
-              </CRow>
-              {selectStatistic === 'statisticAll' ? <LineChart /> : <AreaChart />}
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
+      {permissionLocal.isExistPermission(PermissionDirection.STATISTIC) ? (
+        <CRow>
+          <CCol xs={12}>
+            <CCard className="mb-4">
+              <CCardHeader className="d-flex align-items-center justify-content-between">
+                <strong>📈 Thống kê</strong>
+              </CCardHeader>
+              <CCardBody>
+                <CRow className="mb-3">
+                  <CCol sm={12}>
+                    <CRow>
+                      <CCol lg={2} md={4} xs={12}>
+                        <CFormLabel htmlFor="floorNumber" className="col-form-label">
+                          <b>Chọn loại thống kê</b>
+                        </CFormLabel>
+                      </CCol>
+                      <CCol lg={4} md={8} sm={12}>
+                        <CFormSelect value={selectStatistic} onChange={handleChangeStatistic}>
+                          {optionsStatistic.map((option) => (
+                            <option key={option.value} value={option.value}>
+                              {option.text}
+                            </option>
+                          ))}
+                        </CFormSelect>
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                </CRow>
+                {selectStatistic === 'statisticAll' ? <LineChart /> : <AreaChart />}
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      ) : null}
     </Helmet>
   );
 };
