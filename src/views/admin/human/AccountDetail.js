@@ -55,8 +55,7 @@ const AccountDetail = () => {
               <CCard className="mb-4">
                 <CCardHeader className="d-flex align-items-center justify-content-between">
                   <strong>
-                    <FaUserEdit /> Thông tin cá nhân - {`${userInfo.lastName} ${userInfo.firstName}`} (
-                    {userInfo.roles[0].roleName})
+                    <FaUserEdit /> Thông tin cá nhân - {`${userInfo.lastName} ${userInfo.firstName}`}
                   </strong>
                 </CCardHeader>
                 <CCardBody>
