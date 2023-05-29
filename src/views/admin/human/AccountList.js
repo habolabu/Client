@@ -63,7 +63,6 @@ const AccountList = () => {
       };
       const res = await userServices.getUsers(params);
       if (res && res.data) {
-        console.log(res.data);
         setUserList(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách tài khoản ! ', {
