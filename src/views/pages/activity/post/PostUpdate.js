@@ -5,7 +5,7 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -21,6 +21,7 @@ import { MdEdit } from 'react-icons/md';
 const PostUpdate = () => {
   const [postInfo, setPostInfo] = useState(null);
   const url = useParams();
+  const navigate = useNavigate();
 
   const getPostDetails = async () => {
     try {
@@ -96,6 +97,7 @@ const PostUpdate = () => {
         toast.success('Chỉnh sửa thành công ! ', {
           theme: 'colored',
         });
+        navigate('/habolabu/bai-viet');
       } else {
         toast.error('Chỉnh sửa thất bại ! ', {
           theme: 'colored',
