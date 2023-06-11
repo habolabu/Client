@@ -14,6 +14,10 @@ const authServices = {
     const url = '/auth/command/api/account-setting';
     return axiosClient.put(url, data);
   },
+  grantGroupPermission: (data) => {
+    const url = '/auth/command/api/account-setting/multiple';
+    return axiosClient.put(url, data);
+  },
   addRole: (params) => {
     const url = '/auth/command/api/role';
     return axiosClient.post(url, params);

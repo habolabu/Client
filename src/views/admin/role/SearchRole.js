@@ -56,6 +56,33 @@ function Row(props) {
     }
   };
 
+  const grantGroupPermission = async (accountId, permissionId, roleId, status) => {
+    try {
+      const params = {
+        referenceKey: {
+          accountId: accountId,
+          permissionId: permissionId,
+          roleId: roleId,
+        },
+        status: !status,
+      };
+      const res = await authServices.grantGroupPermission(params);
+      if (res && res.data) {
+        toast.success('Cập nhật thành công ! ', {
+          theme: 'colored',
+        });
+        submitCheckedChange();
+      } else {
+        toast.error('Thất bại khi cập nhật nhóm quyền ! ', {
+          theme: 'colored',
+        });
+      }
+    } catch (error) {
+      console.log('Thất bại khi cập nhật nhóm quyền: ', error);
+      toast.error('Thất bại khi cập nhật nhóm quyền ! ', { theme: 'colored' });
+    }
+  };
+
   return (
     <React.Fragment>
       <TableRow>
@@ -67,7 +94,18 @@ function Row(props) {
         <TableCell>{permissionAccount[0].permissionBlock.id}</TableCell>
         <TableCell>{permissionAccount[0].permissionBlock.display}</TableCell>
         {permissionAccount.map((role) => {
-          return <TableCell key={role.permissionBlock.id} align="center"></TableCell>;
+          return (
+            <TableCell key={role.permissionBlock.id} align="center">
+              <Checkbox
+                defaultChecked={role.permissionBlock.permissionDocuments.every(
+                  (permissionChild) => permissionChild.status === true,
+                )}
+                onClick={() => {
+                  grantGroupPermission(accountId, role.permissionBlock.id, role.roleId, role.permissionBlock.status);
+                }}
+              />
+            </TableCell>
+          );
         })}
       </TableRow>
       <TableRow>
@@ -135,6 +173,7 @@ export default function SearchRole() {
     try {
       const res = await authServices.getPermissionAccount(accountId);
       if (res && res.data) {
+        console.log(1);
         setPermissionListAccount(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách quyền ! ', {
@@ -229,7 +268,7 @@ export default function SearchRole() {
                                 key={index}
                                 permissionAccount={permissionListPerRow}
                                 accountId={parseInt(accountId)}
-                                submitCheckedChange={(getPermissionsAccount, savePermissionsCurrent)}
+                                submitCheckedChange={getPermissionsAccount}
                               />
                             );
                           })}

@@ -10,6 +10,10 @@ const userServices = {
     const url = '/human/query/api/user';
     return axiosClient.get(url, { params });
   },
+  getAllUsers: (params) => {
+    const url = '/human/query/api/user/all';
+    return axiosClient.get(url, { params });
+  },
   getUserCurrentDetails: () => {
     const url = `/human/query/api/user/detail`;
     return axiosClient.get(url);

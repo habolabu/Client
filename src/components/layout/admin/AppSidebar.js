@@ -32,7 +32,6 @@ const AppSidebar = () => {
   //     dispatch({ type: 'set', sidebarShow: true });
   //   }
   // }, [params.pathname]);
-
   return (
     <CSidebar
       position="fixed"

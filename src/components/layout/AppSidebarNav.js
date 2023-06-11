@@ -60,7 +60,7 @@ export const AppSidebarNav = ({ items }) => {
   const navItem = (item, index) => {
     const { component, name, badge, icon, ...rest } = item;
     const Component = component;
-    const isSubset = item.permissions.every((value) => permissions.includes(value));
+    const isSubset = item.permissions.some((value) => permissions.includes(value));
 
     if (isSubset || item.permissions.length === 0) {
       return (
@@ -83,7 +83,7 @@ export const AppSidebarNav = ({ items }) => {
   const navGroup = (item, index) => {
     const { component, name, icon, to, ...rest } = item;
     const Component = component;
-    const isSubset = item.permissions.every((value) => permissions.includes(value));
+    const isSubset = item.permissions.some((value) => permissions.includes(value));
 
     if (isSubset || item.permissions.length === 0) {
       return (

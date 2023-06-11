@@ -15,6 +15,10 @@ const avatarServices = {
     const url = `/human/query/api/avatar`;
     return axiosClient.get(url, { params });
   },
+  getLogoCurrentUser: (params) => {
+    const url = `/human/query/api/user/logo`;
+    return axiosClient.get(url, { params });
+  },
   getAvatarDetails: (avatarId) => {
     const url = `/human/query/api/avatar/${avatarId}`;
     return axiosClient.get(url);

@@ -113,9 +113,11 @@ const ManageEmotion = () => {
                         })}
                       </CTableBody>
                     </CTable>
-                    <CCol xs={12} className="d-flex justify-content-center mt-3">
-                      <Pagination count={emotionList.totalPage} color="primary" onChange={handlePageClick} />
-                    </CCol>
+                    {emotionList.totalPage > 1 ? (
+                      <CCol xs={12} className="d-flex justify-content-center mt-3">
+                        <Pagination count={emotionList.totalPage} color="primary" onChange={handlePageClick} />
+                      </CCol>
+                    ) : null}
                   </CRow>
                 ) : (
                   <CRow>

@@ -38,6 +38,8 @@ import EditRoomModal from 'src/components/adminComponents/buiding/room/EditRoomM
 import Page403 from 'src/views/pages/auth/Page403';
 import PermissionDirection from 'src/utils/PermissionDirection';
 import { permissionLocal } from 'src/utils/permissionLocal';
+import AssignUserRoomModal from 'src/components/adminComponents/buiding/room/AssignUserRoomModal';
+import DeleteUserRoomModal from 'src/components/adminComponents/buiding/room/DeleteUserRoomModal';
 
 const RoomList = ({ apartmentId }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -88,7 +90,7 @@ const RoomList = ({ apartmentId }) => {
   };
 
   return (
-    <CCol md={6} xs={12}>
+    <CCol xs={12}>
       {permissionLocal.isExistPermission(PermissionDirection.VIEW_ROOM) ? (
         <>
           <h5 className="mb-3">📝 Thông tin danh sách các phòng</h5>
@@ -143,6 +145,8 @@ const RoomList = ({ apartmentId }) => {
                         <CTableHeaderCell scope="col">Mã phòng (ID)</CTableHeaderCell>
                         <CTableHeaderCell scope="col">Tên phòng</CTableHeaderCell>
                         <CTableHeaderCell scope="col">Vị trí</CTableHeaderCell>
+                        <CTableHeaderCell scope="col">Trạng thái phòng</CTableHeaderCell>
+                        <CTableHeaderCell scope="col">Chủ phòng</CTableHeaderCell>
                         <CTableHeaderCell scope="col">Thao tác</CTableHeaderCell>
                       </CTableRow>
                     </CTableHead>
@@ -153,6 +157,19 @@ const RoomList = ({ apartmentId }) => {
                             <CTableHeaderCell scope="row">{room.id}</CTableHeaderCell>
                             <CTableDataCell>{room.name}</CTableDataCell>
                             <CTableDataCell>Tầng {room.floorNumber}</CTableDataCell>
+                            {room.owmer !== null ? (
+                              <>
+                                <CTableDataCell>Đã có chủ</CTableDataCell>
+                                <CTableDataCell>
+                                  {room.owner.ownerInfo.lastName} {room.owner.ownerInfo.firstName}
+                                </CTableDataCell>
+                              </>
+                            ) : (
+                              <>
+                                <CTableDataCell>Chưa có chủ</CTableDataCell>
+                                <CTableDataCell>Trống</CTableDataCell>
+                              </>
+                            )}
                             <CTableDataCell>
                               {/* add details room modal */}
                               <DetailsRoomModal slug={room.slug} />
@@ -166,6 +183,13 @@ const RoomList = ({ apartmentId }) => {
                               />
                               {/* add delete room modal */}
                               <DeleteRoomModal slug={room.slug} submitDeleteRoomChange={getRoomList} />
+                              {room.owner !== null ? (
+                                <>
+                                  <DeleteUserRoomModal idRecord={room.id} submitDeleteUserRoomChange={getRoomList} />
+                                </>
+                              ) : (
+                                <AssignUserRoomModal roomId={room.id} submitAssignUserRoomChange={getRoomList} />
+                              )}
                             </CTableDataCell>
                           </CTableRow>
                         );
@@ -182,7 +206,7 @@ const RoomList = ({ apartmentId }) => {
             </CCardBody>
             <CFooter>
               {/* pagination */}
-              {roomList.data ? (
+              {roomList.totalPage > 1 ? (
                 <CCol xs={12}>
                   <div className={'mt-2'}>
                     <ReactPaginate
@@ -206,9 +230,7 @@ const RoomList = ({ apartmentId }) => {
                     />
                   </div>
                 </CCol>
-              ) : (
-                <></>
-              )}
+              ) : null}
             </CFooter>
           </CCard>
         </>

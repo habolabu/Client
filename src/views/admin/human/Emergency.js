@@ -111,7 +111,7 @@ const Emergency = ({ userId }) => {
           )}
         </CCardBody>
         <CCardFooter>
-          {emergencyInfo.data ? (
+          {emergencyInfo.totalPage > 1 ? (
             <CCol xs={12}>
               <div className={'mt-2'}>
                 <ReactPaginate
@@ -135,9 +135,7 @@ const Emergency = ({ userId }) => {
                 />
               </div>
             </CCol>
-          ) : (
-            <p>Không tìm thấy thông tin...</p>
-          )}
+          ) : null}
         </CCardFooter>
       </CCard>
     </CCol>

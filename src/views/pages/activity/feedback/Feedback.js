@@ -147,9 +147,11 @@ const Feedback = () => {
                           })}
                         </CTableBody>
                       </CTable>
-                      <CCol xs={12} className="d-flex justify-content-center mt-3">
-                        <Pagination count={feedBackList.totalPage} color="primary" onChange={handlePageClick} />
-                      </CCol>
+                      {feedBackList.totalPage > 1 ? (
+                        <CCol xs={12} className="d-flex justify-content-center mt-3">
+                          <Pagination count={feedBackList.totalPage} color="primary" onChange={handlePageClick} />
+                        </CCol>
+                      ) : null}
                     </CRow>
                   ) : (
                     <CRow>

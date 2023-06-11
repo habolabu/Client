@@ -46,11 +46,9 @@ const Dashboard = () => {
         <CCol xs={12} lg={5}>
           <Clock />
         </CCol>
-        {permissionLocal.isExistPermission(PermissionDirection.STATISTIC) ? (
-          <CCol xs={12} lg={7}>
-            <BlocksServices />
-          </CCol>
-        ) : null}
+        <CCol xs={12} lg={7}>
+          <BlocksServices />
+        </CCol>
       </CRow>
       {permissionLocal.isExistPermission(PermissionDirection.STATISTIC) ? (
         <CRow>

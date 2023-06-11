@@ -195,9 +195,11 @@ const PostList = () => {
                 </CCol>
               );
             })}
-            <CCol xs={12} className="d-flex justify-content-center mt-5">
-              <Pagination count={postList.totalPage} color="primary" onChange={handlePageClick} />
-            </CCol>
+            {postList.totalPage > 1 ? (
+              <CCol xs={12} className="d-flex justify-content-center mt-5">
+                <Pagination count={postList.totalPage} color="primary" onChange={handlePageClick} />
+              </CCol>
+            ) : null}
           </CRow>
         ) : (
           <CRow>

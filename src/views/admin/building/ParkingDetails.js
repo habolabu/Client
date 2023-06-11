@@ -219,7 +219,7 @@ const ParkingDetails = () => {
             </CCard>
           </CCol>
           {/* pagination */}
-          {parkingSpaceList.data ? (
+          {parkingSpaceList.totalPage > 1 ? (
             <CCol xs={12}>
               <div className={'mt-2'}>
                 <ReactPaginate
@@ -243,9 +243,7 @@ const ParkingDetails = () => {
                 />
               </div>
             </CCol>
-          ) : (
-            <></>
-          )}
+          ) : null}
         </CRow>
       ) : (
         <Page403 />

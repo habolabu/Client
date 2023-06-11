@@ -161,7 +161,7 @@ const PostDetail = () => {
                 {postInfo.totalComment} bình luận
               </CFormLabel>
             </div>
-            <FBReactions />
+            <FBReactions reactChanged={() => console.log(1)} />
             <CForm onSubmit={formik.handleSubmit}>
               <CRow className="align-items-center justify-content-center my-4">
                 <CCol sm={12}>
@@ -200,7 +200,7 @@ const PostDetail = () => {
                 {comments.data.map((comment) => {
                   return <CommentItem key={comment.id} data={comment}></CommentItem>;
                 })}
-                {currentPage === comments.totalPage ? (
+                {currentPage < comments.totalPage ? (
                   <></>
                 ) : (
                   <p

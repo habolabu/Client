@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import LikeIcon from '../../../../assets/reaction/likeicon.png';
 import Angry from '../../../../assets/reaction/angry.svg';
@@ -11,7 +12,7 @@ import emotionServices from 'src/api/activityServices/emotionServices';
 import { useEffect } from 'react';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
-const FBReactions = () => {
+const FBReactions = ({ reactChanged }) => {
   const [btnClicked, setBtnClicked] = useState(false);
   const [selectedReaction, setSelectedReaction] = useState({ img: LikeIcon, name: 'React' });
   const [emotionList, setEmotionList] = useState([]);
@@ -39,6 +40,7 @@ const FBReactions = () => {
   const handleReactionClick = ({ img, name }) => {
     setSelectedReaction({ img, name });
     setBtnClicked(false);
+    reactChanged();
   };
 
   const list = {

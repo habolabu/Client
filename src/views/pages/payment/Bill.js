@@ -34,7 +34,7 @@ import DetailsPaymentModal from 'src/components/adminComponents/payment/DetailsP
 
 const Bill = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [billInfo, setBillInfo] = useState(null);
+  const [billInfo, setBillInfo] = useState([]);
 
   const getBillCurrentUser = async () => {
     try {
@@ -72,7 +72,7 @@ const Bill = () => {
               <strong>💰 Danh sách hoá đơn của bạn</strong>
             </CCardHeader>
             <CCardBody>
-              {billInfo != null ? (
+              {billInfo.data ? (
                 <CTable striped responsive hover className="text-center text-nowrap">
                   <CTableHead>
                     <CTableRow className="text-center">
@@ -118,7 +118,7 @@ const Bill = () => {
               )}
             </CCardBody>
             <CCardFooter>
-              {billInfo ? (
+              {billInfo.totalPage > 1 ? (
                 <CCol xs={12}>
                   <div className={'mt-2'}>
                     <ReactPaginate

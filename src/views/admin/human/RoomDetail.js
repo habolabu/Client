@@ -120,7 +120,7 @@ const RoomDetail = ({ userId }) => {
         </CCardBody>
         <CFooter>
           {/* pagination */}
-          {roomList.data ? (
+          {roomList.totalPage > 1 ? (
             <CCol xs={12}>
               <div className={'mt-2'}>
                 <ReactPaginate
@@ -144,9 +144,7 @@ const RoomDetail = ({ userId }) => {
                 />
               </div>
             </CCol>
-          ) : (
-            <></>
-          )}
+          ) : null}
         </CFooter>
       </CCard>
     </CCol>

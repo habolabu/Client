@@ -162,7 +162,7 @@ const ParkingList = ({ apartmentId }) => {
             </CCardBody>
             <CFooter>
               {/* pagination */}
-              {parkingList.data ? (
+              {parkingList.totalPage > 1 ? (
                 <CCol xs={12}>
                   <div className={'mt-2'}>
                     <ReactPaginate
@@ -186,9 +186,7 @@ const ParkingList = ({ apartmentId }) => {
                     />
                   </div>
                 </CCol>
-              ) : (
-                <></>
-              )}
+              ) : null}
             </CFooter>
           </CCard>
         </>
