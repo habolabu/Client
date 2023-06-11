@@ -8,6 +8,7 @@ export const permissionLocal = {
   data: null,
 
   saveData: (data) => {
+    permissionLocal.data = JSON.stringify(data);
     localStorage.setItem(permissionLocal.localStorageName, JSON.stringify(data));
   },
 

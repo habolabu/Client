@@ -264,7 +264,7 @@ const ManageBill = () => {
               )}
             </CCardBody>
             <CCardFooter>
-              {billInfo.data ? (
+              {billInfo.totalPage > 1 ? (
                 <CCol xs={12}>
                   <div className={'mt-2'}>
                     <ReactPaginate
@@ -288,9 +288,7 @@ const ManageBill = () => {
                     />
                   </div>
                 </CCol>
-              ) : (
-                <p>Không tìm thấy thông tin...</p>
-              )}
+              ) : null}
             </CCardFooter>
           </CCard>
         </CCol>

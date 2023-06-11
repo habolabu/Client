@@ -12,6 +12,7 @@ import { CCol, CRow } from '@coreui/react';
 import { Avatar, ListItemAvatar } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Lottie from 'react-lottie-player';
+import { permissionLocal } from 'src/utils/permissionLocal';
 
 function SimpleDialog(props) {
   const { onClose, open, data } = props;
@@ -20,20 +21,25 @@ function SimpleDialog(props) {
     <Dialog onClose={(_, reason) => onClose(reason)} open={open}>
       <DialogTitle>Lựa chọn</DialogTitle>
       <List sx={{ pt: 0 }}>
-        {data.map((item, index) => (
-          <Link to={item.to} key={index}>
-            <ListItem disableGutters sx={{ width: 350 }}>
-              <ListItemButton key={item}>
-                <ListItemAvatar>
-                  <Avatar sx={{ bgcolor: blue[100], color: blue[600], width: 50, height: 50 }}>
-                    <Lottie loop animationData={item.icon} play />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={item.name} sx={{ marginLeft: 2 }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
+        {data.map((item, index) => {
+          if (item.permissions.some((value) => permissionLocal.getData().includes(value))) {
+            return (
+              <Link to={item.to} key={index}>
+                <ListItem disableGutters sx={{ width: 350 }}>
+                  <ListItemButton key={item}>
+                    <ListItemAvatar>
+                      <Avatar sx={{ bgcolor: blue[100], color: blue[600], width: 50, height: 50 }}>
+                        <Lottie loop animationData={item.icon} play />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={item.name} sx={{ marginLeft: 2 }} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            );
+          }
+          return null;
+        })}
       </List>
     </Dialog>
   );

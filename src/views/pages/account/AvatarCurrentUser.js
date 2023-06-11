@@ -115,7 +115,7 @@ const Avatar = ({ isCookieLocked }) => {
           )}
         </CCardBody>
         <CCardFooter>
-          {avatarUser.data ? (
+          {avatarUser.totalPage > 1 ? (
             <CCol xs={12}>
               <div className={'mt-2'}>
                 <ReactPaginate

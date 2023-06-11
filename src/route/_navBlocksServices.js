@@ -48,32 +48,37 @@ const _navBlocksServices = [
   {
     name: 'Quản lý hoá đơn',
     icon: coins,
-    permissions: [],
+    permissions: [PermissionDirection.APPROVE_BILL, PermissionDirection.REJECT_BILL, PermissionDirection.VIEW_BILL],
     items: [
       {
         name: 'Quản lý hoá đơn',
         to: '/habolabu/quan-ly-hoa-don',
         icon: coins,
-        permissions: [],
+        permissions: [PermissionDirection.APPROVE_BILL, PermissionDirection.REJECT_BILL],
       },
       {
         name: 'Hoá đơn cá nhân',
         to: '/habolabu/hoa-don',
         icon: document,
-        permissions: [],
+        permissions: [PermissionDirection.VIEW_BILL],
       },
     ],
   },
   {
     name: 'Quản lý hoạt động',
     icon: personActivity,
-    permissions: [],
+    permissions: [
+      PermissionDirection.VIEW_POST,
+      PermissionDirection.VIEW_EMOTION,
+      PermissionDirection.VIEW_FEEDBACK_TYPE,
+      PermissionDirection.VIEW_FEEDBACK,
+    ],
     items: [
       {
         name: 'Quản lý bài viết',
         to: '/habolabu/bai-viet',
         icon: book,
-        permissions: [],
+        permissions: [PermissionDirection.VIEW_POST],
       },
       {
         name: 'Quản lý cảm xúc',
@@ -91,7 +96,7 @@ const _navBlocksServices = [
         name: 'Danh sách phản hồi',
         to: '/habolabu/danh-sach-phan-hoi',
         icon: document,
-        permissions: [],
+        permissions: [PermissionDirection.VIEW_FEEDBACK],
       },
     ],
   },
@@ -104,7 +109,7 @@ const _navBlocksServices = [
         name: 'Danh sách người dùng',
         to: '/habolabu/quan-ly-nguoi-dung',
         icon: user,
-        permissions: [],
+        permissions: [PermissionDirection.VIEW_USER],
       },
       {
         name: 'Thông tin cá nhân',
@@ -112,12 +117,12 @@ const _navBlocksServices = [
         icon: avatar,
         permissions: [],
       },
-      {
-        name: 'Đổi mật khẩu',
-        to: '/habolabu/doi-mat-khau',
-        icon: fingerprint,
-        permissions: [],
-      },
+      // {
+      //   name: 'Đổi mật khẩu',
+      //   to: '/habolabu/doi-mat-khau',
+      //   icon: fingerprint,
+      //   permissions: [],
+      // },
     ],
   },
   {

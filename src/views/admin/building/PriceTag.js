@@ -175,7 +175,7 @@ const PriceTag = () => {
           </CCard>
         </CCol>
         {/* pagination */}
-        {priceTagList.data ? (
+        {priceTagList.totalPage > 1 ? (
           <CCol xs={12}>
             <div className={'mt-2'}>
               <ReactPaginate
@@ -199,9 +199,7 @@ const PriceTag = () => {
               />
             </div>
           </CCol>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </CRow>
     </Helmet>
   );

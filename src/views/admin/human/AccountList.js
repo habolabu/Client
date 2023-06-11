@@ -40,7 +40,7 @@ import { BiSearchAlt } from 'react-icons/bi';
 import Tippy from '@tippyjs/react';
 
 const AccountList = () => {
-  const [userList, setUserList] = useState(null);
+  const [userList, setUserList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   // searching
@@ -164,7 +164,7 @@ const AccountList = () => {
                   />
                 </CCol>
               </CRow>
-              {userList ? (
+              {userList.data ? (
                 <CTable striped responsive hover className="text-nowrap text-center">
                   <CTableHead>
                     <CTableRow className="text-center">
@@ -221,7 +221,7 @@ const AccountList = () => {
           </CCard>
         </CCol>
         {/* pagination */}
-        {userList ? (
+        {userList.totalPage > 1 ? (
           <CCol xs={12}>
             <div className={'mt-2'}>
               <ReactPaginate
@@ -245,9 +245,7 @@ const AccountList = () => {
               />
             </div>
           </CCol>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </CRow>
     </Helmet>
   );

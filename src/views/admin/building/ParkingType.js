@@ -153,7 +153,7 @@ const ParkingType = () => {
             </CCard>
           </CCol>
           {/* pagination */}
-          {parkingTypeList.data ? (
+          {parkingTypeList.totalPage > 1 ? (
             <CCol xs={12}>
               <div className={'mt-2'}>
                 <ReactPaginate
@@ -177,9 +177,7 @@ const ParkingType = () => {
                 />
               </div>
             </CCol>
-          ) : (
-            <></>
-          )}
+          ) : null}
         </CRow>
       ) : (
         <Page403 />

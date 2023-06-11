@@ -78,42 +78,46 @@ const DetailsRoomModal = ({ slug }) => {
                 </p>
                 <div>
                   <b>📝 Thông tin chủ sở hữu:</b>
-                  <ul>
-                    <li>
-                      <b>Họ và tên: </b> {roomInfo.owner.ownerInfo.lastName} {roomInfo.owner.ownerInfo.firstName}
-                    </li>
-                    <li>
-                      <b>Giới tính: </b> {roomInfo.owner.ownerInfo.gender === 0 ? 'Nữ' : 'Nam'}
-                    </li>
-                    <li>
-                      <b>Ngày sinh: </b> {new Date(roomInfo.owner.ownerInfo.dateOfBirth).toLocaleDateString('vi-Vi')}
-                    </li>
-                    <li>
-                      <b>Địa chỉ: </b> {roomInfo.owner.ownerInfo.address}
-                    </li>
-                    <li>
-                      <b>Quốc tịch: </b> {roomInfo.owner.ownerInfo.nationality}
-                    </li>
-                    <li>
-                      <b>CCCD: </b> {roomInfo.owner.ownerInfo.idCard}
-                    </li>
-                    <li>
-                      <b>Số điện thoại: </b> {roomInfo.owner.ownerInfo.phoneNumber}
-                    </li>
-                    <li>
-                      <b>Email: </b> {roomInfo.owner.ownerInfo.email}
-                    </li>
-                    <li>
-                      <b>Ngày tạo: </b> {new Date(roomInfo.owner.ownerInfo.createdAt).toLocaleDateString('vi-Vi')}
-                    </li>
-                    <li>
-                      <b>Ngày vào: </b> {roomInfo.owner.joinDate.slice(0, 10)}
-                    </li>
-                    <li>
-                      <b>Ngày rời: </b>
-                      {roomInfo.owner.leaveDate ? roomInfo.owner.leaveDate.slice(0, 10) : 'Chưa cập nhật'}
-                    </li>
-                  </ul>
+                  {roomInfo.owner !== null ? (
+                    <ul>
+                      <li>
+                        <b>Họ và tên: </b> {roomInfo.owner.ownerInfo.lastName} {roomInfo.owner.ownerInfo.firstName}
+                      </li>
+                      <li>
+                        <b>Giới tính: </b> {roomInfo.owner.ownerInfo.gender === 0 ? 'Nữ' : 'Nam'}
+                      </li>
+                      <li>
+                        <b>Ngày sinh: </b> {new Date(roomInfo.owner.ownerInfo.dateOfBirth).toLocaleDateString('vi-Vi')}
+                      </li>
+                      <li>
+                        <b>Địa chỉ: </b> {roomInfo.owner.ownerInfo.address}
+                      </li>
+                      <li>
+                        <b>Quốc tịch: </b> {roomInfo.owner.ownerInfo.nationality}
+                      </li>
+                      <li>
+                        <b>CCCD: </b> {roomInfo.owner.ownerInfo.idCard}
+                      </li>
+                      <li>
+                        <b>Số điện thoại: </b> {roomInfo.owner.ownerInfo.phoneNumber}
+                      </li>
+                      <li>
+                        <b>Email: </b> {roomInfo.owner.ownerInfo.email}
+                      </li>
+                      <li>
+                        <b>Ngày tạo: </b> {new Date(roomInfo.owner.ownerInfo.createdAt).toLocaleDateString('vi-Vi')}
+                      </li>
+                      <li>
+                        <b>Ngày vào: </b> {roomInfo.owner.joinDate.slice(0, 10)}
+                      </li>
+                      <li>
+                        <b>Ngày rời: </b>
+                        {roomInfo.owner.leaveDate ? roomInfo.owner.leaveDate.slice(0, 10) : 'Chưa cập nhật'}
+                      </li>
+                    </ul>
+                  ) : (
+                    <p className="text-danger fw-bold">Chưa có chủ sở hữu</p>
+                  )}
                 </div>
               </CCol>
             </CRow>

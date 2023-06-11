@@ -150,13 +150,13 @@ const _navAdmin = [
         icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
         permissions: [],
       },
-      {
-        component: CNavItem,
-        name: 'Đổi mật khẩu',
-        to: '/habolabu/doi-mat-khau',
-        icon: <CIcon icon={cilLockLocked} customClassName="nav-icon" />,
-        permissions: [],
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Đổi mật khẩu',
+      //   to: '/habolabu/doi-mat-khau',
+      //   icon: <CIcon icon={cilLockLocked} customClassName="nav-icon" />,
+      //   permissions: [],
+      // },
     ],
   },
   {

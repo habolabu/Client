@@ -65,13 +65,15 @@ const Building = () => {
 
   // get data page
   useEffect(() => {
-    const callApiArea = setTimeout(() => {
-      getArea();
-    }, 500);
+    if (permissionLocal.isExistPermission(PermissionDirection.VIEW_AREA)) {
+      const callApiArea = setTimeout(() => {
+        getArea();
+      }, 500);
 
-    return () => {
-      clearTimeout(callApiArea);
-    };
+      return () => {
+        clearTimeout(callApiArea);
+      };
+    }
   }, [currentPage, name, address]);
 
   const handlePageClick = async (data) => {
@@ -166,7 +168,7 @@ const Building = () => {
             </CCard>
           </CCol>
           {/* pagination */}
-          {areaList.totalPage > 0 ? (
+          {areaList.totalPage > 1 ? (
             <CCol xs={12}>
               <div className={'mt-2'}>
                 <ReactPaginate

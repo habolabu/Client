@@ -302,7 +302,7 @@ const AddUserModal = ({ submitAddUserChange }) => {
                   <p className="formik-text-size text-danger mt-1"> {formik.errors.nationality} </p>
                 ) : null}
               </CCol>
-              <CCol md={12} sm={11}>
+              <CCol md={6} sm={11}>
                 <CFormLabel htmlFor="username" className="col-sm-12 col-form-label">
                   <b>
                     Tên tài khoản <span className="text-danger">*</span>
@@ -319,7 +319,7 @@ const AddUserModal = ({ submitAddUserChange }) => {
                   <p className="formik-text-size text-danger mt-1"> {formik.errors.username} </p>
                 ) : null}
               </CCol>
-              {/* <CCol md={6} sm={11}>
+              <CCol md={6} sm={11}>
                 <CFormLabel htmlFor="floorNumber" className="col-sm-12 col-form-label">
                   <b>
                     Loại tài khoản <span className="text-danger">*</span>
@@ -344,7 +344,7 @@ const AddUserModal = ({ submitAddUserChange }) => {
                 ) : (
                   <p>Đang lấy danh sách quyền...</p>
                 )}
-              </CCol> */}
+              </CCol>
             </CRow>
           </CModalBody>
           <CModalFooter>

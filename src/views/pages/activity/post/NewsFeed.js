@@ -36,7 +36,7 @@ const NewsFeed = () => {
           </CCard>
         </CCol>
         {/* pagination */}
-        {/* {areaList.totalPage > 0 ? (
+        {/* {areaList.totalPage > 1 ? (
           <CCol xs={12}>
             <div className={'mt-2'}>
               <ReactPaginate

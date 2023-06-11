@@ -22,9 +22,9 @@ const AppHeaderDropdown = () => {
 
   const getAvatarUser = async () => {
     try {
-      const res = await avatarServices.getAvatarCurrentUser();
+      const res = await avatarServices.getLogoCurrentUser();
       if (res && res.data) {
-        setAvatarUser(res.data.response.body);
+        setAvatarUser(res.data.response.body.avatar);
       } else {
         console.log('Thất bại khi lấy avatar tài khoản: ');
       }
@@ -41,7 +41,7 @@ const AppHeaderDropdown = () => {
       <CDropdown variant="nav-item">
         <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
           {avatarUser ? (
-            <CAvatar src={avatarUser.data[0].url} size="md" />
+            <CAvatar src={avatarUser} size="md" />
           ) : (
             <CAvatar
               src="https://res.cloudinary.com/dzd9sonxs/image/upload/v1664544714/avatar/default-avatar_xh2rub.png"
@@ -67,10 +67,10 @@ const AppHeaderDropdown = () => {
             <CIcon icon={cilUser} className="me-2" />
             Thông tin cá nhân
           </Link>
-          <Link to={`/${brandName}/doi-mat-khau`} className="dropdown-item">
+          {/* <Link to={`/${brandName}/doi-mat-khau`} className="dropdown-item">
             <CIcon icon={cilSettings} className="me-2" />
             Đổi mật khẩu
-          </Link>
+          </Link> */}
 
           <CDropdownDivider />
           <Link
