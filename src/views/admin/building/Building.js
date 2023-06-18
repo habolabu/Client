@@ -88,7 +88,9 @@ const Building = () => {
               <CCardHeader className="d-flex align-items-center justify-content-between">
                 <strong>🌎 Quản lý khu vực</strong>
                 {/* add area modal */}
-                <AddArea submitAddAreaChange={getArea} />
+                {permissionLocal.isExistPermission(PermissionDirection.ADD_NEW_AREA) ? (
+                  <AddArea submitAddAreaChange={getArea} />
+                ) : null}
               </CCardHeader>
               <CCardBody>
                 <CRow className="mb-3">
@@ -129,9 +131,13 @@ const Building = () => {
                               <div className="mb-3">
                                 <b>⚡ Thao tác:</b>
                                 {/* edit area modal */}
-                                <EditArea slug={areaItem.slug} submitEditAreaChange={getArea} />
+                                {permissionLocal.isExistPermission(PermissionDirection.MODIFY_EXIST_AREA) ? (
+                                  <EditArea slug={areaItem.slug} submitEditAreaChange={getArea} />
+                                ) : null}
                                 {/* delete area modal */}
-                                <DeleteArea slug={areaItem.slug} submitDeleteAreaChange={getArea} />
+                                {permissionLocal.isExistPermission(PermissionDirection.DELETE_EXIST_AREA) ? (
+                                  <DeleteArea slug={areaItem.slug} submitDeleteAreaChange={getArea} />
+                                ) : null}
                               </div>
 
                               <div className="mb-3">

@@ -15,7 +15,6 @@ import document from '../assets/lottie/document.json';
 import book from '../assets/lottie/book.json';
 import emoji from '../assets/lottie/emoji.json';
 import avatar from '../assets/lottie/avatar.json';
-import fingerprint from '../assets/lottie/fingerprint.json';
 
 import PermissionDirection from 'src/utils/PermissionDirection';
 

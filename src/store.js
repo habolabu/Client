@@ -8,6 +8,7 @@ import { legacy_createStore as createStore } from 'redux';
 const initialState = {
   sidebarShow: true,
   sidebarUnfoldable: true,
+  avatarUser: 'https://res.cloudinary.com/dzd9sonxs/image/upload/v1664544714/avatar/default-avatar_xh2rub.png',
 };
 
 const changeState = (state = initialState, { type, ...rest }) => {
