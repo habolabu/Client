@@ -67,7 +67,7 @@ const EditParkingModal = ({ apartmentId, submitEditParkingChange, ...rest }) => 
   return (
     <>
       <Tippy content="Sửa thông tin">
-        <CButton color="warning" size="sm" className="ms-2" onClick={() => setVisibleEditParking(!visibleEditParking)}>
+        <CButton color="warning" size="sm" className="me-2" onClick={() => setVisibleEditParking(!visibleEditParking)}>
           <FaEdit />
         </CButton>
       </Tippy>

@@ -62,7 +62,7 @@ const AddFeedbackTypeModal = ({ submitAddFeedBackTypeChange }) => {
         variant="contained"
         startIcon={<AddIcon />}
         size="small"
-        className="ms-2"
+        className="me-2"
         onClick={() => setVisibleAddFeedBackType(!visibleAddFeedBackType)}
       >
         Thêm

@@ -40,7 +40,7 @@ const DeleteArea = ({ slug, submitDeleteAreaChange }) => {
   return (
     <>
       <Tippy content="Xoá khu vực">
-        <CButton color="danger" size="sm" className="ms-2" onClick={() => setVisibleDeleteArea(!visibleDeleteArea)}>
+        <CButton color="danger" size="sm" className="me-2" onClick={() => setVisibleDeleteArea(!visibleDeleteArea)}>
           <MdDeleteForever />
         </CButton>
       </Tippy>

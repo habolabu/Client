@@ -139,7 +139,7 @@ const PostDetail = () => {
   };
 
   return (
-    <Helmet title="Chi tiết bài viết" role="Admin">
+    <Helmet title="Chi tiết bài viết">
       {postInfo != null ? (
         <CCard className="my-4">
           <CCardHeader>
@@ -161,7 +161,7 @@ const PostDetail = () => {
                 {postInfo.totalComment} bình luận
               </CFormLabel>
             </div>
-            <FBReactions reactChanged={() => console.log(1)} />
+            <FBReactions postId={postInfo.id} reactChanged={getPostDetails} />
             <CForm onSubmit={formik.handleSubmit}>
               <CRow className="align-items-center justify-content-center my-4">
                 <CCol sm={12}>
@@ -198,11 +198,16 @@ const PostDetail = () => {
                   <></>
                 )}
                 {comments.data.map((comment) => {
-                  return <CommentItem key={comment.id} data={comment}></CommentItem>;
+                  return (
+                    <CommentItem
+                      key={comment.id}
+                      commentId={comment.id}
+                      postId={postInfo.id}
+                      data={comment}
+                    ></CommentItem>
+                  );
                 })}
                 {currentPage < comments.totalPage ? (
-                  <></>
-                ) : (
                   <p
                     onClick={() => {
                       handlePageClick(currentPage);
@@ -211,6 +216,8 @@ const PostDetail = () => {
                   >
                     Xem thêm bình luận
                   </p>
+                ) : (
+                  <></>
                 )}
               </>
             ) : (
@@ -220,7 +227,7 @@ const PostDetail = () => {
         </CCard>
       ) : (
         <CRow>
-          <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
+          <p className="text-danger fw-bold">Không có thông tin !!!</p>
           <CCol sm={4}>
             <Skeleton variant="rectangular" height={118} />
             <Skeleton />

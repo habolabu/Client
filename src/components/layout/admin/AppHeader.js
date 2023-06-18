@@ -46,7 +46,7 @@ const AppHeader = () => {
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto align-items-center">
           <Lottie loop animationData={cityHall} play style={{ width: 40, height: 40 }} />
-          <p style={{ margin: 0 }}>Hệ thống chung cư thông minh - {process.env.REACT_APP_BRAND_NAME.toUpperCase()}</p>
+          <p style={{ margin: 0 }}>Hệ thống chung cư - {process.env.REACT_APP_BRAND_NAME.toUpperCase()}</p>
         </CHeaderNav>
         <CHeaderNav>
           {/* message */}

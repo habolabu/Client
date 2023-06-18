@@ -21,7 +21,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import authServices from 'src/api/auth/authServices';
 import { toast } from 'react-toastify';
 import Helmet from 'src/components/helmet/helmet';
-import { Checkbox } from '@mui/material';
+import { Box, Checkbox } from '@mui/material';
 import uuid from 'react-uuid';
 import { permissionLocal } from 'src/utils/permissionLocal';
 
@@ -86,16 +86,16 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow>
-        <TableCell>
+        <TableCell width={75}>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell>{permissionAccount[0].permissionBlock.id}</TableCell>
-        <TableCell>{permissionAccount[0].permissionBlock.display}</TableCell>
+        <TableCell width={140}>{permissionAccount[0].permissionBlock.id}</TableCell>
+        <TableCell width={400}>{permissionAccount[0].permissionBlock.display}</TableCell>
         {permissionAccount.map((role) => {
           return (
-            <TableCell key={role.permissionBlock.id} align="center">
+            <TableCell key={role.permissionBlock.id}>
               <Checkbox
                 defaultChecked={role.permissionBlock.permissionDocuments.every(
                   (permissionChild) => permissionChild.status === true,
@@ -109,20 +109,20 @@ function Row(props) {
         })}
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ padding: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Table size="small" aria-label="purchases">
               <TableBody>
                 {permissionAccount[0].permissionBlock.permissionDocuments.map((permissionDocument, index) => (
                   <TableRow key={permissionDocument.childOrder}>
-                    <TableCell></TableCell>
-                    <TableCell>{permissionDocument.id}</TableCell>
-                    <TableCell component="th" scope="row">
+                    <TableCell width={75}></TableCell>
+                    <TableCell width={140}>{permissionDocument.id}</TableCell>
+                    <TableCell component="th" scope="row" width={400}>
                       {permissionDocument.display}
                     </TableCell>
                     {permissionAccount.map((role) => {
                       return (
-                        <TableCell key={uuid()} align="center">
+                        <TableCell key={uuid()}>
                           <Checkbox
                             defaultChecked={role.permissionBlock.permissionDocuments[index].status}
                             // onChange={handleChange}
@@ -173,7 +173,6 @@ export default function SearchRole() {
     try {
       const res = await authServices.getPermissionAccount(accountId);
       if (res && res.data) {
-        console.log(1);
         setPermissionListAccount(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách quyền ! ', {
@@ -212,78 +211,75 @@ export default function SearchRole() {
     <Helmet title="Tìm kiếm quyền">
       <CRow className="align-items-center justify-content-center">
         <CCol md={10} xs={12}>
-          <CCard className="mb-4">
+          <CCard className="mb-5">
             <CCardHeader className="d-flex align-items-center justify-content-between">
-              <strong>🏫 Tìm kiếm phân quyền người dùng</strong>
+              <strong>🔍 Tìm kiếm phân quyền người dùng</strong>
             </CCardHeader>
             <CCardBody>
               <CRow className="mb-3">
                 <CCol md={6} sm={12}>
-                  <CFormLabel htmlFor="searchAccountId" className="col-sm-12 col-form-label">
-                    🔍 Tìm kiếm theo mã tài khoản
-                  </CFormLabel>
                   <CFormInput
                     type="number"
                     id="searchAccountId"
                     placeholder="Nhập mã tài khoản..."
+                    floatingLabel="🔍 Tìm kiếm theo mã tài khoản"
                     onChange={(e) => {
                       e.target.value !== '' ? setAccountId(e.target.value) : setAccountId(0);
                     }}
                   />
                 </CCol>
               </CRow>
-
-              {permissionListAccount.length > 0 ? (
-                <>
-                  <h6 className="my-4">📃 Danh sách phân quyền tài khoản</h6>
-                  {permissionListAccount.length > 0 ? (
-                    <TableContainer component={Paper} className="mt-3 mb-5">
-                      <Table aria-label="collapsible table">
-                        <TableHead>
-                          <TableRow>
-                            <TableCell />
-                            <TableCell>Mã phân quyền</TableCell>
-                            <TableCell>Tên quyền</TableCell>
-                            {permissionListAccount.map((role) => {
-                              return (
-                                <TableCell align="center" key={role.roleId}>
-                                  {role.roleDisplay}
-                                </TableCell>
-                              );
-                            })}
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {permissionListAccount[0].permissions.map((permission, index) => {
-                            let permissionListPerRow = [];
-                            permissionListAccount.forEach((role) => {
-                              permissionListPerRow.push({
-                                roleName: role.roleName,
-                                roleId: role.roleId,
-                                permissionBlock: role.permissions[index],
-                              });
-                            });
-                            return (
-                              <Row
-                                key={index}
-                                permissionAccount={permissionListPerRow}
-                                accountId={parseInt(accountId)}
-                                submitCheckedChange={getPermissionsAccount}
-                              />
-                            );
-                          })}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  ) : (
-                    <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-                  )}
-                </>
-              ) : (
-                <></>
-              )}
             </CCardBody>
           </CCard>
+
+          {permissionListAccount.length > 0 ? (
+            <>
+              <Box className="box-title">
+                <strong>📃 Danh sách phân quyền tài khoản</strong>
+                {/* add apartment modal */}
+              </Box>
+              {permissionListAccount.length > 0 ? (
+                <TableContainer component={Paper} className="mt-3 mb-5">
+                  <Table aria-label="collapsible table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell width={75} />
+                        <TableCell width={140}>Mã phân quyền</TableCell>
+                        <TableCell width={400}>Tên quyền</TableCell>
+                        {permissionListAccount.map((role) => {
+                          return <TableCell key={role.roleId}>{role.roleDisplay}</TableCell>;
+                        })}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {permissionListAccount[0].permissions.map((permission, index) => {
+                        let permissionListPerRow = [];
+                        permissionListAccount.forEach((role) => {
+                          permissionListPerRow.push({
+                            roleName: role.roleName,
+                            roleId: role.roleId,
+                            permissionBlock: role.permissions[index],
+                          });
+                        });
+                        return (
+                          <Row
+                            key={index}
+                            permissionAccount={permissionListPerRow}
+                            accountId={parseInt(accountId)}
+                            submitCheckedChange={getPermissionsAccount}
+                          />
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              ) : (
+                <p className="text-danger fw-bold">Không có thông tin !!!</p>
+              )}
+            </>
+          ) : (
+            <></>
+          )}
         </CCol>
       </CRow>
     </Helmet>

@@ -84,7 +84,7 @@ const EditArea = ({ slug, submitEditAreaChange }) => {
   return (
     <>
       <Tippy content="Sửa khu vực">
-        <CButton color="info" size="sm" className="ms-2" onClick={() => setVisibleEditArea(!visibleEditArea)}>
+        <CButton color="info" size="sm" className="me-2" onClick={() => setVisibleEditArea(!visibleEditArea)}>
           <FaEdit />
         </CButton>
       </Tippy>

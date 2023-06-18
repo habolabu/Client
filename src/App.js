@@ -17,7 +17,7 @@ const loading = (
   </div>
 );
 // Containers
-const AdminLayout = React.lazy(() => import('./layout/AdminLayout'));
+const Layout = React.lazy(() => import('./layout/AdminLayout'));
 
 // Pages
 const Login = React.lazy(() => import('./views/pages/auth/Login'));
@@ -31,7 +31,7 @@ const App = () => {
         <Suspense fallback={loading}>
           <Routes>
             <Route path="/" name="LoginPage" element={<Login />} />
-            <Route path="/habolabu/*" name="AdminDashboard" element={<AdminLayout />} />
+            <Route path="/habolabu/*" name="Layout" element={<Layout />} />
             <Route path="*" name="404" element={<Page404 />} />
           </Routes>
         </Suspense>

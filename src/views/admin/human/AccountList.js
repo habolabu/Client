@@ -97,7 +97,7 @@ const AccountList = () => {
   };
 
   return (
-    <Helmet title="Quản lý tài khoản" role="Admin">
+    <Helmet title="Quản lý tài khoản">
       <CRow>
         <CCol xs={12}>
           <CCard className="mb-4">
@@ -109,56 +109,51 @@ const AccountList = () => {
             <CCardBody>
               <CRow className="mb-3">
                 <CCol md={3} sm={12}>
-                  <CFormLabel htmlFor="searchFirstName" className="col-sm-12 col-form-label">
-                    🔍 Tìm kiếm theo tên
-                  </CFormLabel>
                   <CFormInput
                     type="text"
+                    className="my-2"
                     id="searchFirstName"
+                    floatingLabel="🔍 Tìm kiếm theo tên"
                     placeholder="Nhập tên..."
                     onChange={(e) => setSearchFirstName(e.target.value)}
                   />
                 </CCol>
                 <CCol md={4} sm={12}>
-                  <CFormLabel htmlFor="searchLastName" className="col-sm-12 col-form-label">
-                    🔍 Tìm kiếm theo họ tên lót
-                  </CFormLabel>
                   <CFormInput
                     type="text"
+                    className="my-2"
                     id="searchLastName"
+                    floatingLabel="🔍 Tìm kiếm theo họ tên lót"
                     placeholder="Nhập họ tên lót..."
                     onChange={(e) => setSearchLastName(e.target.value)}
                   />
                 </CCol>
                 <CCol md={5} sm={12}>
-                  <CFormLabel htmlFor="searchAddress" className="col-sm-12 col-form-label">
-                    🔍 Tìm kiếm địa chỉ
-                  </CFormLabel>
                   <CFormInput
                     type="text"
+                    className="my-2"
                     id="searchAddress"
+                    floatingLabel=" 🔍 Tìm kiếm địa chỉ"
                     placeholder="Nhập địa chỉ..."
                     onChange={(e) => setSearchAddress(e.target.value)}
                   />
                 </CCol>
                 <CCol md={6} sm={12}>
-                  <CFormLabel htmlFor="searchBeginDOP" className="col-sm-12 col-form-label">
-                    🔍 Tìm kiếm theo ngày sinh (bắt đầu)
-                  </CFormLabel>
                   <CFormInput
                     type="date"
+                    className="my-2"
                     id="searchBeginDOP"
+                    floatingLabel="🔍 Tìm kiếm theo ngày sinh (bắt đầu)"
                     placeholder="Nhập ngày bắt đầu (vd: 2001-01-01)..."
                     onChange={(e) => setSearchBeginDOP(e.target.value)}
                   />
                 </CCol>
                 <CCol md={6} sm={12}>
-                  <CFormLabel htmlFor="searchEndDOP" className="col-sm-12 col-form-label">
-                    🔍 Tìm kiếm theo ngày sinh (kết thúc)
-                  </CFormLabel>
                   <CFormInput
                     type="date"
+                    className="my-2"
                     id="searchEndDOP"
+                    floatingLabel="🔍 Tìm kiếm theo ngày sinh (kết thúc)"
                     placeholder="Nhập ngày kết thúc (vd: 2001-01-05)..."
                     onChange={(e) => setSearchEndDOP(e.target.value)}
                   />
@@ -168,7 +163,7 @@ const AccountList = () => {
                 <CTable striped responsive hover className="text-nowrap text-center">
                   <CTableHead>
                     <CTableRow className="text-center">
-                      <CTableHeaderCell scope="col">Mã người dùng</CTableHeaderCell>
+                      <CTableHeaderCell scope="col">ID</CTableHeaderCell>
                       <CTableHeaderCell scope="col">Họ và tên</CTableHeaderCell>
                       <CTableHeaderCell scope="col">Giới tính</CTableHeaderCell>
                       <CTableHeaderCell scope="col">Địa chỉ</CTableHeaderCell>
@@ -196,7 +191,7 @@ const AccountList = () => {
                             {/* details user modal */}
                             <Link to={`${user.id}`}>
                               <Tippy content="Xem chi tiết">
-                                <CButton size="sm" color="info">
+                                <CButton size="sm" color="info" className="me-2">
                                   <BiSearchAlt />
                                 </CButton>
                               </Tippy>
@@ -213,8 +208,8 @@ const AccountList = () => {
                 </CTable>
               ) : (
                 <SkeletonTheme color="#202020" highlightColor="#ccc">
-                  <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-                  <Skeleton count={5} />
+                  <p className="text-danger fw-bold">Không có thông tin !!!</p>
+                  <Skeleton count={3} />
                 </SkeletonTheme>
               )}
             </CCardBody>

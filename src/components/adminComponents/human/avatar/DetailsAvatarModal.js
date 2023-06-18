@@ -49,6 +49,7 @@ const DetailsAvatarModal = ({ avatarId }) => {
             setVisibleDetailsAvatar(!visibleDetailsAvatar);
             getAvatarDetails();
           }}
+          className="me-2"
         >
           <BsEyeFill />
         </CButton>
@@ -69,8 +70,8 @@ const DetailsAvatarModal = ({ avatarId }) => {
             </CRow>
           ) : (
             <SkeletonTheme color="#202020" highlightColor="#ccc">
-              <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-              <Skeleton count={5} />
+              <p className="text-danger fw-bold">Không có thông tin !!!</p>
+              <Skeleton count={3} />
             </SkeletonTheme>
           )}
         </CModalBody>

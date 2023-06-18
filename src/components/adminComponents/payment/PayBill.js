@@ -67,7 +67,7 @@ const PayBill = ({ billId }) => {
   return (
     <>
       <Tippy content="Thanh toán hoá đơn">
-        <CButton color="success" size="sm" className="ms-2" onClick={() => handlePayBill()}>
+        <CButton color="success" size="sm" className="me-2" onClick={() => handlePayBill()}>
           <MdPayment />
         </CButton>
       </Tippy>

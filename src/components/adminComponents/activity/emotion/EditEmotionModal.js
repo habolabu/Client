@@ -86,7 +86,7 @@ const EditEmotionModal = ({ emotionId, submitEditEmotionChange }) => {
         </div>
       </div>
       <Tippy content="Sửa cảm xúc">
-        <CButton color="warning" size="sm" className="ms-2" onClick={() => setVisibleEditEmotion(!visibleEditEmotion)}>
+        <CButton color="warning" size="sm" className="me-2" onClick={() => setVisibleEditEmotion(!visibleEditEmotion)}>
           <MdEdit />
         </CButton>
       </Tippy>

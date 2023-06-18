@@ -103,7 +103,7 @@ const AddRoomModal = ({ apartmentId, submitAddRoomChange }) => {
         <CButton
           color="success"
           size="sm"
-          className="ms-2"
+          className="me-2"
           onClick={() => {
             setVisibleAddRoom(!visibleAddRoom);
           }}

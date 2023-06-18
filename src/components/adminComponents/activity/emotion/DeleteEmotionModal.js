@@ -35,7 +35,7 @@ const DeleteEmotionModal = ({ emotionId, submitEmotionChange }) => {
         <CButton
           color="danger"
           size="sm"
-          className="ms-2"
+          className="me-2"
           onClick={() => setVisibleDeleteEmotion(!visibleDeleteEmotion)}
         >
           <MdDeleteForever />

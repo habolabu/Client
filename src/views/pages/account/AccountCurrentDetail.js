@@ -43,7 +43,7 @@ const AccountCurrentDetail = () => {
   }, []);
 
   return (
-    <Helmet title="Thông tin tài khoản" role="Admin">
+    <Helmet title="Thông tin tài khoản">
       {userInfo ? (
         <CContainer>
           <CRow className="align-items-center justify-content-center">
@@ -183,8 +183,8 @@ const AccountCurrentDetail = () => {
         </CContainer>
       ) : (
         <SkeletonTheme color="#202020" highlightColor="#ccc">
-          <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-          <Skeleton count={5} />
+          <p className="text-danger fw-bold">Không có thông tin !!!</p>
+          <Skeleton count={3} />
         </SkeletonTheme>
       )}
     </Helmet>

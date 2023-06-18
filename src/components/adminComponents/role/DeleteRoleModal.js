@@ -33,7 +33,7 @@ const DeleteRoleModal = ({ roleId, submitDeleteRoleChange }) => {
   return (
     <>
       <Tippy content="Xoá vai trò">
-        <CButton color="danger" size="sm" className="ms-2" onClick={() => setVisibleDeleteRole(!visibleDeleteRole)}>
+        <CButton color="danger" size="sm" className="me-2" onClick={() => setVisibleDeleteRole(!visibleDeleteRole)}>
           <MdDeleteForever />
         </CButton>
       </Tippy>

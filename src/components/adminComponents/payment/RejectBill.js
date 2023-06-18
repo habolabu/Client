@@ -34,7 +34,7 @@ const RejectBill = ({ billId, submitChange }) => {
   return (
     <>
       <Tippy content="Từ chối hoá đơn">
-        <CButton color="danger" size="sm" className="ms-2" onClick={() => handleRejectBill()}>
+        <CButton color="danger" size="sm" className="me-2" onClick={() => handleRejectBill()}>
           <MdDeleteForever />
         </CButton>
       </Tippy>

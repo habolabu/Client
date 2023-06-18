@@ -38,7 +38,7 @@ const DeleteAvatar = ({ avatarId, submitDeleteAvatarChange }) => {
   return (
     <>
       <Tippy content="Xoá ảnh">
-        <CButton color="danger" size="sm" className="ms-2" onClick={() => handleDeleteAvatar()}>
+        <CButton color="danger" size="sm" className="me-2" onClick={() => handleDeleteAvatar()}>
           <MdDeleteForever />
         </CButton>
       </Tippy>

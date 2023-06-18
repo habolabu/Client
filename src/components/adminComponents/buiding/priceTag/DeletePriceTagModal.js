@@ -36,7 +36,7 @@ const DeletePriceTagModal = ({ slug, submitDeletePriceTagChange }) => {
         <CButton
           color="danger"
           size="sm"
-          className="ms-2"
+          className="me-2"
           onClick={() => setVisibleDeletePriceTag(!visibleDeletePriceTag)}
         >
           <MdDeleteForever />

@@ -37,7 +37,7 @@ const UpdateAvatar = ({ avatarId }) => {
   return (
     <>
       <Tippy content="Cập nhật avatar">
-        <CButton color="primary" size="sm" className="ms-2" onClick={() => handleChooseAvatar()}>
+        <CButton color="primary" size="sm" className="me-2" onClick={() => handleChooseAvatar()}>
           <BsFillCheckCircleFill />
         </CButton>
       </Tippy>

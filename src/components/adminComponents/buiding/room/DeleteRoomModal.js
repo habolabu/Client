@@ -32,7 +32,7 @@ const DeleteRoomModal = ({ slug, submitDeleteRoomChange }) => {
   return (
     <>
       <Tippy content="Xoá phòng">
-        <CButton color="danger" size="sm" className="ms-2" onClick={() => setVisibleDeleteRoom(!visibleDeleteRoom)}>
+        <CButton color="danger" size="sm" className="me-2" onClick={() => setVisibleDeleteRoom(!visibleDeleteRoom)}>
           <MdDeleteForever />
         </CButton>
       </Tippy>

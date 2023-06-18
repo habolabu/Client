@@ -101,7 +101,7 @@ const EditRoomModal = ({ submitEditRoomChange, ...rest }) => {
   return (
     <>
       <Tippy content="Sửa thông tin">
-        <CButton color="warning" size="sm" className="ms-2" onClick={() => setVisibleEditRoom(!visibleEditRoom)}>
+        <CButton color="warning" size="sm" className="me-2" onClick={() => setVisibleEditRoom(!visibleEditRoom)}>
           <FaEdit />
         </CButton>
       </Tippy>

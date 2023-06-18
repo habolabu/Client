@@ -47,7 +47,7 @@ const AccountDetail = () => {
   }, [url]);
 
   return (
-    <Helmet title="Thông tin tài khoản" role="Admin">
+    <Helmet title="Thông tin tài khoản">
       {userInfo ? (
         <CContainer>
           <CRow className="align-items-center justify-content-center">
@@ -182,18 +182,16 @@ const AccountDetail = () => {
             <Avatar userId={url.userId} />
             {/* emergency */}
             <Emergency userId={url.userId} />
-          </CRow>
-          <CRow>
             {/* avatar */}
-            <ParkingDetail userId={url.userId} />
+            {/* <ParkingDetail userId={url.userId} /> */}
             {/* emergency */}
-            <RoomDetail userId={url.userId} />
+            {/* <RoomDetail userId={url.userId} /> */}
           </CRow>
         </CContainer>
       ) : (
         <SkeletonTheme color="#202020" highlightColor="#ccc">
-          <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-          <Skeleton count={5} />
+          <p className="text-danger fw-bold">Không có thông tin !!!</p>
+          <Skeleton count={3} />
         </SkeletonTheme>
       )}
     </Helmet>

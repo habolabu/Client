@@ -88,7 +88,7 @@ const AddEmotionModal = ({ submitAddEmotionChange }) => {
         variant="contained"
         startIcon={<AddIcon />}
         size="small"
-        className="ms-2"
+        className="me-2"
         onClick={() => setVisibleAddEmotion(!visibleAddEmotion)}
       >
         Thêm cảm xúc

@@ -134,7 +134,7 @@ const EditFeedbackModal = ({ feedbackId, slug, submitEditFeedBackChange }) => {
         color="info"
         endIcon={<MdEdit />}
         size="small"
-        className="ms-2"
+        className="me-2 mb-1"
         onClick={() => setVisibleEditFeedBackType(!visibleEditFeedBackType)}
       >
         Sửa

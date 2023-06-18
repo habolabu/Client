@@ -82,7 +82,7 @@ const PriceTag = () => {
     setCurrentPage(data.selected + 1);
   };
   return (
-    <Helmet title="Quản lý giá cả" role="Admin">
+    <Helmet title="Quản lý giá cả">
       <CRow className="align-items-center justify-content-center">
         <CCol md={8} xs={12}>
           <CCard className="mb-4">
@@ -94,33 +94,27 @@ const PriceTag = () => {
             <CCardBody>
               <CRow className="mb-3">
                 <CCol md={6} sm={12}>
-                  <CFormLabel htmlFor="searchName" className="col-sm-12 col-form-label">
-                    🔍 Tìm kiếm theo tên
-                  </CFormLabel>
                   <CFormInput
                     type="text"
+                    floatingLabel="🔍 Tìm kiếm theo tên"
                     id="searchName"
                     placeholder="Nhập tên..."
                     onChange={(e) => setNamePriceTag(e.target.value)}
                   />
                 </CCol>
                 <CCol md={3} sm={12}>
-                  <CFormLabel htmlFor="searchBeginPricePerDay" className="col-sm-12 col-form-label">
-                    🔍 Giá (bắt đầu)
-                  </CFormLabel>
                   <CFormInput
                     type="text"
+                    floatingLabel="🔍 Giá (bắt đầu)"
                     id="searchBeginPricePerDay"
                     placeholder="Nhập giá bắt đầu..."
                     onChange={(e) => setBeginPricePerDay(e.target.value)}
                   />
                 </CCol>
                 <CCol md={3} sm={12}>
-                  <CFormLabel htmlFor="searchEndPricePerDay" className="col-sm-12 col-form-label">
-                    🔍 Giá (kết thúc)
-                  </CFormLabel>
                   <CFormInput
                     type="text"
+                    floatingLabel=" 🔍 Giá (kết thúc)"
                     id="searchEndPricePerDay"
                     placeholder="Nhập giá kết thúc..."
                     onChange={(e) => setEndPricePerDay(e.target.value)}
@@ -167,7 +161,7 @@ const PriceTag = () => {
                 </CTable>
               ) : (
                 <SkeletonTheme color="#202020" highlightColor="#ccc">
-                  <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
+                  <p className="text-danger fw-bold">Không có thông tin !!!</p>
                   <Skeleton count={10} />
                 </SkeletonTheme>
               )}

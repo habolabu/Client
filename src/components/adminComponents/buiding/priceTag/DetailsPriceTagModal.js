@@ -54,7 +54,12 @@ const DetailsPriceTagModal = ({ slug }) => {
   return (
     <>
       <Tippy content="Xem chi tiết">
-        <CButton size="sm" color="info" onClick={() => setVisibleDetailsPriceTag(!visibleDetailsPriceTag)}>
+        <CButton
+          size="sm"
+          color="info"
+          className="me-2"
+          onClick={() => setVisibleDetailsPriceTag(!visibleDetailsPriceTag)}
+        >
           <BiSearchAlt />
         </CButton>
       </Tippy>

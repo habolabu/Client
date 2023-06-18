@@ -99,7 +99,7 @@ const EditParkingSpaceModal = ({ parkingId, submitEditParkingSpaceChange, ...res
         <CButton
           color="warning"
           size="sm"
-          className="ms-2"
+          className="me-2"
           onClick={() => setVisibleEditParkingSpace(!visibleEditParkingSpace)}
         >
           <FaEdit />

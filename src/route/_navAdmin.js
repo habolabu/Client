@@ -37,7 +37,7 @@ const _navAdmin = [
   },
   {
     component: CNavGroup,
-    name: 'Quản lý Chung cư',
+    name: 'Cơ sở vật chất',
     icon: <CIcon icon={cilLibraryBuilding} customClassName="nav-icon" />,
     permissions: [PermissionDirection.VIEW_AREA, PermissionDirection.VIEW_PARKING, PermissionDirection.VIEW_PRICE_TAG],
     items: [
@@ -57,7 +57,7 @@ const _navAdmin = [
       },
       {
         component: CNavItem,
-        name: 'Quản lý giá cả',
+        name: 'Giá cả',
         to: '/habolabu/quan-ly-gia-ca',
         icon: <CIcon icon={cilDollar} customClassName="nav-icon" />,
         permissions: [PermissionDirection.VIEW_PRICE_TAG],
@@ -66,20 +66,20 @@ const _navAdmin = [
   },
   {
     component: CNavItem,
-    name: 'Quản lý người dùng',
+    name: 'Người dùng',
     to: '/habolabu/quan-ly-nguoi-dung',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
     permissions: [PermissionDirection.VIEW_USER],
   },
   {
     component: CNavGroup,
-    name: 'Quản lý hoá đơn',
+    name: 'Hoá đơn',
     icon: <CIcon icon={cilCart} customClassName="nav-icon" />,
     permissions: [],
     items: [
       {
         component: CNavItem,
-        name: 'Quản lý hoá đơn',
+        name: 'Danh sách hoá đơn',
         to: '/habolabu/quan-ly-hoa-don',
         icon: <CIcon icon={cilCart} customClassName="nav-icon" />,
         permissions: [],
@@ -95,32 +95,24 @@ const _navAdmin = [
   },
   {
     component: CNavGroup,
-    name: 'Quản lý hoạt động',
+    name: 'Hoạt động',
     icon: <CIcon icon={cilListRich} customClassName="nav-icon" />,
     permissions: [],
     items: [
       {
         component: CNavItem,
-        name: 'Quản lý bài viết',
+        name: 'Bài viết',
         to: '/habolabu/bai-viet',
         icon: <CIcon icon={cilBookmark} customClassName="nav-icon" />,
         permissions: [],
       },
       {
         component: CNavItem,
-        name: 'Quản lý cảm xúc',
+        name: 'Cảm xúc',
         to: '/habolabu/quan-ly-cam-xuc',
         icon: <CIcon icon={cilMoodGood} customClassName="nav-icon" />,
         permissions: [PermissionDirection.VIEW_EMOTION],
       },
-    ],
-  },
-  {
-    component: CNavGroup,
-    name: 'Quản lý phản hồi',
-    icon: <CIcon icon={cilFeaturedPlaylist} customClassName="nav-icon" />,
-    permissions: [],
-    items: [
       {
         component: CNavItem,
         name: 'Loại phản hồi',
@@ -139,7 +131,7 @@ const _navAdmin = [
   },
   {
     component: CNavGroup,
-    name: 'Quản lý tài khoản',
+    name: 'Tài khoản',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     permissions: [],
     items: [
@@ -161,7 +153,7 @@ const _navAdmin = [
   },
   {
     component: CNavGroup,
-    name: 'Quản lý quyền',
+    name: 'Bảo mật',
     icon: <CIcon icon={cilLockLocked} customClassName="nav-icon" />,
     permissions: [PermissionDirection.VIEW_ROLE, PermissionDirection.VIEW_PERMISSION],
     items: [
@@ -174,7 +166,7 @@ const _navAdmin = [
       },
       {
         component: CNavItem,
-        name: 'Danh sách vai trò',
+        name: 'Vai trò người dùng',
         to: '/habolabu/danh-sach-vai-tro',
         icon: <CIcon icon={cilList} customClassName="nav-icon" />,
         permissions: [PermissionDirection.VIEW_ROLE, PermissionDirection.VIEW_PERMISSION],

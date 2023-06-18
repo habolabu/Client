@@ -9,7 +9,6 @@ import React, { useEffect, useState } from 'react';
 import {
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CCol,
   CFormInput,
@@ -37,6 +36,7 @@ import InitBill from 'src/components/adminComponents/payment/InitBill';
 import RejectBill from 'src/components/adminComponents/payment/RejectBill';
 import Helmet from 'src/components/helmet/helmet';
 import numberWithCommas from 'src/utils/numberWithCommas';
+import { Box } from '@mui/material';
 
 const ManageBill = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -130,7 +130,7 @@ const ManageBill = () => {
   };
 
   return (
-    <Helmet title="Quản lý hoá đơn" role="Admin">
+    <Helmet title="Quản lý hoá đơn">
       <CRow>
         <CCol xs={12}>
           <CCard className="mb-4">
@@ -140,7 +140,7 @@ const ManageBill = () => {
             </CCardHeader>
             <CCardBody>
               <CRow className="mb-3">
-                <CCol md={4} sm={12}>
+                <CCol md={6} sm={12}>
                   <CFormLabel htmlFor="searchUserID" className="col-sm-12 col-form-label">
                     🔍 ID người dùng
                   </CFormLabel>
@@ -151,24 +151,8 @@ const ManageBill = () => {
                     onChange={(e) => setSearchUserID(e.target.value)}
                   />
                 </CCol>
-                <CCol md={4} sm={12}>
-                  <CFormLabel htmlFor="searchPaymentType" className="col-sm-12 col-form-label">
-                    🔍 Loại thanh toán
-                  </CFormLabel>
-                  {paymentTypeInfo ? (
-                    <CFormSelect onChange={handleChangePaymentType}>
-                      {paymentTypeInfo.map((payment) => (
-                        <option key={payment.oid} value={payment.oid}>
-                          {payment.name}
-                        </option>
-                      ))}
-                    </CFormSelect>
-                  ) : (
-                    <></>
-                  )}
-                </CCol>
 
-                <CCol md={4} sm={12}>
+                <CCol md={6} sm={12}>
                   <CFormLabel htmlFor="searchBillStatus" className="col-sm-12 col-form-label">
                     🔍 Trạng thái hoá đơn
                   </CFormLabel>
@@ -185,7 +169,7 @@ const ManageBill = () => {
                   )}
                 </CCol>
 
-                <CCol md={4} sm={12}>
+                <CCol md={6} sm={12}>
                   <CFormLabel htmlFor="searchBeginTotal" className="col-sm-12 col-form-label">
                     🔍 Tìm kiếm theo tổng tiền (bắt đầu)
                   </CFormLabel>
@@ -196,7 +180,8 @@ const ManageBill = () => {
                     onChange={(e) => setBeginTotal(e.target.value)}
                   />
                 </CCol>
-                <CCol md={4} sm={12}>
+
+                <CCol md={6} sm={12}>
                   <CFormLabel htmlFor="searchEndTotal" className="col-sm-12 col-form-label">
                     🔍 Tìm kiếm theo tổng tiền (kết thúc)
                   </CFormLabel>
@@ -208,89 +193,90 @@ const ManageBill = () => {
                   />
                 </CCol>
               </CRow>
-
-              {billStatus ? (
-                <h5 className="my-4">💴 Danh sách hoá đơn (Trạng thái: {billStatus[billStatusID - 1].name})</h5>
-              ) : null}
-
-              {billInfo.totalPage > 0 ? (
-                <CTable striped responsive hover className="text-center text-nowrap">
-                  <CTableHead>
-                    <CTableRow className="text-center">
-                      <CTableHeaderCell scope="col">Mã hoá đơn</CTableHeaderCell>
-                      <CTableHeaderCell scope="col">Mã người dùng</CTableHeaderCell>
-                      <CTableHeaderCell scope="col">Tên người thanh toán</CTableHeaderCell>
-                      <CTableHeaderCell scope="col">Trạng thái thanh toán</CTableHeaderCell>
-                      <CTableHeaderCell scope="col">Loại thanh toán</CTableHeaderCell>
-                      <CTableHeaderCell scope="col">Tổng tiền</CTableHeaderCell>
-                      <CTableHeaderCell scope="col">Thao tác</CTableHeaderCell>
-                    </CTableRow>
-                  </CTableHead>
-                  <CTableBody>
-                    {billInfo.data.map((bill) => {
-                      return (
-                        <CTableRow key={bill.id} className="align-middle">
-                          <CTableDataCell>{bill.id}</CTableDataCell>
-                          <CTableDataCell>{bill.user.id}</CTableDataCell>
-                          <CTableDataCell>{`${bill.user.lastName} ${bill.user.firstName}`}</CTableDataCell>
-                          <CTableDataCell>
-                            {bill.billStatus.id === 2 ? (
-                              <span className="text-warning">{bill.billStatus.name}</span>
-                            ) : (
-                              bill.billStatus.name
-                            )}
-                          </CTableDataCell>
-                          <CTableDataCell>{bill.paymentType.name}</CTableDataCell>
-                          <CTableDataCell>{numberWithCommas(bill.total)} vnđ</CTableDataCell>
-                          <CTableDataCell>
-                            <DetailsPaymentModal billId={bill.id} />
-                            {bill.billStatus.id === 1 ? (
-                              <>
-                                <ApproveBill billId={bill.id} submitChange={getAllBill} />
-                                <RejectBill billId={bill.id} submitChange={getAllBill} />
-                              </>
-                            ) : null}
-                          </CTableDataCell>
-                        </CTableRow>
-                      );
-                    })}
-                  </CTableBody>
-                </CTable>
-              ) : (
-                <SkeletonTheme color="#202020" highlightColor="#ccc">
-                  <p className="text-danger fw-bold">Không tìm thấy dữ liệu dữ liệu. Vui lòng thử lại sau !!!</p>
-                  <Skeleton count={5} />
-                </SkeletonTheme>
-              )}
             </CCardBody>
-            <CCardFooter>
-              {billInfo.totalPage > 1 ? (
-                <CCol xs={12}>
-                  <div className={'mt-2'}>
-                    <ReactPaginate
-                      previousLabel={'<<'}
-                      nextLabel={'>>'}
-                      breakLabel={'...'}
-                      pageCount={billInfo.totalPage}
-                      marginPagesDisplayed={2}
-                      pageRangeDisplayed={2}
-                      onPageChange={handlePageClick}
-                      containerClassName={'pagination justify-content-center'}
-                      pageClassName={'page-item'}
-                      pageLinkClassName={'page-link'}
-                      previousClassName={'page-item'}
-                      previousLinkClassName={'page-link'}
-                      nextClassName={'page-item'}
-                      nextLinkClassName={'page-link'}
-                      breakClassName={'page-item'}
-                      breakLinkClassName={'page-link'}
-                      activeClassName={'active'}
-                    />
-                  </div>
-                </CCol>
-              ) : null}
-            </CCardFooter>
           </CCard>
+
+          <Box className="box-title">
+            {billStatus ? (
+              <strong className="mt-3">Danh sách hoá đơn ({billStatus[billStatusID - 1].name})</strong>
+            ) : null}
+          </Box>
+
+          <CRow>
+            {billInfo.totalPage > 0 ? (
+              <CTable striped responsive hover className="text-center text-nowrap table-custom">
+                <CTableHead>
+                  <CTableRow className="text-center">
+                    <CTableHeaderCell scope="col">Mã hoá đơn</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Mã người dùng</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Tên người thanh toán</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Trạng thái thanh toán</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Tổng tiền</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Thao tác</CTableHeaderCell>
+                  </CTableRow>
+                </CTableHead>
+                <CTableBody>
+                  {billInfo.data.map((bill) => {
+                    return (
+                      <CTableRow key={bill.id} className="align-middle">
+                        <CTableDataCell>{bill.id}</CTableDataCell>
+                        <CTableDataCell>{bill.user.id}</CTableDataCell>
+                        <CTableDataCell>{`${bill.user.lastName} ${bill.user.firstName}`}</CTableDataCell>
+                        <CTableDataCell>
+                          {bill.billStatus.id === 2 ? (
+                            <span className="text-warning">{bill.billStatus.name}</span>
+                          ) : (
+                            bill.billStatus.name
+                          )}
+                        </CTableDataCell>
+                        <CTableDataCell>{numberWithCommas(bill.total)} vnđ</CTableDataCell>
+                        <CTableDataCell>
+                          <DetailsPaymentModal billId={bill.id} />
+                          {bill.billStatus.id === 1 ? (
+                            <>
+                              <ApproveBill billId={bill.id} submitChange={getAllBill} />
+                              <RejectBill billId={bill.id} submitChange={getAllBill} />
+                            </>
+                          ) : null}
+                        </CTableDataCell>
+                      </CTableRow>
+                    );
+                  })}
+                </CTableBody>
+              </CTable>
+            ) : (
+              <SkeletonTheme color="#202020" highlightColor="#ccc">
+                <p className="text-danger fw-bold">Không tìm thấy dữ liệu dữ liệu. Vui lòng thử lại sau !!!</p>
+                <Skeleton count={3} />
+              </SkeletonTheme>
+            )}
+          </CRow>
+
+          {billInfo.totalPage > 1 ? (
+            <CCol xs={12}>
+              <div className={'mt-2'}>
+                <ReactPaginate
+                  previousLabel={'<<'}
+                  nextLabel={'>>'}
+                  breakLabel={'...'}
+                  pageCount={billInfo.totalPage}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={2}
+                  onPageChange={handlePageClick}
+                  containerClassName={'pagination justify-content-center'}
+                  pageClassName={'page-item'}
+                  pageLinkClassName={'page-link'}
+                  previousClassName={'page-item'}
+                  previousLinkClassName={'page-link'}
+                  nextClassName={'page-item'}
+                  nextLinkClassName={'page-link'}
+                  breakClassName={'page-item'}
+                  breakLinkClassName={'page-link'}
+                  activeClassName={'active'}
+                />
+              </div>
+            </CCol>
+          ) : null}
         </CCol>
       </CRow>
     </Helmet>

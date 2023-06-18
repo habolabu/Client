@@ -36,7 +36,7 @@ const DeleteFeedbackModal = ({ slug, submitDeleteFeedBackChange }) => {
         color="error"
         endIcon={<MdDeleteForever />}
         size="small"
-        className="ms-2"
+        className="me-2"
         onClick={() => setVisibleDeleteFeedBack(!visibleDeleteFeedBack)}
       >
         Xoá
