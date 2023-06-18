@@ -86,10 +86,9 @@ const ParkingList = ({ apartmentId }) => {
   };
 
   return (
-    <CCol md={6} xs={12}>
+    <CCol xs={12}>
       {permissionLocal.isExistPermission(PermissionDirection.VIEW_PARKING) ? (
         <>
-          <h5 className="mb-3">📝 Thông tin danh sách bãi đỗ xe</h5>
           <CCard className="mb-4">
             <CCardHeader className="d-flex align-items-center justify-content-between">
               <strong>🚕 Danh sách bãi đỗ xe</strong>
@@ -99,13 +98,10 @@ const ParkingList = ({ apartmentId }) => {
             <CCardBody>
               <CRow className="mb-3">
                 <CCol sm={12}>
-                  <CFormLabel htmlFor="searchNameParking" className="col-form-label">
-                    🔍 Tìm kiếm theo tên bãi đỗ xe:
-                  </CFormLabel>
-                </CCol>
-                <CCol sm={12}>
                   <CFormInput
                     type="text"
+                    floatingLabel=" 🔍 Tìm kiếm theo tên bãi đỗ xe"
+                    className="my-2"
                     id="searchNameParking"
                     placeholder="Nhập tên bãi đỗ xe..."
                     onChange={(e) => setNameParking(e.target.value)}
@@ -132,7 +128,7 @@ const ParkingList = ({ apartmentId }) => {
                             <CTableDataCell>
                               <Link to={parking.slug}>
                                 <Tippy content="Xem chi tiết">
-                                  <CButton size="sm" color="info">
+                                  <CButton size="sm" color="info" className="me-2">
                                     <BiSearchAlt />
                                   </CButton>
                                 </Tippy>
@@ -155,8 +151,8 @@ const ParkingList = ({ apartmentId }) => {
                 </>
               ) : (
                 <SkeletonTheme color="#202020" highlightColor="#ccc">
-                  <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-                  <Skeleton count={5} />
+                  <p className="text-danger fw-bold">Không có thông tin !!!</p>
+                  <Skeleton count={3} />
                 </SkeletonTheme>
               )}
             </CCardBody>

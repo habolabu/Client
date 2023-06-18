@@ -19,7 +19,7 @@ import { BiPlusMedical } from 'react-icons/bi';
 
 const NewsFeed = () => {
   return (
-    <Helmet title="Tin tức" role="Admin">
+    <Helmet title="Tin tức">
       <CRow>
         <CCol xs={12}>
           <CCard className="mb-4">

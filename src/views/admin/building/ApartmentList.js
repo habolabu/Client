@@ -114,7 +114,7 @@ const ApartmentList = () => {
   };
 
   return (
-    <Helmet title="Danh sách chung cư" role="Admin">
+    <Helmet title="Danh sách chung cư">
       {permissionLocal.isExistPermission(PermissionDirection.VIEW_APARTMENT) ? (
         <CRow className="align-items-center justify-content-center">
           <CCol md={10} xs={12}>
@@ -127,33 +127,30 @@ const ApartmentList = () => {
               <CCardBody>
                 <CRow className="mb-3">
                   <CCol md={12} sm={12}>
-                    <CFormLabel htmlFor="searchApartmentName" className="col-sm-12 col-form-label">
-                      🔍 Tìm kiếm theo tên chung cư
-                    </CFormLabel>
                     <CFormInput
                       type="text"
+                      floatingLabel="🔍 Tìm kiếm theo tên chung cư"
+                      className="my-2"
                       id="searchApartmentName"
                       placeholder="Nhập tên chung cư..."
                       onChange={(e) => setApartmentName(e.target.value)}
                     />
                   </CCol>
                   <CCol md={6} sm={12}>
-                    <CFormLabel htmlFor="searchBeginFloorAmount" className="col-sm-12 col-form-label">
-                      🔍 Số lượng phòng (bắt đầu)
-                    </CFormLabel>
                     <CFormInput
                       type="number"
+                      floatingLabel="🔍 Số lượng phòng (bắt đầu)"
+                      className="my-2"
                       id="searchBeginFloorAmount"
                       placeholder="Nhập số bắt đầu..."
                       onChange={(e) => setBeginFloorAmount(e.target.value)}
                     />
                   </CCol>
                   <CCol md={6} sm={12}>
-                    <CFormLabel htmlFor="searchEndFloorAmount" className="col-sm-12 col-form-label">
-                      🔍 Số lượng phòng (kết thúc)
-                    </CFormLabel>
                     <CFormInput
                       type="number"
+                      floatingLabel="🔍 Số lượng phòng (kết thúc)"
+                      className="my-2"
                       id="searchEndFloorAmount"
                       placeholder="Nhập số kết thúc..."
                       onChange={(e) => setEndFloorAmount(e.target.value)}
@@ -183,7 +180,7 @@ const ApartmentList = () => {
                               <CTableDataCell>
                                 <Link to={apartment.slug}>
                                   <Tippy content="Xem chi tiết">
-                                    <CButton size="sm" color="info">
+                                    <CButton size="sm" color="info" className="me-2">
                                       <BiSearchAlt />
                                     </CButton>
                                   </Tippy>
@@ -205,8 +202,8 @@ const ApartmentList = () => {
                   </>
                 ) : (
                   <SkeletonTheme color="#202020" highlightColor="#ccc">
-                    <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-                    <Skeleton count={5} />
+                    <p className="text-danger fw-bold">Không có thông tin !!!</p>
+                    <Skeleton count={3} />
                   </SkeletonTheme>
                 )}
               </CCardBody>

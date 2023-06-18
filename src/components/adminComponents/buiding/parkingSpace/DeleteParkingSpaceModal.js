@@ -41,7 +41,7 @@ const DeleteParkingSpaceModal = ({ parkingId, parkingTypeId, submitDeleteParking
         <CButton
           color="danger"
           size="sm"
-          className="ms-2"
+          className="me-2"
           onClick={() => setVisibleDeleteParkingSpace(!visibleDeleteParkingSpace)}
         >
           <MdDeleteForever />

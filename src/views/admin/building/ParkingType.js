@@ -53,6 +53,7 @@ const ParkingType = () => {
       };
       const res = await parkingTypeServices.getParkingType(params);
       if (res && res.data) {
+        console.log(res.data);
         setParkingTypeList(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách khu vực đỗ xe ! ', {
@@ -80,7 +81,7 @@ const ParkingType = () => {
   };
 
   return (
-    <Helmet title="Quản lý đỗ xe" role="Admin">
+    <Helmet title="Quản lý đỗ xe">
       {permissionLocal.isExistPermission(PermissionDirection.VIEW_PARKING_TYPE) ? (
         <CRow className="align-items-center justify-content-center">
           <CCol md={8} xs={12}>
@@ -92,15 +93,11 @@ const ParkingType = () => {
               </CCardHeader>
               <CCardBody>
                 <CRow className="mb-3">
-                  <CCol md={5} sm={12}>
-                    <CFormLabel htmlFor="searchNameParkingType" className="col-form-label">
-                      🔍 Tìm kiếm theo tên khu vực đỗ xe:
-                    </CFormLabel>
-                  </CCol>
                   <CCol md={7} sm={12}>
                     <CFormInput
                       type="text"
                       id="searchNameParkingType"
+                      floatingLabel=" 🔍 Tìm kiếm theo tên khu vực đỗ xe"
                       placeholder="Nhập tên bãi đỗ xe..."
                       onChange={(e) => setNameParkingType(e.target.value)}
                     />
@@ -145,8 +142,8 @@ const ParkingType = () => {
                   </>
                 ) : (
                   <SkeletonTheme color="#202020" highlightColor="#ccc">
-                    <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-                    <Skeleton count={5} />
+                    <p className="text-danger fw-bold">Không có thông tin !!!</p>
+                    <Skeleton count={3} />
                   </SkeletonTheme>
                 )}
               </CCardBody>

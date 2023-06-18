@@ -72,7 +72,7 @@ const ManageEmotion = () => {
   };
 
   return (
-    <Helmet title="Quản lý cảm xúc" role="Admin">
+    <Helmet title="Quản lý cảm xúc">
       <CContainer>
         {/* Action */}
         <CRow>
@@ -121,7 +121,7 @@ const ManageEmotion = () => {
                   </CRow>
                 ) : (
                   <CRow>
-                    <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
+                    <p className="text-danger fw-bold">Không có thông tin !!!</p>
                     <CCol sm={12}>
                       <Skeleton />
                       <Skeleton />

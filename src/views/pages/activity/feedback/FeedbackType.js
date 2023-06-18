@@ -76,7 +76,7 @@ const FeedbackType = () => {
   };
 
   return (
-    <Helmet title="Loại phản hồi" role="Admin">
+    <Helmet title="Loại phản hồi">
       <CContainer>
         {/* Action */}
         <CRow>
@@ -152,7 +152,7 @@ const FeedbackType = () => {
                   </CRow>
                 ) : (
                   <CRow>
-                    <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
+                    <p className="text-danger fw-bold">Không có thông tin !!!</p>
                     <CCol sm={12}>
                       <Skeleton />
                       <Skeleton />

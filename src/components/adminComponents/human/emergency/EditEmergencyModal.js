@@ -101,7 +101,7 @@ const EditEmergencyModal = ({ emergencyId, submitEditEmergencyChange }) => {
         <CButton
           size="sm"
           color="warning"
-          className="ms-2"
+          className="me-2"
           onClick={() => {
             setVisibleEditEmergency(!visibleEditEmergency);
           }}

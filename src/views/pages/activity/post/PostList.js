@@ -90,7 +90,7 @@ const PostList = () => {
   };
 
   return (
-    <Helmet title="Quản lý bài viết" role="Admin">
+    <Helmet title="Quản lý bài viết">
       <CContainer>
         {/* Action */}
         <CRow>
@@ -117,10 +117,11 @@ const PostList = () => {
                       onChange={(e) => setPostTitle(e.target.value)}
                     />
                   </CCol>
-                  <CCardText className="mt-4">Tìm kiếm theo ngày</CCardText>
+                  <CCardText className="mt-4">🔍 Tìm kiếm theo ngày</CCardText>
                   <CCol md={6} sm={12}>
                     <CFormInput
                       type="date"
+                      className="my-1"
                       id="searchBeginDate"
                       floatingLabel="🔍 Ngày bắt đầu"
                       onChange={(e) => setSearchBeginDate(e.target.value)}
@@ -129,6 +130,7 @@ const PostList = () => {
                   <CCol md={6} sm={12}>
                     <CFormInput
                       type="date"
+                      className="my-1"
                       id="searchEndDate"
                       floatingLabel="🔍 Ngày kết thúc"
                       onChange={(e) => setSearchEndDate(e.target.value)}
@@ -144,7 +146,7 @@ const PostList = () => {
           <CRow xs={{ gutter: 3 }}>
             {postList.data.map((postItem) => {
               return (
-                <CCol xs={12} md={6} lg={4} key={postItem.id}>
+                <CCol xs={12} key={postItem.id}>
                   <Card>
                     <CardHeader
                       avatar={
@@ -203,7 +205,7 @@ const PostList = () => {
           </CRow>
         ) : (
           <CRow>
-            <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
+            <p className="text-danger fw-bold">Không có thông tin !!!</p>
             <CCol sm={4}>
               <Skeleton variant="rectangular" height={118} />
               <Skeleton />

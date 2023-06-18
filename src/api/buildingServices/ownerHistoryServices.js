@@ -6,9 +6,9 @@
 import axiosClient from '../axios/axiosClient';
 
 const ownerHistoryServices = {
-  assignUserToRoom: (roomId, ownerId) => {
+  assignUserToRoom: (params) => {
     const url = '/building/command/api/owner-history';
-    return axiosClient.post(url, { roomId: roomId, userID: ownerId });
+    return axiosClient.post(url, { params });
   },
   unAssignUserToRoom: (idRecord) => {
     const url = '/building/command/api/owner-history';

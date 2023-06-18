@@ -30,6 +30,7 @@ import AddEmergencyModal from 'src/components/adminComponents/human/emergency/Ad
 import EditEmergencyModal from 'src/components/adminComponents/human/emergency/EditEmergencyModal';
 import DetailsEmergencyModal from 'src/components/adminComponents/human/emergency/DetailsEmergencyModal';
 import DeleteEmergencyModal from 'src/components/adminComponents/human/emergency/DeleteEmergencyModal';
+import { Box } from '@mui/material';
 
 const EmergencyCurrentUser = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -64,85 +65,78 @@ const EmergencyCurrentUser = () => {
   };
 
   return (
-    <CCol md={7} xs={12}>
-      <CCard className="mb-4">
-        <CCardHeader className="d-flex align-items-center justify-content-between">
-          <strong>📃 Danh sách liên hệ khẩn cấp</strong>
-          {/* update emergency */}
-          <AddEmergencyModal submitAddEmergencyChange={getEmergencyUser} />
-        </CCardHeader>
-        <CCardBody>
-          {emergencyInfo.totalPage > 0 ? (
-            <CTable striped responsive hover className="text-center text-nowrap">
-              <CTableHead>
-                <CTableRow className="text-center">
-                  <CTableHeaderCell scope="col">ID</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Họ và tên</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Số điện thoại</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Địa chỉ</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Thao tác</CTableHeaderCell>
+    <>
+      <Box className="box-title">
+        <strong>Danh sách liên hệ khẩn cấp</strong>
+        {/* update emergency */}
+        <AddEmergencyModal submitAddEmergencyChange={getEmergencyUser} />
+      </Box>
+
+      {emergencyInfo.totalPage > 0 ? (
+        <CTable striped responsive hover className="text-center text-nowrap table-custom">
+          <CTableHead>
+            <CTableRow className="text-center">
+              <CTableHeaderCell scope="col">ID</CTableHeaderCell>
+              <CTableHeaderCell scope="col">Họ và tên</CTableHeaderCell>
+              <CTableHeaderCell scope="col">Số điện thoại</CTableHeaderCell>
+              <CTableHeaderCell scope="col">Địa chỉ</CTableHeaderCell>
+              <CTableHeaderCell scope="col">Thao tác</CTableHeaderCell>
+            </CTableRow>
+          </CTableHead>
+          <CTableBody>
+            {emergencyInfo.data.map((emergency) => {
+              return (
+                <CTableRow key={emergency.id} className="align-middle">
+                  <CTableDataCell>{emergency.id}</CTableDataCell>
+                  <CTableDataCell>{emergency.name}</CTableDataCell>
+                  <CTableDataCell>{emergency.phoneNumber}</CTableDataCell>
+                  <CTableDataCell>{emergency.address}</CTableDataCell>
+                  <CTableDataCell>
+                    {/* details avatar modal */}
+                    <DetailsEmergencyModal emergencyId={emergency.id} />
+                    {/* update avatar */}
+                    <DeleteEmergencyModal emergencyId={emergency.id} submitDeleteEmergencyChange={getEmergencyUser} />
+                    {/* update avatar */}
+                    <EditEmergencyModal emergencyId={emergency.id} submitEditEmergencyChange={getEmergencyUser} />
+                  </CTableDataCell>
                 </CTableRow>
-              </CTableHead>
-              <CTableBody>
-                {emergencyInfo.data.map((emergency) => {
-                  return (
-                    <CTableRow key={emergency.id} className="align-middle">
-                      <CTableDataCell>{emergency.id}</CTableDataCell>
-                      <CTableDataCell>{emergency.name}</CTableDataCell>
-                      <CTableDataCell>{emergency.phoneNumber}</CTableDataCell>
-                      <CTableDataCell>{emergency.address}</CTableDataCell>
-                      <CTableDataCell>
-                        {/* details avatar modal */}
-                        <DetailsEmergencyModal emergencyId={emergency.id} />
-                        {/* update avatar */}
-                        <DeleteEmergencyModal
-                          emergencyId={emergency.id}
-                          submitDeleteEmergencyChange={getEmergencyUser}
-                        />
-                        {/* update avatar */}
-                        <EditEmergencyModal emergencyId={emergency.id} submitEditEmergencyChange={getEmergencyUser} />
-                      </CTableDataCell>
-                    </CTableRow>
-                  );
-                })}
-              </CTableBody>
-            </CTable>
-          ) : (
-            <SkeletonTheme color="#202020" highlightColor="#ccc">
-              <p>Không tìm thấy dữ liệu dữ liệu...</p>
-              <Skeleton count={5} />
-            </SkeletonTheme>
-          )}
-        </CCardBody>
-        <CCardFooter>
-          {emergencyInfo.totalPage > 1 ? (
-            <CCol xs={12}>
-              <div className={'mt-2'}>
-                <ReactPaginate
-                  previousLabel={'<<'}
-                  nextLabel={'>>'}
-                  breakLabel={'...'}
-                  pageCount={emergencyInfo.totalPage}
-                  marginPagesDisplayed={2}
-                  pageRangeDisplayed={2}
-                  onPageChange={handlePageClick}
-                  containerClassName={'pagination justify-content-center'}
-                  pageClassName={'page-item'}
-                  pageLinkClassName={'page-link'}
-                  previousClassName={'page-item'}
-                  previousLinkClassName={'page-link'}
-                  nextClassName={'page-item'}
-                  nextLinkClassName={'page-link'}
-                  breakClassName={'page-item'}
-                  breakLinkClassName={'page-link'}
-                  activeClassName={'active'}
-                />
-              </div>
-            </CCol>
-          ) : null}
-        </CCardFooter>
-      </CCard>
-    </CCol>
+              );
+            })}
+          </CTableBody>
+        </CTable>
+      ) : (
+        <SkeletonTheme color="#202020" highlightColor="#ccc">
+          <p>Không tìm thấy dữ liệu dữ liệu...</p>
+          <Skeleton count={3} />
+        </SkeletonTheme>
+      )}
+
+      {emergencyInfo.totalPage > 1 ? (
+        <CCol xs={12}>
+          <div className={'mt-2'}>
+            <ReactPaginate
+              previousLabel={'<<'}
+              nextLabel={'>>'}
+              breakLabel={'...'}
+              pageCount={emergencyInfo.totalPage}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={2}
+              onPageChange={handlePageClick}
+              containerClassName={'pagination justify-content-center'}
+              pageClassName={'page-item'}
+              pageLinkClassName={'page-link'}
+              previousClassName={'page-item'}
+              previousLinkClassName={'page-link'}
+              nextClassName={'page-item'}
+              nextLinkClassName={'page-link'}
+              breakClassName={'page-item'}
+              breakLinkClassName={'page-link'}
+              activeClassName={'active'}
+            />
+          </div>
+        </CCol>
+      ) : null}
+    </>
   );
 };
 

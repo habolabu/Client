@@ -113,7 +113,7 @@ const EditParkingTypeModal = ({ slug, submitEditParkingTypeChange }) => {
         <CButton
           color="warning"
           size="sm"
-          className="ms-2"
+          className="me-2"
           onClick={() => setVisibleEditParkingType(!visibleEditParkingType)}
         >
           <FaEdit />

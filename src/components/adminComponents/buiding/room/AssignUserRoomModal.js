@@ -79,7 +79,7 @@ const AssignUserRoomModal = ({ roomId, submitAssignUserRoomChange }) => {
   return (
     <>
       <Tippy content="Thêm chủ phòng">
-        <CButton color="success" size="sm" className="ms-2" onClick={() => setVisibleDeleteRoom(!visibleDeleteRoom)}>
+        <CButton color="success" size="sm" className="me-2" onClick={() => setVisibleDeleteRoom(!visibleDeleteRoom)}>
           <BiPlusMedical />
         </CButton>
       </Tippy>

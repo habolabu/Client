@@ -32,7 +32,7 @@ const DeleteUserModal = ({ userId, submitDeleteUserChange }) => {
   return (
     <>
       <Tippy content="Xoá tài khoản">
-        <CButton color="danger" size="sm" className="ms-2" onClick={() => setVisibleDeleteUser(!visibleDeleteUser)}>
+        <CButton color="danger" size="sm" className="me-2" onClick={() => setVisibleDeleteUser(!visibleDeleteUser)}>
           <MdDeleteForever />
         </CButton>
       </Tippy>

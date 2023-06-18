@@ -110,7 +110,7 @@ const PostUpdate = () => {
   };
 
   return (
-    <Helmet title="Chi tiết bài viết" role="Admin">
+    <Helmet title="Chi tiết bài viết">
       {postInfo != null ? (
         <CCard className="mb-4">
           <CCardHeader className="d-flex align-items-center justify-content-between">
@@ -164,7 +164,7 @@ const PostUpdate = () => {
         </CCard>
       ) : (
         <CRow>
-          <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
+          <p className="text-danger fw-bold">Không có thông tin !!!</p>
           <CCol sm={4}>
             <Skeleton variant="rectangular" height={118} />
             <Skeleton />

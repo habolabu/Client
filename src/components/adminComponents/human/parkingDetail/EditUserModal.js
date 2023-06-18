@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 // /**
 //  * Copyright 2023 @ by Open University. All rights reserved
 //  * Author: Thành Nam Nguyễn (DH19IT03)
@@ -9,7 +10,7 @@ import React, { useEffect, useState } from 'react';
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { registerLocale, setDefaultLocale } from 'react-datepicker';
+import { registerLocale } from 'react-datepicker';
 import vi from 'date-fns/locale/vi';
 
 import { useFormik } from 'formik';
@@ -159,7 +160,7 @@ const EditUserModal = ({ userId, submitEditUserChange }) => {
   return (
     <>
       <Tippy content="Sửa thông tin">
-        <CButton color="warning" size="sm" className="ms-2" onClick={() => setVisibleAddUser(!visibleAddUser)}>
+        <CButton color="warning" size="sm" className="me-2" onClick={() => setVisibleAddUser(!visibleAddUser)}>
           <FaEdit />
         </CButton>
       </Tippy>

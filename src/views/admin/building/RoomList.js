@@ -93,7 +93,6 @@ const RoomList = ({ apartmentId }) => {
     <CCol xs={12}>
       {permissionLocal.isExistPermission(PermissionDirection.VIEW_ROOM) ? (
         <>
-          <h5 className="mb-3">📝 Thông tin danh sách các phòng</h5>
           <CCard className="mb-4">
             <CCardHeader className="d-flex align-items-center justify-content-between">
               <strong>🏠 Danh sách các phòng</strong>
@@ -103,33 +102,30 @@ const RoomList = ({ apartmentId }) => {
             <CCardBody>
               <CRow className="mb-3 justify-content-center">
                 <CCol md={12} sm={12}>
-                  <CFormLabel htmlFor="searchNameRoom" className="col-sm-12 col-form-label">
-                    🔍 Tìm kiếm theo tên phòng
-                  </CFormLabel>
                   <CFormInput
                     type="text"
+                    floatingLabel="🔍 Tìm kiếm theo tên phòng"
+                    className="my-2"
                     id="searchNameRoom"
                     placeholder="Nhập tên phòng ..."
                     onChange={(e) => setNameRoom(e.target.value)}
                   />
                 </CCol>
                 <CCol md={6} sm={12}>
-                  <CFormLabel htmlFor="searchBFloorNumber" className="col-sm-12 col-form-label">
-                    🔍 Số tầng (bắt đầu)
-                  </CFormLabel>
                   <CFormInput
                     type="text"
+                    floatingLabel="🔍 Số tầng (bắt đầu)"
+                    className="my-2"
                     id="searchBFloorNumber"
                     placeholder="Nhập số bắt đầu..."
                     onChange={(e) => setBeginFloorNumber(e.target.value)}
                   />
                 </CCol>
                 <CCol md={6} sm={12}>
-                  <CFormLabel htmlFor="searchEFloorNumber" className="col-sm-12 col-form-label">
-                    🔍 Số tầng (kết thúc)
-                  </CFormLabel>
                   <CFormInput
                     type="text"
+                    floatingLabel="🔍 Số tầng (kết thúc)"
+                    className="my-2"
                     id="searchEFloorNumber"
                     placeholder="Nhập số kết thúc..."
                     onChange={(e) => setEndFloorNumber(e.target.value)}
@@ -157,7 +153,7 @@ const RoomList = ({ apartmentId }) => {
                             <CTableHeaderCell scope="row">{room.id}</CTableHeaderCell>
                             <CTableDataCell>{room.name}</CTableDataCell>
                             <CTableDataCell>Tầng {room.floorNumber}</CTableDataCell>
-                            {room.owmer !== null ? (
+                            {room.owner !== null ? (
                               <>
                                 <CTableDataCell>Đã có chủ</CTableDataCell>
                                 <CTableDataCell>
@@ -199,8 +195,8 @@ const RoomList = ({ apartmentId }) => {
                 </>
               ) : (
                 <SkeletonTheme color="#202020" highlightColor="#ccc">
-                  <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-                  <Skeleton count={5} />
+                  <p className="text-danger fw-bold">Không có thông tin !!!</p>
+                  <Skeleton count={3} />
                 </SkeletonTheme>
               )}
             </CCardBody>

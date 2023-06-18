@@ -159,7 +159,7 @@ const EditUserModal = ({ userId, submitEditUserChange }) => {
   return (
     <>
       <Tippy content="Sửa thông tin">
-        <CButton color="warning" size="sm" className="ms-2" onClick={() => setVisibleAddUser(!visibleAddUser)}>
+        <CButton color="warning" size="sm" className="me-2" onClick={() => setVisibleAddUser(!visibleAddUser)}>
           <FaEdit />
         </CButton>
       </Tippy>

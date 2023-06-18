@@ -46,7 +46,7 @@ const Apartment = () => {
   }, [url.apartmentDetails]);
 
   return (
-    <Helmet title={apartmentInfo ? apartmentInfo.name : 'Căn hộ'} role="Admin">
+    <Helmet title={apartmentInfo ? apartmentInfo.name : 'Căn hộ'}>
       {permissionLocal.isExistPermission(PermissionDirection.VIEW_APARTMENT) ? (
         <>
           {apartmentInfo ? (
@@ -79,14 +79,17 @@ const Apartment = () => {
               <CRow>
                 {/* room list */}
                 <RoomList apartmentId={apartmentInfo.id} />
+              </CRow>
+              <hr />
+              <CRow>
                 {/* parking list */}
                 <ParkingList apartmentId={apartmentInfo.id} />
               </CRow>
             </>
           ) : (
             <SkeletonTheme color="#202020" highlightColor="#ccc">
-              <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-              <Skeleton count={5} />
+              <p className="text-danger fw-bold">Không có thông tin !!!</p>
+              <Skeleton count={3} />
             </SkeletonTheme>
           )}
         </>

@@ -34,7 +34,7 @@ const DeleteUserRoomModal = ({ idRecord, submitDeleteUserRoomChange }) => {
         <CButton
           color="secondary"
           size="sm"
-          className="ms-2"
+          className="me-2"
           onClick={() => setVisibleDeleteUserRoom(!visibleDeleteRoom)}
         >
           <MdDeleteForever />

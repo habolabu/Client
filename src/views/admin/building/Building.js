@@ -18,7 +18,6 @@ import {
   CAccordionHeader,
   CAccordionItem,
   CFormInput,
-  CFormLabel,
 } from '@coreui/react';
 
 import Helmet from 'src/components/helmet/helmet';
@@ -81,7 +80,7 @@ const Building = () => {
   };
 
   return (
-    <Helmet title="Quản lý khu vực" role="Admin">
+    <Helmet title="Quản lý khu vực">
       {permissionLocal.isExistPermission(PermissionDirection.VIEW_AREA) ? (
         <CRow>
           <CCol xs={12}>
@@ -94,22 +93,20 @@ const Building = () => {
               <CCardBody>
                 <CRow className="mb-3">
                   <CCol md={6} sm={12}>
-                    <CFormLabel htmlFor="searchName" className="col-sm-12 col-form-label">
-                      🔍 Tìm kiếm theo tên
-                    </CFormLabel>
                     <CFormInput
                       type="text"
+                      floatingLabel="🔍 Tìm kiếm theo tên"
+                      className="my-2"
                       id="searchName"
                       placeholder="Nhập tên..."
                       onChange={(e) => setName(e.target.value)}
                     />
                   </CCol>
                   <CCol md={6} sm={12}>
-                    <CFormLabel htmlFor="searchAddress" className="col-sm-12 col-form-label">
-                      🔍 Tìm kiếm theo địa chỉ
-                    </CFormLabel>
                     <CFormInput
                       type="text"
+                      floatingLabel="🔍 Tìm kiếm theo địa chỉ"
+                      className="my-2"
                       id="searchAddress"
                       placeholder="Nhập địa chỉ..."
                       onChange={(e) => setAddress(e.target.value)}
@@ -160,7 +157,7 @@ const Building = () => {
                   </>
                 ) : (
                   <SkeletonTheme color="#202020" highlightColor="#ccc">
-                    <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
+                    <p className="text-danger fw-bold">Không có thông tin !!!</p>
                     <Skeleton count={10} />
                   </SkeletonTheme>
                 )}

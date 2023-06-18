@@ -8,9 +8,8 @@ import React, { useState } from 'react';
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from '@coreui/react';
 import { toast } from 'react-toastify';
 import { MdDeleteForever } from 'react-icons/md';
-import Tippy from '@tippyjs/react';
 import postServices from 'src/api/activityServices/postServices';
-import { Button, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 
 const DeletePostModal = ({ slug, submitDeletePostChange }) => {
   const [visibleDeletePost, setVisibleDeletePost] = useState(false);

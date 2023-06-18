@@ -87,7 +87,7 @@ const PostCreate = () => {
   });
 
   return (
-    <Helmet title="Tạo bài viết" role="Admin">
+    <Helmet title="Tạo bài viết">
       <CRow>
         <CCol xs={12}>
           <form onSubmit={formik.handleSubmit}>

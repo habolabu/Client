@@ -59,6 +59,7 @@ const DetailsEmergencyModal = ({ emergencyId }) => {
             setVisibleDetailsEmergency(!visibleDetailsEmergency);
             getEmergencyDetails();
           }}
+          className="me-2"
         >
           <BiSearchAlt />
         </CButton>

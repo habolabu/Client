@@ -61,7 +61,7 @@ const UpdateRoleModal = ({ roleData, submitUpdateRoleChange }) => {
   return (
     <>
       <Tippy content="Sửa thông tin">
-        <CButton color="warning" size="sm" className="ms-2" onClick={() => setVisibleEditRole(!visibleEditRole)}>
+        <CButton color="warning" size="sm" className="me-2" onClick={() => setVisibleEditRole(!visibleEditRole)}>
           <FaEdit />
         </CButton>
       </Tippy>

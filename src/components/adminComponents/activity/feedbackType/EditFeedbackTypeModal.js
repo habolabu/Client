@@ -92,7 +92,7 @@ const EditFeedbackTypeModal = ({ slug, submitEditFeedBackTypeChange }) => {
         color="info"
         endIcon={<MdEdit />}
         size="small"
-        className="ms-2"
+        className="me-2"
         onClick={() => setVisibleEditFeedBackType(!visibleEditFeedBackType)}
       >
         Sửa

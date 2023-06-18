@@ -61,7 +61,7 @@ const AddParkingModal = ({ apartmentId, submitAddParkingChange }) => {
   return (
     <>
       <Tippy content="Thêm bãi đỗ xe">
-        <CButton color="success" size="sm" className="ms-2" onClick={() => setVisibleAddParking(!visibleAddParking)}>
+        <CButton color="success" size="sm" className="me-2" onClick={() => setVisibleAddParking(!visibleAddParking)}>
           Thêm <BiPlusMedical />
         </CButton>
       </Tippy>

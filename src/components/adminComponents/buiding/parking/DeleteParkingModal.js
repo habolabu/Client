@@ -35,7 +35,7 @@ const DeleteParkingModal = ({ slug, submitDeleteParkingChange }) => {
         <CButton
           color="danger"
           size="sm"
-          className="ms-2"
+          className="me-2"
           onClick={() => setVisibleDeleteParking(!visibleDeleteParking)}
         >
           <MdDeleteForever />

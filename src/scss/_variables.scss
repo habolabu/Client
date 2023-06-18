@@ -602,15 +602,15 @@ $box-shadow-inset: inset 0 1px 2px rgba($black, 0.075) !default;
 // Customizes the `.table` component with basic values, each used across all table variations.
 
 // scss-docs-start table-variables
-// $table-cell-padding-y:        .5rem !default;
-// $table-cell-padding-x:        .5rem !default;
+$table-cell-padding-y: 0.65rem !default;
+$table-cell-padding-x: 2.5rem !default;
 // $table-cell-padding-y-sm:     .25rem !default;
 // $table-cell-padding-x-sm:     .25rem !default;
 
-// $table-cell-vertical-align:   top !default;
+$table-cell-vertical-align: middle !default;
 
 // $table-color:                 $body-color !default;
-// $table-bg:                    transparent !default;
+$table-bg: white !default;
 
 // $table-th-font-weight:        600 !default;
 
@@ -628,7 +628,7 @@ $box-shadow-inset: inset 0 1px 2px rgba($black, 0.075) !default;
 
 // $table-border-factor:         .1 !default;
 // $table-border-width:          $border-width !default;
-// $table-border-color:          $border-color !default;
+$table-border-color: #dedede !default;
 
 // $table-striped-order:         odd !default;
 

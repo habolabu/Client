@@ -21,7 +21,7 @@ import PermissionDirection from 'src/utils/PermissionDirection';
 
 const _navBlocksServices = [
   {
-    name: 'Quản lý Chung cư',
+    name: 'Cơ sở vật chất',
     icon: cityHall,
     permissions: [PermissionDirection.VIEW_AREA, PermissionDirection.VIEW_PARKING, PermissionDirection.VIEW_PRICE_TAG],
     items: [
@@ -38,7 +38,7 @@ const _navBlocksServices = [
         permissions: [PermissionDirection.VIEW_PARKING],
       },
       {
-        name: 'Quản lý giá cả',
+        name: 'Giá cả',
         to: '/habolabu/quan-ly-gia-ca',
         icon: coins,
         permissions: [PermissionDirection.VIEW_PRICE_TAG],
@@ -46,12 +46,12 @@ const _navBlocksServices = [
     ],
   },
   {
-    name: 'Quản lý hoá đơn',
+    name: 'Hoá đơn',
     icon: coins,
     permissions: [PermissionDirection.APPROVE_BILL, PermissionDirection.REJECT_BILL, PermissionDirection.VIEW_BILL],
     items: [
       {
-        name: 'Quản lý hoá đơn',
+        name: 'Danh sách hoá đơn',
         to: '/habolabu/quan-ly-hoa-don',
         icon: coins,
         permissions: [PermissionDirection.APPROVE_BILL, PermissionDirection.REJECT_BILL],
@@ -65,7 +65,7 @@ const _navBlocksServices = [
     ],
   },
   {
-    name: 'Quản lý hoạt động',
+    name: 'Hoạt động',
     icon: personActivity,
     permissions: [
       PermissionDirection.VIEW_POST,
@@ -75,13 +75,13 @@ const _navBlocksServices = [
     ],
     items: [
       {
-        name: 'Quản lý bài viết',
+        name: 'Bài viết',
         to: '/habolabu/bai-viet',
         icon: book,
         permissions: [PermissionDirection.VIEW_POST],
       },
       {
-        name: 'Quản lý cảm xúc',
+        name: 'Cảm xúc',
         to: '/habolabu/quan-ly-cam-xuc',
         icon: emoji,
         permissions: [PermissionDirection.VIEW_EMOTION],
@@ -101,7 +101,7 @@ const _navBlocksServices = [
     ],
   },
   {
-    name: 'Quản lý tài khoản',
+    name: 'Tài khoản',
     icon: user,
     permissions: [],
     items: [
@@ -126,7 +126,7 @@ const _navBlocksServices = [
     ],
   },
   {
-    name: 'Quản lý quyền',
+    name: 'Bảo mật',
     icon: permission,
     permissions: [PermissionDirection.VIEW_ROLE, PermissionDirection.VIEW_PERMISSION],
     items: [
@@ -137,7 +137,7 @@ const _navBlocksServices = [
         permissions: [PermissionDirection.VIEW_ROLE, PermissionDirection.VIEW_PERMISSION],
       },
       {
-        name: 'Danh sách vai trò',
+        name: 'Vai trò người dùng',
         to: '/habolabu/danh-sach-vai-tro',
         icon: permission,
         permissions: [PermissionDirection.VIEW_ROLE, PermissionDirection.VIEW_PERMISSION],
@@ -145,7 +145,7 @@ const _navBlocksServices = [
     ],
   },
   {
-    name: 'Chat',
+    name: 'Trò chuyện',
     icon: chat,
     permissions: [],
     items: [],

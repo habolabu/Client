@@ -34,7 +34,7 @@ const ApproveBill = ({ billId, submitChange }) => {
   return (
     <>
       <Tippy content="Duyệt hoá đơn">
-        <CButton color="primary" size="sm" className="ms-2" onClick={() => handleApproveBill()}>
+        <CButton color="primary" size="sm" className="me-2" onClick={() => handleApproveBill()}>
           <BsFillCheckCircleFill />
         </CButton>
       </Tippy>

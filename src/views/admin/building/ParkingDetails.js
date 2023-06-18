@@ -83,6 +83,7 @@ const ParkingDetails = () => {
       };
       const res = await parkingSpaceServices.getParkingSpace(params);
       if (res && res.data) {
+        console.log('Danh sách khu vực đỗ xe: ', res.data.response.body);
         setParkingSpaceList(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách khu vực đỗ xe ! ', {
@@ -109,10 +110,10 @@ const ParkingDetails = () => {
   };
 
   return (
-    <Helmet title="Bãi đỗ xe tầng hầm" role="Admin">
+    <Helmet title="Bãi đỗ xe tầng hầm">
       {permissionLocal.isExistPermission(PermissionDirection.VIEW_PARKING_DETAIL) ? (
         <CRow className="align-items-center justify-content-center">
-          <CCol md={8} xs={12}>
+          <CCol xs={12}>
             <CCard className="mb-4">
               <CCardHeader className="d-flex align-items-center justify-content-between">
                 <strong>🚕 Bãi đỗ xe {parkingInfo.name}</strong>
@@ -122,51 +123,47 @@ const ParkingDetails = () => {
               <CCardBody>
                 <CRow className="mb-3 justify-content-center">
                   <CCol md={6} sm={12}>
-                    <CFormLabel htmlFor="searchBCapacity" className="col-sm-12 col-form-label">
-                      🔍 Sức chứa (bắt đầu)
-                    </CFormLabel>
                     <CFormInput
                       type="text"
+                      floatingLabel="🔍 Sức chứa (bắt đầu)"
+                      className="my-2"
                       id="searchBCapacity"
                       placeholder="Nhập số bắt đầu..."
                       onChange={(e) => setBeginCapacity(e.target.value)}
                     />
                   </CCol>
                   <CCol md={6} sm={12}>
-                    <CFormLabel htmlFor="searchECapacity" className="col-sm-12 col-form-label">
-                      🔍 Sức chứa (kết thúc)
-                    </CFormLabel>
                     <CFormInput
                       type="text"
+                      floatingLabel="🔍 Sức chứa (kết thúc)"
+                      className="my-2"
                       id="searchECapacity"
                       placeholder="Nhập số kết thúc..."
                       onChange={(e) => setEndCapacity(e.target.value)}
                     />
                   </CCol>
                   <CCol md={6} sm={12}>
-                    <CFormLabel htmlFor="searchBAvailableSpace" className="col-sm-12 col-form-label">
-                      🔍 Sức chứa còn lại (bắt đầu)
-                    </CFormLabel>
                     <CFormInput
                       type="text"
+                      floatingLabel="🔍 Sức chứa còn lại (bắt đầu)"
+                      className="my-2"
                       id="searchBAvailableSpace"
                       placeholder="Nhập số bắt đầu..."
                       onChange={(e) => setBeginAvailableSpace(e.target.value)}
                     />
                   </CCol>
                   <CCol md={6} sm={12}>
-                    <CFormLabel htmlFor="searchEAvailableSpace" className="col-sm-12 col-form-label">
-                      🔍 Sức chứa còn lại (kết thúc)
-                    </CFormLabel>
                     <CFormInput
                       type="text"
+                      floatingLabel="🔍 Sức chứa còn lại (kết thúc)"
+                      className="my-2"
                       id="searchEAvailableSpace"
                       placeholder="Nhập số kết thúc..."
                       onChange={(e) => setEndAvailableSpace(e.target.value)}
                     />
                   </CCol>
                 </CRow>
-                {parkingSpaceList.data ? (
+                {parkingSpaceList.totalPage > 0 ? (
                   <>
                     <h6 className="my-4">📃 Danh sách bãi đỗ xe</h6>
                     <CTable striped responsive hover className="text-center text-nowrap">
@@ -211,8 +208,8 @@ const ParkingDetails = () => {
                   </>
                 ) : (
                   <SkeletonTheme color="#202020" highlightColor="#ccc">
-                    <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-                    <Skeleton count={5} />
+                    <p className="text-danger fw-bold">Không có thông tin !!!</p>
+                    <Skeleton count={3} />
                   </SkeletonTheme>
                 )}
               </CCardBody>

@@ -50,6 +50,7 @@ const DetailsRoomModal = ({ slug }) => {
             setVisibleDetailsRoom(!visibleDetailsRoom);
             getRoomDetails();
           }}
+          className="me-2"
         >
           <BiSearchAlt />
         </CButton>
@@ -116,15 +117,15 @@ const DetailsRoomModal = ({ slug }) => {
                       </li>
                     </ul>
                   ) : (
-                    <p className="text-danger fw-bold">Chưa có chủ sở hữu</p>
+                    <span className="text-danger fw-bold"> Chưa có chủ sở hữu</span>
                   )}
                 </div>
               </CCol>
             </CRow>
           ) : (
             <SkeletonTheme color="#202020" highlightColor="#ccc">
-              <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-              <Skeleton count={5} />
+              <p className="text-danger fw-bold">Không có thông tin !!!</p>
+              <Skeleton count={3} />
             </SkeletonTheme>
           )}
         </CModalBody>

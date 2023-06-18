@@ -17,9 +17,10 @@ body {
 
 *::-webkit-scrollbar,
 *::-webkit-scrollbar-thumb {
-  height: 3px;
+  height: 5px;
   background-clip: padding-box;
-  border: 2px solid #0000003a;
+  background: #0000003a;
+  width: 7px;
 }
 
 *::-webkit-scrollbar:hover,
@@ -275,6 +276,7 @@ a,
   margin-top: -100px;
   z-index: 1;
   position: relative;
+  width: 110px;
 }
 
 .reactionsHolder {
@@ -284,7 +286,7 @@ a,
   box-shadow: 3px 3px 30px rgba(0, 10, 10, 0.2);
   padding: 15px;
   border-radius: 60px;
-  width: 350px;
+  width: 370px;
   margin-bottom: 20px;
   opacity: 0;
 }
@@ -330,7 +332,18 @@ a,
     width: 40px;
     height: 40px;
     line-height: 27px;
-    font-size: 13px;
+    font-size: 12px;
+    padding: 6px;
     text-align: center;
+  }
+}
+
+//  Avatar
+.avatar {
+  border-radius: 50%;
+
+  &-img {
+    height: 100%;
+    border-radius: 50%;
   }
 }

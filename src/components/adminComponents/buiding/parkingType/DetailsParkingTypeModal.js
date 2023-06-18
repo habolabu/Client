@@ -54,7 +54,12 @@ const DetailsParkingTypeModal = ({ slug }) => {
   return (
     <>
       <Tippy content="Xem chi tiết">
-        <CButton size="sm" color="info" onClick={() => setVisibleDetailsParkingType(!visibleDetailsParkingType)}>
+        <CButton
+          size="sm"
+          color="info"
+          className="me-2"
+          onClick={() => setVisibleDetailsParkingType(!visibleDetailsParkingType)}
+        >
           <BiSearchAlt />
         </CButton>
       </Tippy>
@@ -95,8 +100,8 @@ const DetailsParkingTypeModal = ({ slug }) => {
             </CRow>
           ) : (
             <SkeletonTheme color="#202020" highlightColor="#ccc">
-              <p className="text-danger fw-bold">Không tìm thấy thông tin. Vui lòng thử lại sau !!!</p>
-              <Skeleton count={5} />
+              <p className="text-danger fw-bold">Không có thông tin !!!</p>
+              <Skeleton count={3} />
             </SkeletonTheme>
           )}
         </CModalBody>

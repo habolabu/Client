@@ -61,6 +61,7 @@ const DetailsPaymentModal = ({ billId }) => {
             setVisibleDetailsPayment(!visibleDetailsPayment);
             getBillDetails();
           }}
+          className="me-2"
         >
           <BsEyeFill />
         </CButton>
@@ -169,7 +170,7 @@ const DetailsPaymentModal = ({ billId }) => {
           ) : (
             <SkeletonTheme color="#202020" highlightColor="#ccc">
               <p className="text-danger fw-bold">Không tìm thấy thông tin...</p>
-              <Skeleton count={5} />
+              <Skeleton count={3} />
             </SkeletonTheme>
           )}
         </CModalBody>
