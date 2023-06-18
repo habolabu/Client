@@ -21,7 +21,6 @@ import {
   CTableBody,
   CTableDataCell,
   CFormInput,
-  CFormLabel,
 } from '@coreui/react';
 import { BiSearchAlt } from 'react-icons/bi';
 
@@ -99,13 +98,15 @@ const ApartmentList = () => {
   };
 
   useEffect(() => {
-    const callApiApartment = setTimeout(() => {
-      getApartments();
-    }, 500);
+    if (permissionLocal.isExistPermission(PermissionDirection.VIEW_APARTMENT)) {
+      const callApiApartment = setTimeout(() => {
+        getApartments();
+      }, 500);
 
-    return () => {
-      clearTimeout(callApiApartment);
-    };
+      return () => {
+        clearTimeout(callApiApartment);
+      };
+    }
   }, [currentPage, apartmentName, beginFloorAmount, endFloorAmount, areaInfo]);
 
   // pagination
@@ -122,7 +123,9 @@ const ApartmentList = () => {
               <CCardHeader className="d-flex align-items-center justify-content-between">
                 <strong>🏫 Danh sách chung cư ở {areaInfo.name}</strong>
                 {/* add apartment modal */}
-                <AddApartment areaId={areaInfo.id} submitAddApartmentChange={getApartments} />
+                {permissionLocal.isExistPermission(PermissionDirection.ADD_NEW_APARTMENT) ? (
+                  <AddApartment areaId={areaInfo.id} submitAddApartmentChange={getApartments} />
+                ) : null}
               </CCardHeader>
               <CCardBody>
                 <CRow className="mb-3">
@@ -186,13 +189,17 @@ const ApartmentList = () => {
                                   </Tippy>
                                 </Link>
                                 {/* edit apartment modal */}
-                                <EditApartment
-                                  areaId={areaInfo.id}
-                                  slug={apartment.slug}
-                                  submitEditApartmentChange={getApartments}
-                                />
+                                {permissionLocal.isExistPermission(PermissionDirection.MODIFY_EXIST_APARTMENT) ? (
+                                  <EditApartment
+                                    areaId={areaInfo.id}
+                                    slug={apartment.slug}
+                                    submitEditApartmentChange={getApartments}
+                                  />
+                                ) : null}
                                 {/* delete apartment modal */}
-                                <DeleteApartment slug={apartment.slug} submitDeleteApartmentChange={getApartments} />
+                                {permissionLocal.isExistPermission(PermissionDirection.DELETE_EXIST_APARTMENT) ? (
+                                  <DeleteApartment slug={apartment.slug} submitDeleteApartmentChange={getApartments} />
+                                ) : null}
                               </CTableDataCell>
                             </CTableRow>
                           );

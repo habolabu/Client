@@ -10,32 +10,70 @@ import { toast } from 'react-toastify';
 import avatarServices from 'src/api/humanServices/avatarServices';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import Tippy from '@tippyjs/react';
+import { useDispatch } from 'react-redux';
 
 const UpdateAvatar = ({ avatarId }) => {
-  const handleChooseAvatar = async () => {
+  const dispatch = useDispatch();
+
+  const getAvatarUser = async () => {
     try {
+      const res = await avatarServices.getLogoCurrentUser();
+      if (res && res.data) {
+        dispatch({
+          type: 'set',
+          avatarUser: res.data.response.body.avatar,
+        });
+      } else {
+        console.log('Thất bại khi lấy avatar tài khoản: ');
+      }
+    } catch (error) {
+      console.log('Thất bại khi lấy avatar tài khoản: ', error);
+    }
+  };
+
+  const handleChooseAvatar = async () => {
+    let loadingLogin = document.getElementById('loadingLogin');
+    try {
+      loadingLogin.classList.add('show');
       const res = await avatarServices.updateAvatar({ id: avatarId });
       if (res.hasOwnProperty('error')) {
-        toast.error('Chọn ảnh thất bại. Vui lòng thử lại sau ! ', {
+        loadingLogin.classList.remove('show');
+        toast.error('Cập nhật ảnh thất bại. Vui lòng thử lại sau ! ', {
           theme: 'colored',
         });
       } else if (res && res.data) {
-        toast.success('Chọn ảnh thành công ! ', {
+        getAvatarUser();
+        loadingLogin.classList.remove('show');
+        toast.success('Cập nhật ảnh thành công ! ', {
           theme: 'colored',
         });
       } else {
-        toast.error('Chọn ảnh thất bại ! ', {
+        loadingLogin.classList.remove('show');
+        toast.error('Cập nhật ảnh thất bại ! ', {
           theme: 'colored',
         });
       }
     } catch (error) {
-      console.log('Chọn ảnh thất bại: ', error);
-      toast.error('Chọn ảnh thất bại ! ', { theme: 'colored' });
+      loadingLogin.classList.remove('show');
+      console.log('Cập nhật ảnh thất bại: ', error);
+      toast.error('Cập nhật ảnh thất bại ! ', { theme: 'colored' });
     }
   };
 
   return (
     <>
+      <div className="loading-login" id="loadingLogin">
+        <div className="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
       <Tippy content="Cập nhật avatar">
         <CButton color="primary" size="sm" className="me-2" onClick={() => handleChooseAvatar()}>
           <BsFillCheckCircleFill />

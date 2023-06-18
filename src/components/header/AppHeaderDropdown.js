@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // /**
 //  * Copyright 2023 @ by Open University. All rights reserved
 //  * Author: Thành Nam Nguyễn (DH19IT03)
 //  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { CAvatar, CDropdown, CDropdownDivider, CDropdownHeader, CDropdownMenu, CDropdownToggle } from '@coreui/react';
-import { cilCreditCard, cilSettings, cilUser, cilArrowThickFromLeft, cilChatBubble } from '@coreui/icons';
+import { cilCreditCard, cilUser, cilArrowThickFromLeft, cilChatBubble } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 
 import { Link } from 'react-router-dom';
@@ -13,18 +14,22 @@ import Cookies from 'js-cookie';
 import Tippy from '@tippyjs/react';
 import avatarServices from 'src/api/humanServices/avatarServices';
 import { encryptData } from 'src/utils/encryptData';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AppHeaderDropdown = () => {
   let brandName = process.env.REACT_APP_BRAND_NAME;
   let roomChat = process.env.REACT_APP_ROOMCHAT_URL;
-
-  const [avatarUser, setAvatarUser] = useState(null);
+  const dispatch = useDispatch();
+  const avatarUser = useSelector((state) => state.avatarUser);
 
   const getAvatarUser = async () => {
     try {
       const res = await avatarServices.getLogoCurrentUser();
       if (res && res.data) {
-        setAvatarUser(res.data.response.body.avatar);
+        dispatch({
+          type: 'set',
+          avatarUser: res.data.response.body.avatar,
+        });
       } else {
         console.log('Thất bại khi lấy avatar tài khoản: ');
       }
@@ -40,14 +45,7 @@ const AppHeaderDropdown = () => {
     <Tippy content="Cài đặt">
       <CDropdown variant="nav-item">
         <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-          {avatarUser ? (
-            <CAvatar src={avatarUser} size="md" />
-          ) : (
-            <CAvatar
-              src="https://res.cloudinary.com/dzd9sonxs/image/upload/v1664544714/avatar/default-avatar_xh2rub.png"
-              size="md"
-            />
-          )}
+          <CAvatar src={avatarUser} size="md" />
         </CDropdownToggle>
         <CDropdownMenu className="pt-0" placement="bottom-end">
           <CDropdownHeader className="bg-light fw-semibold py-2">Thông tin</CDropdownHeader>

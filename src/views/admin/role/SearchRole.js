@@ -5,7 +5,7 @@
 //  */
 
 import React, { useState, useEffect } from 'react';
-import { CCard, CCardBody, CCardHeader, CCol, CFormInput, CFormLabel, CRow } from '@coreui/react';
+import { CCard, CCardBody, CCardHeader, CCol, CFormInput, CRow } from '@coreui/react';
 import PropTypes from 'prop-types';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -94,14 +94,16 @@ function Row(props) {
         <TableCell width={140}>{permissionAccount[0].permissionBlock.id}</TableCell>
         <TableCell width={400}>{permissionAccount[0].permissionBlock.display}</TableCell>
         {permissionAccount.map((role) => {
+          let groupStatus = role.permissionBlock.permissionDocuments.every(
+            (permissionChild) => permissionChild.status === true,
+          );
+
           return (
             <TableCell key={role.permissionBlock.id}>
               <Checkbox
-                defaultChecked={role.permissionBlock.permissionDocuments.every(
-                  (permissionChild) => permissionChild.status === true,
-                )}
+                defaultChecked={groupStatus}
                 onClick={() => {
-                  grantGroupPermission(accountId, role.permissionBlock.id, role.roleId, role.permissionBlock.status);
+                  grantGroupPermission(accountId, role.permissionBlock.id, role.roleId, groupStatus);
                 }}
               />
             </TableCell>
@@ -173,6 +175,7 @@ export default function SearchRole() {
     try {
       const res = await authServices.getPermissionAccount(accountId);
       if (res && res.data) {
+        savePermissionsCurrent();
         setPermissionListAccount(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy danh sách quyền ! ', {

@@ -68,6 +68,7 @@ const PostDetail = () => {
       };
       const res = await commentServices.getCommentAll(params);
       if (res && res.data) {
+        console.log(res.data);
         setComments(res.data.response.body);
       } else {
         toast.error('Thất bại khi lấy bình luận ! ' + res.response.message, {

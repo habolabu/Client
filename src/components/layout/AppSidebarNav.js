@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // /**
 //  * Copyright 2023 @ by Open University. All rights reserved
 //  * Author: Thành Nam Nguyễn (DH19IT03)

@@ -26,23 +26,25 @@ const Apartment = () => {
 
   // get data page
   useEffect(() => {
-    const getApartmentDetails = async () => {
-      try {
-        const res = await apartmentServices.getApartmentDetails(url.apartmentDetails);
-        if (res && res.data) {
-          setApartmentInfo(res.data.response.body);
-        } else {
-          console.log('Thất bại khi lấy thông tin chung cư ! ' + res.response.message);
-          toast.error('Thất bại khi lấy thông tin chung cư ! ', {
-            theme: 'colored',
-          });
+    if (permissionLocal.isExistPermission(PermissionDirection.VIEW_APARTMENT)) {
+      const getApartmentDetails = async () => {
+        try {
+          const res = await apartmentServices.getApartmentDetails(url.apartmentDetails);
+          if (res && res.data) {
+            setApartmentInfo(res.data.response.body);
+          } else {
+            console.log('Thất bại khi lấy thông tin chung cư ! ' + res.response.message);
+            toast.error('Thất bại khi lấy thông tin chung cư ! ', {
+              theme: 'colored',
+            });
+          }
+        } catch (error) {
+          console.log('Thất bại khi lấy thông tin chung cư: ', error.message);
+          toast.error('Thất bại khi lấy thông tin chung cư ! ', { theme: 'colored' });
         }
-      } catch (error) {
-        console.log('Thất bại khi lấy thông tin chung cư: ', error.message);
-        toast.error('Thất bại khi lấy thông tin chung cư ! ', { theme: 'colored' });
-      }
-    };
-    getApartmentDetails();
+      };
+      getApartmentDetails();
+    }
   }, [url.apartmentDetails]);
 
   return (
@@ -75,16 +77,24 @@ const Apartment = () => {
                   </CCard>
                 </CCol>
               </CRow>
-              <hr />
-              <CRow>
-                {/* room list */}
-                <RoomList apartmentId={apartmentInfo.id} />
-              </CRow>
-              <hr />
-              <CRow>
-                {/* parking list */}
-                <ParkingList apartmentId={apartmentInfo.id} />
-              </CRow>
+              {permissionLocal.isExistPermission(PermissionDirection.VIEW_ROOM) ? (
+                <>
+                  <hr />
+                  <CRow>
+                    {/* room list */}
+                    <RoomList apartmentId={apartmentInfo.id} />
+                  </CRow>
+                </>
+              ) : null}
+              {permissionLocal.isExistPermission(PermissionDirection.VIEW_PARKING) ? (
+                <>
+                  <hr />
+                  <CRow>
+                    {/* parking list */}
+                    <ParkingList apartmentId={apartmentInfo.id} />
+                  </CRow>
+                </>
+              ) : null}
             </>
           ) : (
             <SkeletonTheme color="#202020" highlightColor="#ccc">

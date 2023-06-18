@@ -97,7 +97,9 @@ const RoomList = ({ apartmentId }) => {
             <CCardHeader className="d-flex align-items-center justify-content-between">
               <strong>🏠 Danh sách các phòng</strong>
               {/* add room modal */}
-              <AddRoomModal apartmentId={apartmentId} submitAddRoomChange={getRoomList} />
+              {permissionLocal.isExistPermission(PermissionDirection.ADD_NEW_ROOM) ? (
+                <AddRoomModal apartmentId={apartmentId} submitAddRoomChange={getRoomList} />
+              ) : null}
             </CCardHeader>
             <CCardBody>
               <CRow className="mb-3 justify-content-center">

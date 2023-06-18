@@ -16,8 +16,6 @@ import 'simplebar/dist/simplebar.min.css';
 
 // sidebar nav config
 import navigation from '../../../route/_navAdmin';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 const AppSidebar = () => {
   const dispatch = useDispatch();
