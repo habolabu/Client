@@ -40,6 +40,7 @@ const AddUserModal = ({ submitAddUserChange }) => {
   const [gender, setGender] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
   const [roles, setRoles] = useState(null);
+  const [selectedRole, setSelectedRole] = useState(1);
 
   const sexs = [
     { id: 1, name: 'male', title: 'Nam' },
@@ -109,7 +110,7 @@ const AddUserModal = ({ submitAddUserChange }) => {
           dateOfBirth: dateOfBirth.toISOString().slice(0, 10),
           nationality: values.nationality,
           username: values.username,
-          roleId: 1,
+          roleId: parseInt(selectedRole),
         };
         console.log(params);
         const res = await userServices.addUser(params);
@@ -331,7 +332,7 @@ const AddUserModal = ({ submitAddUserChange }) => {
                     aria-label="role"
                     onChange={(e) => {
                       const selectedRole = e.target.value;
-                      setRoles(selectedRole);
+                      setSelectedRole(selectedRole);
                     }}
                   >
                     {roles.map((role) => {
