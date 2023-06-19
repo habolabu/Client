@@ -89,17 +89,19 @@ export default function SimpleDialogDemo() {
               </CCol>
             );
           } else {
-            return (
-              <CCol xs={12} sm={6} md={4} key={index} className="my-2" onClick={() => handleClickOpen(index)}>
-                <div className="card card-5">
-                  <div className="card__icon">
-                    <Lottie loop animationData={item.icon} play />
+            if (item.permissions.some((value) => permissionLocal.getData().includes(value))) {
+              return (
+                <CCol xs={12} sm={6} md={4} key={index} className="my-2" onClick={() => handleClickOpen(index)}>
+                  <div className="card card-5">
+                    <div className="card__icon">
+                      <Lottie loop animationData={item.icon} play />
+                    </div>
+                    <div className="text">{item.name}</div>
                   </div>
-                  <div className="text">{item.name}</div>
-                </div>
-                <SimpleDialog open={open[index]} onClose={() => handleClose(index)} data={item.items} />
-              </CCol>
-            );
+                  <SimpleDialog open={open[index]} onClose={() => handleClose(index)} data={item.items} />
+                </CCol>
+              );
+            }
           }
         })}
       </CRow>

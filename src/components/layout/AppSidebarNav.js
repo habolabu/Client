@@ -21,15 +21,16 @@ export const AppSidebarNav = ({ items }) => {
     try {
       const res = await authServices.getAllPermissionCurrentUser();
       if (res && res.data) {
-        res.data.response.body.forEach((permissionsRoles) => {
-          permissionsRoles.permissions.forEach((permissionDocument) => {
-            permissionDocument.permissionDocuments.forEach((permission) => {
-              if (permission.status) {
-                permissionsAccount.push(permission.name);
-              }
-            });
+        console.log(res.data.response.body[0].permissions);
+
+        res.data.response.body[0].permissions.forEach((permissionsRoles) => {
+          permissionsRoles.permissionDocuments.forEach((permission) => {
+            if (permission.status) {
+              permissionsAccount.push(permission.name);
+            }
           });
         });
+        console.log(permissionsAccount);
         permissionLocal.saveData(permissionsAccount);
         setPermissions(permissionsAccount);
       } else {
